@@ -10,18 +10,21 @@ void SM16208_Init(void)
     GPIO_Init(A2_GPIO, A2_PIN, GPIO_MODE_OUT_PP_HIGH_SLOW);
     GPIO_Init(A1_GPIO, A1_PIN, GPIO_MODE_OUT_PP_HIGH_SLOW);
     GPIO_Init(A0_GPIO, A0_PIN, GPIO_MODE_OUT_PP_HIGH_SLOW);
+    GPIO_Init(POWER_GPIO, POWER_PIN, GPIO_MODE_OUT_PP_HIGH_SLOW);
+
+    GPIO_WriteLow(POWER_GPIO,POWER_PIN);
 }
 
 uint8_t image_matrix[8] = { 0x3C, 0x42, 0xA5, 0x81, 0xA5, 0x99, 0x42, 0x3C };
 u8 key_arr[8];
 
-void display_matrix(u8* matrix)
+void display_matrix(u16* matrix)
 {
     for (uint8_t row = 0; row < 8; row++) 
     {
         
         // 1. 获取当前行的 8位 列数据
-        uint8_t col_data = matrix[row];
+        u16 col_data = matrix[row]<<6;
         
         // 2. 串行发送 16 位数据给 SM16208（OUT0~OUT7 对应低字节）
         uint16_t send_data = (uint16_t)col_data; 

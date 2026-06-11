@@ -29,6 +29,7 @@
 #include "stm8s_it.h"
 #include "GlobalVar.h"
 #include "GPIO.h"
+#include "SM16208.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -144,9 +145,6 @@ INTERRUPT_HANDLER(EXTI_PORTC_IRQHandler, 5)
   * @param  None
   * @retval None
   */
-u16 debugData1 = 0;
-u16 debugData2 = 0;
-u16 debugData3 = 0;
 INTERRUPT_HANDLER(EXTI_PORTD_IRQHandler, 6)
 {
     /* In order to detect unexpected events during development,
@@ -156,7 +154,6 @@ INTERRUPT_HANDLER(EXTI_PORTD_IRQHandler, 6)
     if(GPIO_ReadInputPin(MODE_KEY_GPIO,MODE_KEY_PIN)==0)//按键
     {
         fall_flag = 1;
-        debugData2++;
     }
     enableInterrupts();
 }
@@ -472,55 +469,54 @@ INTERRUPT_HANDLER(TIM6_UPD_OVF_TRG_IRQHandler, 23)
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
-    static u8 keyUpCnt = 0;
+    // static u8 keyUpCnt = 0;
     if (TimingDelay != 0x00)
     {
         TimingDelay--;
     }
 
-    if(fall_flag)
-    {
-        if(MODE_KEY_STATUS() == 0)
-        {
-            fall_delay++;
-            keyUpCnt = 0;
-            debugData3++;
-        }    
-        else 
-        {
-            debugData1 = fall_delay;
-            if(keyUpCnt++ > 3)
-            {
-                if(fall_delay > 50)
-                {
-                    keyState++;
-                    fall_flag = 0;
-                    fall_delay = 0;
-                    release_delay = 0;
-                }
-                else
-                {
-                    fall_flag = 0;
-                    fall_delay = 0;
-                }
-            }
-        }
-    }
+    // if(fall_flag)
+    // {
+    //     if(MODE_KEY_STATUS() == 0)
+    //     {
+    //         fall_delay++;
+    //         keyUpCnt = 0;
+    //         debugData3++;
+    //     }    
+    //     else 
+    //     {
+    //         if(keyUpCnt++ > 3)
+    //         {
+    //             if(fall_delay > 50)
+    //             {
+    //                 keyState++;
+    //                 fall_flag = 0;
+    //                 fall_delay = 0;
+    //                 release_delay = 0;
+    //             }
+    //             else
+    //             {
+    //                 fall_flag = 0;
+    //                 fall_delay = 0;
+    //             }
+    //         }
+    //     }
+    // }
     
-    if(keyState)
-    {
-        if(MODE_KEY_STATUS())
-        {
-            release_delay++;
-            if(release_delay > 1000)
-            {
-                release_delay = 0;
-                work_event = 1;
-            }
-        } 
-        else
-           release_delay = 0;    
-    }
+    // if(keyState)
+    // {
+    //     if(MODE_KEY_STATUS())
+    //     {
+    //         release_delay++;
+    //         if(release_delay > 1000)
+    //         {
+    //             release_delay = 0;
+    //             work_event = 1;
+    //         }
+    //     } 
+    //     else
+    //        release_delay = 0;    
+    // }
 
     /* Cleat Interrupt Pending bit */
     TIM4_ClearITPendingBit(TIM4_IT_UPDATE);

@@ -75,42 +75,54 @@ void WorkProc(u8 state)
     
 }
 
+//u16 image_arr[8] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
+u16 image_arr[8] = { 0x00, 0x0E, 0x06, 0x02, 0x60, 0x70, 0x20, 0x00 };
+
 /**
  * @brief  Main program.
  * @param  None
  * @retval None
  */
-void main(void)
+ void main(void)
 {
-    CLK_SYSCLKConfig(CLK_PRESCALER_HSIDIV1);
+    CLK_SYSCLKConfig(CLK_PRESCALER_HSIDIV1);//16M主频
     CLK_HSICmd(ENABLE);
 
     TIM4_Config();
     delay_ms(100);
-    TM1650_Init();
     
     disableInterrupts();
-    MY_GPIO_Init();
-    exit_init();
+    //MY_GPIO_Init();
+    //exit_init();
     SM16208_Init();
     enableInterrupts();
     
-    TIM2_Config();
+    //TIM2_Config();
     
-    u16 temp = ReadTimeSetting();
-    if(temp < 1000)
-        workTimeSetting = temp;
-    TM1650_Show_Number(workTimeSetting);
+    // u16 temp = ReadTimeSetting();
+    // if(temp < 1000)
+    //     workTimeSetting = temp;
+    // TM1650_Show_Number(workTimeSetting);
+
+    display_matrix(image_arr);
 
     while (1)
     {
-        KeyProcess();
-        if(work_event)
+        // KeyProcess();
+        // if(work_event)
+        // {
+        //     work_event = 0;
+        //     u8 state = keyState;
+        //     keyState = 0;
+        //     WorkProc(state);
+        // }
+
+        display_matrix(image_arr);
+
+        if(debugData1)
         {
-            work_event = 0;
-            u8 state = keyState;
-            keyState = 0;
-            WorkProc(state);
+            debugData1 = 0;
+            display_matrix(image_arr);
         }
         // BEEP_ON();
         // RELAY_ON();

@@ -3,6 +3,9 @@
 
 #include "stm8s.h"
 
+#define POWER_GPIO  GPIOF
+#define POWER_PIN   GPIO_PIN_4
+
 #define SDI_GPIO    GPIOC
 #define SDI_PIN     GPIO_PIN_6
 
@@ -28,6 +31,6 @@
 
 
 void SM16208_Init(void);
-void display_matrix(u8* matrix);
+void display_matrix(u16* matrix);
 
 #endif

@@ -10,6 +10,11 @@ __IO u16 release_delay = 0;
 __IO u8 keyState = 0;
 __IO u8 work_event = 0;
 
+u8 debugData1 = 0;
+u8 debugData2 = 0;
+u8 debugData3 = 0;
+u8 debugData4 = 0;
+
 u16 ReadTimeSetting(void)
 {
     u8 data1 = FLASH_ReadByte(WORKING_TIME_SAVE_ADDR+2);
