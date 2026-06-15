@@ -76,7 +76,7 @@ void WorkProc(u8 state)
 }
 
 //u16 image_arr[8] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
-u16 image_arr[8] = { 0x00, 0x0E, 0x06, 0x02, 0x60, 0x70, 0x20, 0x00 };
+u16 image_arr                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     [8] = { 0x00, 0x0E, 0x06, 0x02, 0x60, 0x70, 0x20, 0x00 };
 
 /**
  * @brief  Main program.

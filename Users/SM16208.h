@@ -29,6 +29,13 @@
 
 #define KEY_PORT    GPIOB
 
+#define CONFIRM_NUM     3
+
+extern u8 key_arr[8];
+extern u8 key_history[8][CONFIRM_NUM];
+extern u8 key_filter[8];
+extern u8 key_filter_pre[8];
+
 
 void SM16208_Init(void);
 void display_matrix(u16* matrix);
