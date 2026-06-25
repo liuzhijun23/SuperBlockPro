@@ -42,63 +42,37 @@ u8 KeyScan(void)
  	return 0;// 无按键按下
 }
 
-void KeyProcess(void)
+void SpeakerInit(void)
 {
-    static u8 lastKey = 0;
-    static u16 slowTimes = 0;
-    u8 key = KeyScan();
-    switch (key)
-    {
-    case KEY_NULL:
-        break;
-    case KEY_L:
-        if (lastKey == key)
-            slowTimes++;
-        else
-            slowTimes = 0;
-        if (slowTimes < 5)
-            delay_ms(200);
-        if(slowTimes < 20)  
-        {
-            if(workTimeSetting > 1)
-                workTimeSetting--;
-        }  
-        else if(slowTimes < 40)
-        {
-            if(workTimeSetting > 5)
-                workTimeSetting -= 5;
-        }  
-        else if(workTimeSetting > 10)
-        {
-            workTimeSetting -= 10;    
-        }
-        TM1650_Show_Number(workTimeSetting);
-        WriteTimeSetting(workTimeSetting);
-        break;
-    case KEY_R:
-        if (lastKey == key)
-            slowTimes++;
-        else
-            slowTimes = 0;
-        if (slowTimes < 5)
-            delay_ms(200);
-        if(slowTimes < 20)  
-        {
-            workTimeSetting++;
-        }  
-        else if(slowTimes < 40)
-        {
-            workTimeSetting += 5;
-        }  
-        else 
-        {
-            workTimeSetting += 10;    
-        }
-        TM1650_Show_Number(workTimeSetting);
-        WriteTimeSetting(workTimeSetting);
-        break;
-    default:
-        break;
-    }
-    lastKey = key;
+    CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
+
+    GPIO_Init(GPIOC, GPIO_PIN_2, GPIO_MODE_OUT_PP_HIGH_FAST);
+    GPIO_Init(GPIOC, GPIO_PIN_3, GPIO_MODE_OUT_PP_HIGH_FAST);
+
+    TIM1_DeInit();
+
+    TIM1_TimeBaseInit(15, TIM1_COUNTERMODE_UP, SPEAKER_ARR, 0);
+    TIM1_OC2Init(TIM1_OCMODE_PWM1, TIM1_OUTPUTSTATE_ENABLE, TIM1_OUTPUTNSTATE_DISABLE,
+                 0, TIM1_OCPOLARITY_HIGH, TIM1_OCNPOLARITY_HIGH, TIM1_OCIDLESTATE_RESET, TIM1_OCNIDLESTATE_RESET);
+                 
+    // 通道 3 配置 (PC3)
+    TIM1_OC3Init(TIM1_OCMODE_PWM1, TIM1_OUTPUTSTATE_ENABLE, TIM1_OUTPUTNSTATE_DISABLE,
+                 0, TIM1_OCPOLARITY_LOW, TIM1_OCNPOLARITY_LOW, TIM1_OCIDLESTATE_RESET, TIM1_OCNIDLESTATE_RESET);
+
+    TIM1_OC2PreloadConfig(ENABLE);
+    TIM1_OC3PreloadConfig(ENABLE);
+    TIM1_ARRPreloadConfig(ENABLE);
+
+    TIM1_CtrlPWMOutputs(ENABLE);
+
+    TIM1_Cmd(ENABLE);
+}
+
+void Set_Speaker_Duty(uint16_t duty_ch2, uint16_t duty_ch3)
+{
+    if (duty_ch2 > SPEAKER_ARR) duty_ch2 = SPEAKER_ARR;
+    if (duty_ch3 > SPEAKER_ARR) duty_ch3 = SPEAKER_ARR;
+
+    TIM1_SetCompare2(duty_ch2); // 修改 PC2 的占空比
+    TIM1_SetCompare3(duty_ch3); // 修改 PC3 的占空比
 }

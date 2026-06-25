@@ -1,6 +1,13 @@
 #include "SM16208.h"
 #include "timer.h"
 
+//u8 image_arr[8] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+//u8 image_arr[8] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
+u8 image_arr[][8] = {
+    { 0x00, 0x0E, 0x06, 0x02, 0x60, 0x70, 0x20, 0x00 },
+    { 0x00, 0x00, 0x70, 0x30, 0x10, 0x00, 0x00, 0x00 },
+};
+
 void SM16208_Init(void)
 {
     GPIO_Init(SDI_GPIO, SDI_PIN, GPIO_MODE_OUT_PP_HIGH_SLOW);
@@ -13,6 +20,15 @@ void SM16208_Init(void)
     GPIO_Init(POWER_GPIO, POWER_PIN, GPIO_MODE_OUT_PP_HIGH_SLOW);
 
     GPIO_WriteLow(POWER_GPIO,POWER_PIN);
+
+    GPIO_Init(GPIOB, GPIO_PIN_0, GPIO_MODE_IN_FL_NO_IT);
+    GPIO_Init(GPIOB, GPIO_PIN_1, GPIO_MODE_IN_FL_NO_IT);
+    GPIO_Init(GPIOB, GPIO_PIN_2, GPIO_MODE_IN_FL_NO_IT);
+    GPIO_Init(GPIOB, GPIO_PIN_3, GPIO_MODE_IN_FL_NO_IT);
+    GPIO_Init(GPIOB, GPIO_PIN_4, GPIO_MODE_IN_FL_NO_IT);
+    GPIO_Init(GPIOB, GPIO_PIN_5, GPIO_MODE_IN_FL_NO_IT);
+    GPIO_Init(GPIOB, GPIO_PIN_6, GPIO_MODE_IN_FL_NO_IT);
+    GPIO_Init(GPIOB, GPIO_PIN_7, GPIO_MODE_IN_FL_NO_IT);
 }
 
 uint8_t image_matrix[8] = { 0x3C, 0x42, 0xA5, 0x81, 0xA5, 0x99, 0x42, 0x3C };
@@ -21,7 +37,13 @@ u8 key_history[8][CONFIRM_NUM];
 u8 key_filter[8];
 u8 key_filter_pre[8];
 
-void display_matrix(u16* matrix)
+void Delay(u16 time)
+{
+    for(int i=0;i<time;i++)
+        asm("NOP");
+}
+
+void display_matrix(u8* matrix)
 {
     for (uint8_t row = 0; row < 8; row++) 
     {
@@ -71,9 +93,11 @@ void display_matrix(u16* matrix)
         
         // 6. 开启显示并延时
         GPIO_WriteLow(OE_GPIO,OE_PIN);
-        delay_ms(1); // 每一行点亮 1 毫秒
 
+        delay_ms(10); // 每一行点亮 1 毫秒
+       
         key_arr[row] = (u8)(KEY_PORT->IDR & 0x00FF);
+        
     }
 }
 
@@ -95,8 +119,8 @@ void process_key_events()
         uint8_t all_zeros = (~key_history[r][0]) & (~key_history[r][1]) & (~key_history[r][2]);
         
         // 备份当前状态为“上一次状态”，然后更新“当前状态”
-        key_previous[r] = key_filter[r]; 
-        key_debounced[r] = (key_filter[r] | all_ones) & (~all_zeros);
+        key_filter_pre[r] = key_filter[r]; 
+        key_filter[r] = (key_filter[r] | all_ones) & (~all_zeros);
 
         // ------------------------------------------------------------
         // 步骤 3：核心——边沿检测（找出哪些键的电平发生了跳变）
@@ -119,15 +143,15 @@ void process_key_events()
             {
                 uint8_t mask = (1 << c);
                 
-                // 检测按下
-                if (press_events & mask) {
-                    on_key_pressed(r, c); // 触发按下回调
-                }
+                // // 检测按下
+                // if (press_events & mask) {
+                //     on_key_pressed(r, c); // 触发按下回调
+                // }
                 
-                // 检测抬起
-                if (release_events & mask) {
-                    on_key_released(r, c); // 触发抬起回调
-                }
+                // // 检测抬起
+                // if (release_events & mask) {
+                //     on_key_released(r, c); // 触发抬起回调
+                // }
             }
         }
     }

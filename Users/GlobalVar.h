@@ -16,8 +16,8 @@ extern __IO u16 release_delay;
 extern __IO u8 keyState;
 extern __IO u8 work_event;
 
-extern u8 debugData1;
-extern u8 debugData2;
-extern u8 debugData3;
-extern u8 debugData4;
+extern u16 debugData1;
+extern u16 debugData2;
+extern u16 debugData3;
+extern u16 debugData4;
 #endif

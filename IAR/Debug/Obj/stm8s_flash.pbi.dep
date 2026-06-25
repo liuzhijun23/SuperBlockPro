@@ -1,23 +1,23 @@
 stm8s_flash.pbi: \
-  D:\Project\TiemoJi_STM8\STM8S_StdPeriph_Driver\src\stm8s_flash.c \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_flash.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc/stm8s.h \
-  D:\Project\TiemoJi_STM8\IAR\..\Users\stm8s_conf.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_adc1.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_awu.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_beep.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_clk.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_exti.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_gpio.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_i2c.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_itc.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_iwdg.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_rst.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_spi.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_tim1.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_tim2.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_tim4.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_uart1.h \
-  D:\Project\TiemoJi_STM8\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_wwdg.h \
-  D:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\stm8\inc\c\intrinsics.h
+  E:\STM8S_Pro\SuperBlockPro\STM8S_StdPeriph_Driver\src\stm8s_flash.c \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_flash.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc/stm8s.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\Users\stm8s_conf.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_adc1.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_awu.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_beep.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_clk.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_exti.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_gpio.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_i2c.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_itc.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_iwdg.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_rst.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_spi.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_tim1.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_tim2.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_tim4.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_uart1.h \
+  E:\STM8S_Pro\SuperBlockPro\IAR\..\STM8S_StdPeriph_Driver\inc\stm8s_wwdg.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\stm8\inc\c\intrinsics.h

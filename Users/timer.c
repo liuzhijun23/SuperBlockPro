@@ -9,7 +9,7 @@ volatile u8 fac_us = 0; // us延时倍乘数
 
 void TIM4_Config(void)
 {
-    TIM4_TimeBaseInit(TIM4_PRESCALER_128, 124);
+    TIM4_TimeBaseInit(TIM4_PRESCALER_16, 100-1);
     /* Clear TIM4 update flag */
     TIM4_ClearFlag(TIM4_FLAG_UPDATE);
     /* Enable update interrupt */

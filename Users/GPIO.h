@@ -57,9 +57,12 @@
 #define FAN_ON()    GPIO_WriteHigh(FAN_GPIO,FAN_PIN)
 #define FAN_OFF()    GPIO_WriteLow(FAN_GPIO,FAN_PIN)
 
+#define SPEAKER_ARR     1999
+
 void exit_init(void);
 void MY_GPIO_Init(void);
 u8 KeyScan(void);
-void KeyProcess(void);
+void SpeakerInit(void);
+void Set_Speaker_Duty(uint16_t duty_ch2, uint16_t duty_ch3);
 
 #endif

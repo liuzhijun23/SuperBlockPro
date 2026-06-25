@@ -75,8 +75,7 @@ void WorkProc(u8 state)
     
 }
 
-//u16 image_arr[8] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
-u16 image_arr                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     [8] = { 0x00, 0x0E, 0x06, 0x02, 0x60, 0x70, 0x20, 0x00 };
+
 
 /**
  * @brief  Main program.
@@ -96,6 +95,11 @@ u16 image_arr                                                                   
     //exit_init();
     SM16208_Init();
     enableInterrupts();
+
+    //SpeakerInit();
+
+    GPIO_Init(GPIOC, GPIO_PIN_2, GPIO_MODE_OUT_PP_HIGH_FAST);
+    GPIO_Init(GPIOC, GPIO_PIN_3, GPIO_MODE_OUT_PP_HIGH_FAST);
     
     //TIM2_Config();
     
@@ -104,7 +108,7 @@ u16 image_arr                                                                   
     //     workTimeSetting = temp;
     // TM1650_Show_Number(workTimeSetting);
 
-    display_matrix(image_arr);
+    //display_matrix(image_arr);
 
     while (1)
     {
@@ -117,13 +121,14 @@ u16 image_arr                                                                   
         //     WorkProc(state);
         // }
 
-        display_matrix(image_arr);
+        display_matrix(image_arr[1]);
+        //display_matrix(key_filter);
 
         if(debugData1)
         {
+            Set_Speaker_Duty(debugData1,debugData2);
             debugData1 = 0;
-            display_matrix(image_arr);
-        }
+        }   
         // BEEP_ON();
         // RELAY_ON();
         // delay_ms(2000);
