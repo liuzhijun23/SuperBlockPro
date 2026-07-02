@@ -75,7 +75,19 @@ void WorkProc(u8 state)
     
 }
 
-
+void SYS_CLK_Init(void)
+{
+    CLK_DeInit();
+    
+    // 2. 选择 HSI 作为主时钟源
+    CLK_HSICmd(ENABLE);
+    
+    // 3. 设置 HSI 分频为 1 (即 16MHz)
+    CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
+    
+    // 4. 设置 CPU 分频为 1 (CPU 主频也是 16MHz)
+    CLK_SYSCLKConfig(CLK_PRESCALER_CPUDIV1);
+}
 
 /**
  * @brief  Main program.
@@ -84,8 +96,10 @@ void WorkProc(u8 state)
  */
  void main(void)
 {
-    CLK_SYSCLKConfig(CLK_PRESCALER_HSIDIV1);//16M主频
-    CLK_HSICmd(ENABLE);
+    // CLK_SYSCLKConfig(CLK_PRESCALER_HSIDIV1);//16M主频
+    // CLK_HSICmd(ENABLE);
+
+    SYS_CLK_Init();
 
     TIM4_Config();
     delay_ms(100);
@@ -96,10 +110,11 @@ void WorkProc(u8 state)
     SM16208_Init();
     enableInterrupts();
 
-    //SpeakerInit();
+    SpeakerInit();
 
-    GPIO_Init(GPIOC, GPIO_PIN_2, GPIO_MODE_OUT_PP_HIGH_FAST);
-    GPIO_Init(GPIOC, GPIO_PIN_3, GPIO_MODE_OUT_PP_HIGH_FAST);
+    // GPIO_Init(GPIOA, GPIO_PIN_3, GPIO_MODE_OUT_PP_HIGH_FAST);
+    // GPIO_Init(GPIOC, GPIO_PIN_2, GPIO_MODE_OUT_PP_HIGH_FAST);
+    // GPIO_Init(GPIOC, GPIO_PIN_3, GPIO_MODE_OUT_PP_HIGH_FAST);
     
     //TIM2_Config();
     
@@ -121,7 +136,7 @@ void WorkProc(u8 state)
         //     WorkProc(state);
         // }
 
-        display_matrix(image_arr[1]);
+        //display_matrix(image_arr[1]);
         //display_matrix(key_filter);
 
         if(debugData1)

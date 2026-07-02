@@ -24,7 +24,7 @@
         <ShowSource>1</ShowSource>
     </Trace1>
     <DebugChecksum>
-        <Checksum>3883700936</Checksum>
+        <Checksum>1144309636</Checksum>
     </DebugChecksum>
     <Disassembly>
         <InstrCount>0</InstrCount>
@@ -105,9 +105,10 @@
         <Category>_ 0</Category>
     </LogFile>
     <Aliases>
-        <A0>_ "F:\图形\SuperBlockPro\STM8S_StdPeriph_Driver\src\stm8s_clk.c" ""</A0>
-        <A1>_ "F:\图形\SuperBlockPro\STM8S_StdPeriph_Driver\src\stm8s_tim4.c" ""</A1>
-        <Count>2</Count>
+        <A0>_ "E:\STM8S_Pro\SuperBlockPro\Users\main.c" ""</A0>
+        <A1>_ "F:\图形\SuperBlockPro\STM8S_StdPeriph_Driver\src\stm8s_clk.c" ""</A1>
+        <A2>_ "F:\图形\SuperBlockPro\STM8S_StdPeriph_Driver\src\stm8s_tim4.c" ""</A2>
+        <Count>3</Count>
         <SuppressDialog>0</SuppressDialog>
     </Aliases>
     <DebuggerSettings>

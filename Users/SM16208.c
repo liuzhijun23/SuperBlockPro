@@ -94,7 +94,7 @@ void display_matrix(u8* matrix)
         // 6. 开启显示并延时
         GPIO_WriteLow(OE_GPIO,OE_PIN);
 
-        delay_ms(10); // 每一行点亮 1 毫秒
+        delay_ms(1); // 每一行点亮 1 毫秒
        
         key_arr[row] = (u8)(KEY_PORT->IDR & 0x00FF);
         

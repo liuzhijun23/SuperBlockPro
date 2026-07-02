@@ -476,28 +476,29 @@ INTERRUPT_HANDLER(TIM4_UPD_OVF_IRQHandler, 23)
         TimingDelay--;
     }
 
-    if(count++ == 2)
-    {
-        count = 0;
-        flag = !flag;
-    }
-    if(flag)
-    {
-        GPIO_WriteHigh(GPIOC,GPIO_PIN_2);
-        GPIO_WriteLow(GPIOC,GPIO_PIN_3);
-    }
-    else
-    {
-        GPIO_WriteHigh(GPIOC,GPIO_PIN_3);
-        GPIO_WriteLow(GPIOC,GPIO_PIN_2);
-    }
+    // {
+    //     count = 0;
+    //     flag = !flag;
+    // }
+    // if(flag)
+    // {
+    //     GPIO_WriteHigh(GPIOC,GPIO_PIN_2);
+    //     GPIO_WriteLow(GPIOC,GPIO_PIN_3);
+    // }
+    // else
+    // {
+    //     GPIO_WriteHigh(GPIOC,GPIO_PIN_3);
+    //     GPIO_WriteLow(GPIOC,GPIO_PIN_2);
+    // }
+
+    GPIO_WriteReverse(GPIOA,GPIO_PIN_3);
     
 
     if (_10ms_cnt++ == 10)
     {
         _10ms_cnt = 0;
 
-        process_key_events();
+        //process_key_events();
     }
 
     // if(fall_flag)
