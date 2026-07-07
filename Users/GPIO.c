@@ -76,3 +76,30 @@ void Set_Speaker_Duty(uint16_t duty_ch2, uint16_t duty_ch3)
     TIM1_SetCompare2(duty_ch2); // 修改 PC2 的占空比
     TIM1_SetCompare3(duty_ch3); // 修改 PC3 的占空比
 }
+
+void Set_SpeakerFreq(u16 freq)
+{
+    u16 arrVal = 1000000/freq-1;
+    TIM1->ARRH = arrVal>>8;
+    TIM1->ARRL = arrVal & 0xFF;
+    
+    TIM1_SetCompare2(arrVal/2);
+    TIM1_SetCompare3(arrVal/2);
+}
+
+u16 voiceArr1[] = {
+    832,645,738,762,844,5502,5461,5262,5262,4910,
+    627,721,809,809,826,6000,6000,4617,4617,5221,
+    5900,5912,2500,2500,111,135,3527,4002,4002,4453,
+    5000,5455,6000,6000,6662,4436,200,0
+};
+
+void SpeakVolum1(void)
+{
+    u16 len = sizeof(voiceArr1)/sizeof(voiceArr1[0]);
+    for(int i=0;i<len;i++)
+    {
+        Set_SpeakerFreq(voiceArr1[i]);
+        delay_ms(20);
+    }
+}

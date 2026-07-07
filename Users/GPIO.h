@@ -59,10 +59,14 @@
 
 #define SPEAKER_ARR     1999
 
+extern u16 voiceArr1[];
+
 void exit_init(void);
 void MY_GPIO_Init(void);
 u8 KeyScan(void);
 void SpeakerInit(void);
 void Set_Speaker_Duty(uint16_t duty_ch2, uint16_t duty_ch3);
+void Set_SpeakerFreq(u16 freq);
+void SpeakVolum1(void);
 
 #endif

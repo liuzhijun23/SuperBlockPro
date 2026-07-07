@@ -141,7 +141,35 @@ void SYS_CLK_Init(void)
 
         if(debugData1)
         {
-            Set_Speaker_Duty(debugData1,debugData2);
+
+            u16 freq = 800;
+            while(freq < 5000)
+            {
+                freq += 300;
+                Set_SpeakerFreq(freq);
+                delay_ms(10);
+            }
+
+            while(freq >1000)
+            {
+                freq -= 300;
+                Set_SpeakerFreq(freq);
+                delay_ms(10);
+            }
+
+            while(freq < 5000)
+            {
+                freq += 300;
+                Set_SpeakerFreq(freq);
+                delay_ms(10);
+            }
+
+            TIM1_SetCompare2(0);
+            TIM1_SetCompare3(0);
+
+
+            //SpeakVolum1();
+           
             debugData1 = 0;
         }   
         // BEEP_ON();
