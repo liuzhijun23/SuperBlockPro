@@ -57,7 +57,7 @@
 #define FAN_ON()    GPIO_WriteHigh(FAN_GPIO,FAN_PIN)
 #define FAN_OFF()    GPIO_WriteLow(FAN_GPIO,FAN_PIN)
 
-#define SPEAKER_ARR     1999
+#define SPEAKER_ARR     255
 
 extern u16 voiceArr1[];
 

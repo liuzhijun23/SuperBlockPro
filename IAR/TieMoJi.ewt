@@ -2180,6 +2180,9 @@
     <group>
         <name>Users</name>
         <file>
+            <name>$PROJ_DIR$\..\Users\audio.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\Users\GlobalVar.c</name>
         </file>
         <file>
@@ -2196,9 +2199,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\Users\timer.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Users\TM1650.c</name>
         </file>
     </group>
 </project>

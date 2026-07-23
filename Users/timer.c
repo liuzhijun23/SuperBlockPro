@@ -31,9 +31,15 @@ void delay_ms(u32 nms)
 void TIM2_Config(void)
 {
     TIM2_DeInit();
-    TIM2_TimeBaseInit(TIM2_PRESCALER_16,499);
-    TIM2_OC1Init(TIM2_OCMODE_PWM2, TIM2_OUTPUTSTATE_ENABLE, 250,TIM2_OCPOLARITY_LOW);
-    TIM2_OC1PreloadConfig(ENABLE);
-    TIM2_ARRPreloadConfig(ENABLE);
-    //TIM2_Cmd(ENABLE);
+    TIM2_TimeBaseInit(TIM2_PRESCALER_8, 249);
+    /* Clear TIM4 update flag */
+    TIM2_ClearFlag(TIM2_FLAG_UPDATE);
+    /* Enable update interrupt */
+    TIM2_ITConfig(TIM2_IT_UPDATE, ENABLE);
+
+    /* enable interrupts */
+    enableInterrupts();
+
+    /* Enable TIM4 */
+    TIM2_Cmd(ENABLE);
 }

@@ -27,12 +27,12 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s.h"
-#include "TM1650.h"
 #include "timer.h"
 #include "GPIO.h"
 #include "stm8s_clk.h"
 #include "GlobalVar.h"
 #include "SM16208.h"
+#include "audio.h"
 
 #define VERSION "Ver1.0"
 
@@ -101,6 +101,7 @@ void SYS_CLK_Init(void)
 
     SYS_CLK_Init();
 
+    TIM2_Config();//
     TIM4_Config();
     delay_ms(100);
     
@@ -111,6 +112,8 @@ void SYS_CLK_Init(void)
     enableInterrupts();
 
     SpeakerInit();
+
+    debugData1 = 1;
 
     // GPIO_Init(GPIOA, GPIO_PIN_3, GPIO_MODE_OUT_PP_HIGH_FAST);
     // GPIO_Init(GPIOC, GPIO_PIN_2, GPIO_MODE_OUT_PP_HIGH_FAST);
@@ -142,33 +145,35 @@ void SYS_CLK_Init(void)
         if(debugData1)
         {
 
-            u16 freq = 800;
-            while(freq < 5000)
-            {
-                freq += 300;
-                Set_SpeakerFreq(freq);
-                delay_ms(10);
-            }
+            // u16 freq = 800;
+            // while(freq < 5000)
+            // {
+            //     freq += 300;
+            //     Set_SpeakerFreq(freq);
+            //     delay_ms(10);
+            // }
 
-            while(freq >1000)
-            {
-                freq -= 300;
-                Set_SpeakerFreq(freq);
-                delay_ms(10);
-            }
+            // while(freq >1000)
+            // {
+            //     freq -= 300;
+            //     Set_SpeakerFreq(freq);
+            //     delay_ms(10);
+            // }
 
-            while(freq < 5000)
-            {
-                freq += 300;
-                Set_SpeakerFreq(freq);
-                delay_ms(10);
-            }
+            // while(freq < 5000)
+            // {
+            //     freq += 300;
+            //     Set_SpeakerFreq(freq);
+            //     delay_ms(10);
+            // }
 
-            TIM1_SetCompare2(0);
-            TIM1_SetCompare3(0);
+            // TIM1_SetCompare2(0);
+            // TIM1_SetCompare3(0);
 
 
             //SpeakVolum1();
+
+            Audio_Start();
            
             debugData1 = 0;
         }   

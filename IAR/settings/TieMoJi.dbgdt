@@ -808,7 +808,7 @@
                 <expressions>
                     <item>debugData1</item>
                     <item>debugData2</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

@@ -30,6 +30,7 @@
 #include "GlobalVar.h"
 #include "GPIO.h"
 #include "SM16208.h"
+#include "audio.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -277,9 +278,37 @@ INTERRUPT_HANDLER(TIM5_CAP_COM_IRQHandler, 14)
  */
 INTERRUPT_HANDLER(TIM2_UPD_OVF_BRK_IRQHandler, 13)
 {
-    /* In order to detect unexpected events during development,
-       it is recommended to set a breakpoint on the following instruction.
-    */
+    if (!playing) return;
+    
+    if (adpcm_byte_pos >= AUDIO_ADPCM_SIZE) {
+        // 播放结束, 静音
+        playing = 0;
+        TIM2_Cmd(DISABLE);;  // 关闭定时器
+        Set_Speaker_Duty(128,128);
+        return;
+    }
+    
+    // --- 取一个 nibble ---
+    uint8_t byte_val = audio_adpcm_data[adpcm_byte_pos];
+    uint8_t nibble;
+    
+    if (use_high_nibble == 0) {
+        nibble = byte_val & 0x0F;        // 先取低4bit
+        use_high_nibble = 1;
+    } else {
+        nibble = (byte_val >> 4) & 0x0F; // 再取高4bit
+        use_high_nibble = 0;
+        adpcm_byte_pos++;
+    }
+    
+    // --- ADPCM 解码 ---
+    int16_t sample = ADPCM_Decode(nibble);
+    
+    // --- 映射到 PWM (8bit: 0~255) ---
+    uint8_t pwm_val = (uint8_t)((sample + 32768) >> 8);
+
+    Set_Speaker_Duty(pwm_val,255-pwm_val);
+  
 }
 
 /**

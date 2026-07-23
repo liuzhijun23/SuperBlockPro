@@ -1,5 +1,4 @@
 #include "GPIO.h"
-#include "TM1650.h"
 #include "timer.h"
 #include "GlobalVar.h"
 
@@ -51,9 +50,9 @@ void SpeakerInit(void)
 
     TIM1_DeInit();
 
-    TIM1_TimeBaseInit(15, TIM1_COUNTERMODE_UP, SPEAKER_ARR, 0);
+    TIM1_TimeBaseInit(0, TIM1_COUNTERMODE_UP, SPEAKER_ARR, 0);
     TIM1_OC2Init(TIM1_OCMODE_PWM1, TIM1_OUTPUTSTATE_ENABLE, TIM1_OUTPUTNSTATE_DISABLE,
-                 0, TIM1_OCPOLARITY_HIGH, TIM1_OCNPOLARITY_HIGH, TIM1_OCIDLESTATE_RESET, TIM1_OCNIDLESTATE_RESET);
+                 128, TIM1_OCPOLARITY_HIGH, TIM1_OCNPOLARITY_HIGH, TIM1_OCIDLESTATE_RESET, TIM1_OCNIDLESTATE_RESET);
                  
     // 通道 3 配置 (PC3)
     TIM1_OC3Init(TIM1_OCMODE_PWM1, TIM1_OUTPUTSTATE_ENABLE, TIM1_OUTPUTNSTATE_DISABLE,
@@ -66,6 +65,7 @@ void SpeakerInit(void)
     TIM1_CtrlPWMOutputs(ENABLE);
 
     TIM1_Cmd(ENABLE);
+
 }
 
 void Set_Speaker_Duty(uint16_t duty_ch2, uint16_t duty_ch3)
