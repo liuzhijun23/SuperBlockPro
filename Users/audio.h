@@ -12,7 +12,7 @@ extern s16 predictor;
 extern s8  step_index;
 extern u16 adpcm_byte_pos;
 extern u8  use_high_nibble;  // 0=低4bit, 1=高4bit
-extern u8  playing;
+extern volatile u8  playing;
 
 void Audio_Start(void);
 int16_t ADPCM_Decode(uint8_t nibble);

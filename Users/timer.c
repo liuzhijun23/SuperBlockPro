@@ -41,5 +41,5 @@ void TIM2_Config(void)
     enableInterrupts();
 
     /* Enable TIM4 */
-    TIM2_Cmd(ENABLE);
+    //TIM2_Cmd(ENABLE);
 }

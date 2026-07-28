@@ -200,7 +200,7 @@ s16 predictor;
 s8  step_index;
 u16 adpcm_byte_pos;
 u8  use_high_nibble;  // 0=低4bit, 1=高4bit
-u8  playing;
+volatile u8  playing;
 
 void Audio_Start(void)
 {
