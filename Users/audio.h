@@ -4,8 +4,8 @@
 #include "stm8s.h"
 
 #define AUDIO_SAMPLE_RATE     8000
-#define AUDIO_TOTAL_SAMPLES   8022
-#define AUDIO_ADPCM_SIZE      4011
+#define AUDIO_TOTAL_SAMPLES   5632
+#define AUDIO_ADPCM_SIZE      2816
 
 extern const uint8_t audio_adpcm_data[];
 extern s16 predictor;
