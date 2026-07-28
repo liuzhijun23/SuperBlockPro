@@ -278,12 +278,15 @@ INTERRUPT_HANDLER(TIM5_CAP_COM_IRQHandler, 14)
  */
 INTERRUPT_HANDLER(TIM2_UPD_OVF_BRK_IRQHandler, 13)
 {
+    TIM2_ClearITPendingBit(TIM2_IT_UPDATE);
+    
     if (!playing) return;
     
     if (adpcm_byte_pos >= AUDIO_ADPCM_SIZE) {
         // 播放结束, 静音
         playing = 0;
         TIM2_Cmd(DISABLE);;  // 关闭定时器
+        TIM1_Cmd(DISABLE);    // ← 加上这句，关闭载波
         Set_Speaker_Duty(128,128);
         return;
     }

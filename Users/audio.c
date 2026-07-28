@@ -209,6 +209,7 @@ void Audio_Start(void)
     adpcm_byte_pos  = 0;
     use_high_nibble = 0;
     playing         = 1;
+    TIM1_Cmd(ENABLE);
     TIM2_Cmd(ENABLE);
 }
 
