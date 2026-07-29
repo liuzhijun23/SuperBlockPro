@@ -6,6 +6,7 @@
 #define AUDIO_SAMPLE_RATE     8000
 #define AUDIO_TOTAL_SAMPLES   5632
 #define AUDIO_ADPCM_SIZE      2816
+#define AUDIO_VOLUME_PERCENT  200     // 音量百分比: 100=原始, 200=2倍, 300=3倍, 越大越响(超过32767会削顶)
 
 extern const uint8_t audio_adpcm_data[];
 extern s16 predictor;

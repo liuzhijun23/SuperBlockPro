@@ -307,10 +307,18 @@ INTERRUPT_HANDLER(TIM2_UPD_OVF_BRK_IRQHandler, 13)
     // --- ADPCM 解码 ---
     int16_t sample = ADPCM_Decode(nibble);
     
+    // --- 音量增益 ---
+    int32_t amplified = (int32_t)sample * AUDIO_VOLUME_PERCENT / 100;
+    if (amplified >  32767) amplified =  32767;  // 防削顶
+    if (amplified < -32768) amplified = -32768;
+    sample = (int16_t)amplified;
+    
     // --- 映射到 PWM (8bit: 0~255) ---
+    // CH2(HIGH极性) 和 CH3(LOW极性) 为差分输出, 需要相同 duty 才能产生差分电压:
+    // V_diff = (pwm_val - (256-pwm_val))/256 * Vcc = (2*pwm_val-256)/256 * Vcc
     uint8_t pwm_val = (uint8_t)((sample + 32768) >> 8);
 
-    Set_Speaker_Duty(pwm_val,255-pwm_val);
+    Set_Speaker_Duty(pwm_val, pwm_val);
   
 }
 
