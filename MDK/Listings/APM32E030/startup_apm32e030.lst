@@ -338,12 +338,11 @@ ARM Macro Assembler    Page 6
               00000000 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0+ --apcs=inter
-work --depend=.\out\apm32e030\startup_apm32e030.d -o.\out\apm32e030\startup_apm
-32e030.o -IC:\Users\liuzj\AppData\Local\Arm\Packs\Geehy\APM32E030_DFP\1.0.3\Dev
-ice\Device\Geehy\APM32E030\Include -IC:\Keil_v5\ARM\CMSIS\Include --predefine="
-__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 533" --predefine="APM32E
-030X8 SETA 1" --list=.\listings\apm32e030\startup_apm32e030.lst ..\Src\startup_
-apm32e030.s
+work --depend=.\out\startup_apm32e030.d -o.\out\startup_apm32e030.o -IC:\Users\
+liuzj\AppData\Local\Arm\Packs\Geehy\APM32E030_DFP\1.0.3\Device\Device\Geehy\APM
+32E030\Include -IC:\Keil_v5\ARM\CMSIS\Include --predefine="__MICROLIB SETA 1" -
+-predefine="__UVISION_VERSION SETA 533" --predefine="APM32E030X8 SETA 1" --list
+=.\listings\apm32e030\startup_apm32e030.lst ..\Src\startup_apm32e030.s
 
 
 
