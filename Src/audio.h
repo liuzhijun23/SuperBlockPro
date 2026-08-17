@@ -1,0 +1,35 @@
+#ifndef AUDIO_H_
+#define AUDIO_H_
+
+#include "main.h"
+
+#define AUDIO_SAMPLE_RATE     8000
+#define AUDIO_TOTAL_SAMPLES   5632
+#define AUDIO_ADPCM_SIZE      2816
+#define AUDIO_VOLUME_PERCENT  200     // 音量百分比: 100=原始, 200=2倍, 300=3倍, 越大越响(超过32767会削顶)
+
+extern const uint8_t audio_adpcm_data[];
+extern s16 predictor;
+extern s8  step_index;
+extern u16 adpcm_byte_pos;
+extern u8  use_high_nibble;  // 0=低4bit, 1=高4bit
+extern volatile u8  playing;
+
+void Audio_Start(void);
+void Audio_Sop(void);
+int16_t ADPCM_Decode(uint8_t nibble);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#endif

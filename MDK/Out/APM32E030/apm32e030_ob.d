@@ -1,0 +1,9 @@
+.\out\apm32e030\apm32e030_ob.o: ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_ob.c
+.\out\apm32e030\apm32e030_ob.o: ..\Driver\APM32E030_StdPeriphDriver\inc\apm32e030_ob.h
+.\out\apm32e030\apm32e030_ob.o: ..\Src\apm32e030.h
+.\out\apm32e030\apm32e030_ob.o: ..\Driver\CMSIS\Include\core_cm0plus.h
+.\out\apm32e030\apm32e030_ob.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\out\apm32e030\apm32e030_ob.o: ..\Driver\CMSIS\Include\cmsis_version.h
+.\out\apm32e030\apm32e030_ob.o: ..\Driver\CMSIS\Include\cmsis_compiler.h
+.\out\apm32e030\apm32e030_ob.o: ..\Driver\CMSIS\Include\cmsis_armcc.h
+.\out\apm32e030\apm32e030_ob.o: ..\Src\system_apm32e030.h

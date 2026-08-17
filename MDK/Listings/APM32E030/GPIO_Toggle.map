@@ -1,0 +1,1311 @@
+Component: ARM Compiler 5.06 update 7 (build 960) Tool: armlink [4d3601]
+
+==============================================================================
+
+Section Cross References
+
+    system_apm32e030.o(i.SystemClockConfig) refers to system_apm32e030.o(i.SystemClock72M) for SystemClock72M
+    system_apm32e030.o(i.SystemCoreClockUpdate) refers to system_apm32e030.o(.data) for SystemCoreClock
+    system_apm32e030.o(i.SystemInit) refers to system_apm32e030.o(i.SystemClockConfig) for SystemClockConfig
+    startup_apm32e030.o(RESET) refers to startup_apm32e030.o(STACK) for __initial_sp
+    startup_apm32e030.o(RESET) refers to startup_apm32e030.o(.text) for Reset_Handler
+    startup_apm32e030.o(RESET) refers to apm32e030_int.o(i.NMI_Handler) for NMI_Handler
+    startup_apm32e030.o(RESET) refers to apm32e030_int.o(i.HardFault_Handler) for HardFault_Handler
+    startup_apm32e030.o(RESET) refers to apm32e030_int.o(i.SVC_Handler) for SVC_Handler
+    startup_apm32e030.o(RESET) refers to apm32e030_int.o(i.PendSV_Handler) for PendSV_Handler
+    startup_apm32e030.o(RESET) refers to apm32e030_int.o(i.SysTick_Handler) for SysTick_Handler
+    startup_apm32e030.o(RESET) refers to apm32e030_int.o(i.TMR6_IRQHandler) for TMR6_IRQHandler
+    startup_apm32e030.o(RESET) refers to apm32e030_int.o(i.TMR17_IRQHandler) for TMR17_IRQHandler
+    startup_apm32e030.o(.text) refers to system_apm32e030.o(i.SystemInit) for SystemInit
+    startup_apm32e030.o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    apm32e030_adc.o(i.ADC_Reset) refers to apm32e030_rcm.o(i.RCM_EnableAPB2PeriphReset) for RCM_EnableAPB2PeriphReset
+    apm32e030_adc.o(i.ADC_Reset) refers to apm32e030_rcm.o(i.RCM_DisableAPB2PeriphReset) for RCM_DisableAPB2PeriphReset
+    apm32e030_fmc.o(i.FMC_ConfigOptionByteUser) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_ConfigReadOutProtection) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_DisableOptionByteBOOT) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_DisableOptionByteSRAMParity) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_DisableOptionByteVDDA) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_EnableOptionByteBOOT) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_EnableOptionByteSRAMParity) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_EnableOptionByteVDDA) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_EnableWriteProtection) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_EraseAllPages) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_EraseOptionByte) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_ErasePage) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_ProgramHalfWord) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_ProgramOptionByteData) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_ProgramWord) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_fmc.o(i.FMC_WaitForReady) refers to apm32e030_fmc.o(i.FMC_ReadState) for FMC_ReadState
+    apm32e030_fmc.o(i.FMC_WriteOptionByteUser) refers to apm32e030_fmc.o(i.FMC_WaitForReady) for FMC_WaitForReady
+    apm32e030_gpio.o(i.GPIO_Reset) refers to apm32e030_rcm.o(i.RCM_EnableAHBPeriphReset) for RCM_EnableAHBPeriphReset
+    apm32e030_gpio.o(i.GPIO_Reset) refers to apm32e030_rcm.o(i.RCM_DisableAHBPeriphReset) for RCM_DisableAHBPeriphReset
+    apm32e030_i2c.o(i.I2C_Reset) refers to apm32e030_rcm.o(i.RCM_EnableAPB1PeriphReset) for RCM_EnableAPB1PeriphReset
+    apm32e030_i2c.o(i.I2C_Reset) refers to apm32e030_rcm.o(i.RCM_DisableAPB1PeriphReset) for RCM_DisableAPB1PeriphReset
+    apm32e030_misc.o(i.NVIC_EnableIRQRequest) refers to apm32e030_misc.o(i.__NVIC_SetPriority) for __NVIC_SetPriority
+    apm32e030_pmu.o(i.PMU_Reset) refers to apm32e030_rcm.o(i.RCM_EnableAPB1PeriphClock) for RCM_EnableAPB1PeriphClock
+    apm32e030_pmu.o(i.PMU_Reset) refers to apm32e030_rcm.o(i.RCM_DisableAPB1PeriphClock) for RCM_DisableAPB1PeriphClock
+    apm32e030_rcm.o(i.RCM_ReadADCCLKFreq) refers to apm32e030_rcm.o(i.RCM_ReadPCLKFreq) for RCM_ReadPCLKFreq
+    apm32e030_rcm.o(i.RCM_ReadHCLKFreq) refers to apm32e030_rcm.o(i.RCM_ReadSYSCLKFreq) for RCM_ReadSYSCLKFreq
+    apm32e030_rcm.o(i.RCM_ReadI2C1CLKFreq) refers to apm32e030_rcm.o(i.RCM_ReadSYSCLKFreq) for RCM_ReadSYSCLKFreq
+    apm32e030_rcm.o(i.RCM_ReadPCLKFreq) refers to apm32e030_rcm.o(i.RCM_ReadHCLKFreq) for RCM_ReadHCLKFreq
+    apm32e030_rcm.o(i.RCM_ReadSYSCLKFreq) refers to uidiv.o(.text) for __aeabi_uidivmod
+    apm32e030_rcm.o(i.RCM_ReadUSART1CLKFreq) refers to apm32e030_rcm.o(i.RCM_ReadPCLKFreq) for RCM_ReadPCLKFreq
+    apm32e030_rcm.o(i.RCM_ReadUSART1CLKFreq) refers to apm32e030_rcm.o(i.RCM_ReadSYSCLKFreq) for RCM_ReadSYSCLKFreq
+    apm32e030_rtc.o(i.RTC_Config) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_Config) refers to apm32e030_rtc.o(i.RTC_EnableInit) for RTC_EnableInit
+    apm32e030_rtc.o(i.RTC_Config) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_Config) refers to apm32e030_rtc.o(i.RTC_DisableInit) for RTC_DisableInit
+    apm32e030_rtc.o(i.RTC_ConfigAlarm) refers to apm32e030_rtc.o(i.RTC_Bcd2ConByte) for RTC_Bcd2ConByte
+    apm32e030_rtc.o(i.RTC_ConfigAlarm) refers to apm32e030_rtc.o(i.RTC_ByteConBcd2) for RTC_ByteConBcd2
+    apm32e030_rtc.o(i.RTC_ConfigAlarm) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigAlarm) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigAlarmSubSecond) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigAlarmSubSecond) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigCalibOutput) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigCalibOutput) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigDate) refers to apm32e030_rtc.o(i.RTC_Bcd2ConByte) for RTC_Bcd2ConByte
+    apm32e030_rtc.o(i.RTC_ConfigDate) refers to apm32e030_rtc.o(i.RTC_ByteConBcd2) for RTC_ByteConBcd2
+    apm32e030_rtc.o(i.RTC_ConfigDate) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigDate) refers to apm32e030_rtc.o(i.RTC_EnableInit) for RTC_EnableInit
+    apm32e030_rtc.o(i.RTC_ConfigDate) refers to apm32e030_rtc.o(i.RTC_DisableInit) for RTC_DisableInit
+    apm32e030_rtc.o(i.RTC_ConfigDate) refers to apm32e030_rtc.o(i.RTC_WaitForSynchro) for RTC_WaitForSynchro
+    apm32e030_rtc.o(i.RTC_ConfigDate) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigDayLightSaving) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigDayLightSaving) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigOutput) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigOutput) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigSmoothCalib) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigSmoothCalib) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigSynchroShift) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigSynchroShift) refers to apm32e030_rtc.o(i.RTC_WaitForSynchro) for RTC_WaitForSynchro
+    apm32e030_rtc.o(i.RTC_ConfigSynchroShift) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigTime) refers to apm32e030_rtc.o(i.RTC_Bcd2ConByte) for RTC_Bcd2ConByte
+    apm32e030_rtc.o(i.RTC_ConfigTime) refers to apm32e030_rtc.o(i.RTC_ByteConBcd2) for RTC_ByteConBcd2
+    apm32e030_rtc.o(i.RTC_ConfigTime) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_ConfigTime) refers to apm32e030_rtc.o(i.RTC_EnableInit) for RTC_EnableInit
+    apm32e030_rtc.o(i.RTC_ConfigTime) refers to apm32e030_rtc.o(i.RTC_DisableInit) for RTC_DisableInit
+    apm32e030_rtc.o(i.RTC_ConfigTime) refers to apm32e030_rtc.o(i.RTC_WaitForSynchro) for RTC_WaitForSynchro
+    apm32e030_rtc.o(i.RTC_ConfigTime) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_DisableAlarm) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_DisableAlarm) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_DisableBypassShadow) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_DisableBypassShadow) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_DisableCalibOutput) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_DisableCalibOutput) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_DisableInterrupt) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_DisableInterrupt) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_DisableRefClock) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_DisableRefClock) refers to apm32e030_rtc.o(i.RTC_EnableInit) for RTC_EnableInit
+    apm32e030_rtc.o(i.RTC_DisableRefClock) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_DisableRefClock) refers to apm32e030_rtc.o(i.RTC_DisableInit) for RTC_DisableInit
+    apm32e030_rtc.o(i.RTC_DisableTimeStamp) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_DisableTimeStamp) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_EnableAlarm) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_EnableAlarm) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_EnableBypassShadow) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_EnableBypassShadow) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_EnableCalibOutput) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_EnableCalibOutput) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_EnableInterrupt) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_EnableInterrupt) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_EnableRefClock) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_EnableRefClock) refers to apm32e030_rtc.o(i.RTC_EnableInit) for RTC_EnableInit
+    apm32e030_rtc.o(i.RTC_EnableRefClock) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_EnableRefClock) refers to apm32e030_rtc.o(i.RTC_DisableInit) for RTC_DisableInit
+    apm32e030_rtc.o(i.RTC_EnableTimeStamp) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_EnableTimeStamp) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_ReadAlarm) refers to apm32e030_rtc.o(i.RTC_Bcd2ConByte) for RTC_Bcd2ConByte
+    apm32e030_rtc.o(i.RTC_ReadBackup) refers to apm32e030_rtc.o(i.__ARM_common_switch8) for __ARM_common_switch8
+    apm32e030_rtc.o(i.RTC_ReadDate) refers to apm32e030_rtc.o(i.RTC_Bcd2ConByte) for RTC_Bcd2ConByte
+    apm32e030_rtc.o(i.RTC_ReadTime) refers to apm32e030_rtc.o(i.RTC_Bcd2ConByte) for RTC_Bcd2ConByte
+    apm32e030_rtc.o(i.RTC_ReadTimeDate) refers to apm32e030_rtc.o(i.RTC_Bcd2ConByte) for RTC_Bcd2ConByte
+    apm32e030_rtc.o(i.RTC_Reset) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_Reset) refers to apm32e030_rtc.o(i.RTC_EnableInit) for RTC_EnableInit
+    apm32e030_rtc.o(i.RTC_Reset) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_Reset) refers to apm32e030_rtc.o(i.RTC_WaitForSynchro) for RTC_WaitForSynchro
+    apm32e030_rtc.o(i.RTC_WaitForSynchro) refers to apm32e030_rtc.o(i.RTC_DisableWriteProtection) for RTC_DisableWriteProtection
+    apm32e030_rtc.o(i.RTC_WaitForSynchro) refers to apm32e030_rtc.o(i.RTC_EnableWriteProtection) for RTC_EnableWriteProtection
+    apm32e030_rtc.o(i.RTC_WriteBackup) refers to apm32e030_rtc.o(i.__ARM_common_switch8) for __ARM_common_switch8
+    apm32e030_spi.o(i.SPI_Reset) refers to apm32e030_rcm.o(i.RCM_EnableAPB2PeriphReset) for RCM_EnableAPB2PeriphReset
+    apm32e030_spi.o(i.SPI_Reset) refers to apm32e030_rcm.o(i.RCM_DisableAPB2PeriphReset) for RCM_DisableAPB2PeriphReset
+    apm32e030_spi.o(i.SPI_Reset) refers to apm32e030_rcm.o(i.RCM_EnableAPB1PeriphReset) for RCM_EnableAPB1PeriphReset
+    apm32e030_spi.o(i.SPI_Reset) refers to apm32e030_rcm.o(i.RCM_DisableAPB1PeriphReset) for RCM_DisableAPB1PeriphReset
+    apm32e030_tmr.o(i.TMR_ConfigExternalClockMode1) refers to apm32e030_tmr.o(i.TMR_ConfigExternalTrigger) for TMR_ConfigExternalTrigger
+    apm32e030_tmr.o(i.TMR_ConfigExternalClockMode2) refers to apm32e030_tmr.o(i.TMR_ConfigExternalTrigger) for TMR_ConfigExternalTrigger
+    apm32e030_tmr.o(i.TMR_ConfigITRxExternalClock) refers to apm32e030_tmr.o(i.TMR_SelectInputTrigger) for TMR_SelectInputTrigger
+    apm32e030_tmr.o(i.TMR_ConfigTIxExternalClock) refers to apm32e030_tmr.o(i.TI2Config) for TI2Config
+    apm32e030_tmr.o(i.TMR_ConfigTIxExternalClock) refers to apm32e030_tmr.o(i.TI1Config) for TI1Config
+    apm32e030_tmr.o(i.TMR_ConfigTIxExternalClock) refers to apm32e030_tmr.o(i.TMR_SelectInputTrigger) for TMR_SelectInputTrigger
+    apm32e030_tmr.o(i.TMR_ICConfig) refers to apm32e030_tmr.o(i.TI1Config) for TI1Config
+    apm32e030_tmr.o(i.TMR_ICConfig) refers to apm32e030_tmr.o(i.TMR_SetIC1Prescal) for TMR_SetIC1Prescal
+    apm32e030_tmr.o(i.TMR_ICConfig) refers to apm32e030_tmr.o(i.TI2Config) for TI2Config
+    apm32e030_tmr.o(i.TMR_ICConfig) refers to apm32e030_tmr.o(i.TMR_SetIC2Prescal) for TMR_SetIC2Prescal
+    apm32e030_tmr.o(i.TMR_ICConfig) refers to apm32e030_tmr.o(i.TI3Config) for TI3Config
+    apm32e030_tmr.o(i.TMR_ICConfig) refers to apm32e030_tmr.o(i.TMR_SetIC3Prescal) for TMR_SetIC3Prescal
+    apm32e030_tmr.o(i.TMR_ICConfig) refers to apm32e030_tmr.o(i.TI4Config) for TI4Config
+    apm32e030_tmr.o(i.TMR_ICConfig) refers to apm32e030_tmr.o(i.TMR_SetIC4Prescal) for TMR_SetIC4Prescal
+    apm32e030_tmr.o(i.TMR_PWMConfig) refers to apm32e030_tmr.o(i.TI1Config) for TI1Config
+    apm32e030_tmr.o(i.TMR_PWMConfig) refers to apm32e030_tmr.o(i.TMR_SetIC1Prescal) for TMR_SetIC1Prescal
+    apm32e030_tmr.o(i.TMR_PWMConfig) refers to apm32e030_tmr.o(i.TI2Config) for TI2Config
+    apm32e030_tmr.o(i.TMR_PWMConfig) refers to apm32e030_tmr.o(i.TMR_SetIC2Prescal) for TMR_SetIC2Prescal
+    apm32e030_tmr.o(i.TMR_Reset) refers to apm32e030_rcm.o(i.RCM_EnableAPB2PeriphReset) for RCM_EnableAPB2PeriphReset
+    apm32e030_tmr.o(i.TMR_Reset) refers to apm32e030_rcm.o(i.RCM_DisableAPB2PeriphReset) for RCM_DisableAPB2PeriphReset
+    apm32e030_tmr.o(i.TMR_Reset) refers to apm32e030_rcm.o(i.RCM_EnableAPB1PeriphReset) for RCM_EnableAPB1PeriphReset
+    apm32e030_tmr.o(i.TMR_Reset) refers to apm32e030_rcm.o(i.RCM_DisableAPB1PeriphReset) for RCM_DisableAPB1PeriphReset
+    apm32e030_usart.o(i.USART_Config) refers to apm32e030_rcm.o(i.RCM_ReadUSART1CLKFreq) for RCM_ReadUSART1CLKFreq
+    apm32e030_usart.o(i.USART_Config) refers to apm32e030_rcm.o(i.RCM_ReadPCLKFreq) for RCM_ReadPCLKFreq
+    apm32e030_usart.o(i.USART_Config) refers to uidiv.o(.text) for __aeabi_uidivmod
+    apm32e030_usart.o(i.USART_Reset) refers to apm32e030_rcm.o(i.RCM_EnableAPB2PeriphReset) for RCM_EnableAPB2PeriphReset
+    apm32e030_usart.o(i.USART_Reset) refers to apm32e030_rcm.o(i.RCM_DisableAPB2PeriphReset) for RCM_DisableAPB2PeriphReset
+    apm32e030_usart.o(i.USART_Reset) refers to apm32e030_rcm.o(i.RCM_EnableAPB1PeriphReset) for RCM_EnableAPB1PeriphReset
+    apm32e030_usart.o(i.USART_Reset) refers to apm32e030_rcm.o(i.RCM_DisableAPB1PeriphReset) for RCM_DisableAPB1PeriphReset
+    apm32e030_wwdt.o(i.WWDT_Reset) refers to apm32e030_rcm.o(i.RCM_EnableAPB1PeriphReset) for RCM_EnableAPB1PeriphReset
+    apm32e030_wwdt.o(i.WWDT_Reset) refers to apm32e030_rcm.o(i.RCM_DisableAPB1PeriphReset) for RCM_DisableAPB1PeriphReset
+    apm32e030_int.o(i.TMR17_IRQHandler) refers to apm32e030_tmr.o(i.TMR_ReadIntFlag) for TMR_ReadIntFlag
+    apm32e030_int.o(i.TMR17_IRQHandler) refers to apm32e030_tmr.o(i.TMR_ClearIntFlag) for TMR_ClearIntFlag
+    apm32e030_int.o(i.TMR17_IRQHandler) refers to audio.o(i.Audio_Sop) for Audio_Sop
+    apm32e030_int.o(i.TMR17_IRQHandler) refers to audio.o(i.ADPCM_Decode) for ADPCM_Decode
+    apm32e030_int.o(i.TMR17_IRQHandler) refers to idiv.o(.text) for __aeabi_idivmod
+    apm32e030_int.o(i.TMR17_IRQHandler) refers to gpio.o(i.Set_Speaker_Duty) for Set_Speaker_Duty
+    apm32e030_int.o(i.TMR17_IRQHandler) refers to audio.o(.data) for playing
+    apm32e030_int.o(i.TMR17_IRQHandler) refers to audio.o(.constdata) for audio_adpcm_data
+    apm32e030_int.o(i.TMR6_IRQHandler) refers to apm32e030_tmr.o(i.TMR_ReadIntFlag) for TMR_ReadIntFlag
+    apm32e030_int.o(i.TMR6_IRQHandler) refers to apm32e030_tmr.o(i.TMR_ClearIntFlag) for TMR_ClearIntFlag
+    apm32e030_int.o(i.TMR6_IRQHandler) refers to sm16208.o(i.process_key_events) for process_key_events
+    apm32e030_int.o(i.TMR6_IRQHandler) refers to globalvar.o(.data) for TimingDelay
+    main.o(i.main) refers to gpio.o(i.EnableAllGpio) for EnableAllGpio
+    main.o(i.main) refers to timer.o(i.TIM6_Config) for TIM6_Config
+    main.o(i.main) refers to timer.o(i.TIM17_Config) for TIM17_Config
+    main.o(i.main) refers to timer.o(i.delay_ms) for delay_ms
+    main.o(i.main) refers to sm16208.o(i.SM16208_Init) for SM16208_Init
+    main.o(i.main) refers to gpio.o(i.SpeakerInit) for SpeakerInit
+    main.o(i.main) refers to audio.o(i.Audio_Start) for Audio_Start
+    main.o(i.main) refers to globalvar.o(.data) for debugData1
+    audio.o(i.ADPCM_Decode) refers to audio.o(.data) for step_index
+    audio.o(i.ADPCM_Decode) refers to audio.o(.constdata) for ima_step_table
+    audio.o(i.Audio_Sop) refers to gpio.o(i.Set_Speaker_Duty) for Set_Speaker_Duty
+    audio.o(i.Audio_Sop) refers to apm32e030_tmr.o(i.TMR_DisablePWMOutputs) for TMR_DisablePWMOutputs
+    audio.o(i.Audio_Sop) refers to apm32e030_tmr.o(i.TMR_Disable) for TMR_Disable
+    audio.o(i.Audio_Sop) refers to audio.o(.data) for playing
+    audio.o(i.Audio_Start) refers to apm32e030_tmr.o(i.TMR_EnablePWMOutputs) for TMR_EnablePWMOutputs
+    audio.o(i.Audio_Start) refers to apm32e030_tmr.o(i.TMR_Enable) for TMR_Enable
+    audio.o(i.Audio_Start) refers to audio.o(.data) for predictor
+    globalvar.o(i.WriteTimeSetting) refers to apm32e030_fmc.o(i.FMC_Unlock) for FMC_Unlock
+    globalvar.o(i.WriteTimeSetting) refers to apm32e030_fmc.o(i.FMC_ErasePage) for FMC_ErasePage
+    globalvar.o(i.WriteTimeSetting) refers to apm32e030_fmc.o(i.FMC_ProgramHalfWord) for FMC_ProgramHalfWord
+    globalvar.o(i.WriteTimeSetting) refers to apm32e030_fmc.o(i.FMC_Lock) for FMC_Lock
+    gpio.o(i.EnableAllGpio) refers to apm32e030_rcm.o(i.RCM_EnableAHBPeriphClock) for RCM_EnableAHBPeriphClock
+    gpio.o(i.SpeakerInit) refers to apm32e030_rcm.o(i.RCM_EnableAHBPeriphClock) for RCM_EnableAHBPeriphClock
+    gpio.o(i.SpeakerInit) refers to apm32e030_rcm.o(i.RCM_EnableAPB2PeriphClock) for RCM_EnableAPB2PeriphClock
+    gpio.o(i.SpeakerInit) refers to apm32e030_gpio.o(i.GPIO_ConfigPinAF) for GPIO_ConfigPinAF
+    gpio.o(i.SpeakerInit) refers to apm32e030_gpio.o(i.GPIO_Config) for GPIO_Config
+    gpio.o(i.SpeakerInit) refers to apm32e030_tmr.o(i.TMR_ConfigTimeBase) for TMR_ConfigTimeBase
+    gpio.o(i.SpeakerInit) refers to apm32e030_tmr.o(i.TMR_OC1Config) for TMR_OC1Config
+    gpio.o(i.SpeakerInit) refers to apm32e030_tmr.o(i.TMR_OC2Config) for TMR_OC2Config
+    gpio.o(i.SpeakerInit) refers to apm32e030_tmr.o(i.TMR_EnablePWMOutputs) for TMR_EnablePWMOutputs
+    gpio.o(i.SpeakerInit) refers to apm32e030_tmr.o(i.TMR_Enable) for TMR_Enable
+    sm16208.o(i.ReadKeyData) refers to apm32e030_gpio.o(i.GPIO_ReadInputBit) for GPIO_ReadInputBit
+    sm16208.o(i.SM16208_Init) refers to apm32e030_gpio.o(i.GPIO_Config) for GPIO_Config
+    sm16208.o(i.SM16208_Init) refers to apm32e030_gpio.o(i.GPIO_WriteBitValue) for GPIO_WriteBitValue
+    sm16208.o(i.display_matrix) refers to apm32e030_gpio.o(i.GPIO_WriteBitValue) for GPIO_WriteBitValue
+    sm16208.o(i.display_matrix) refers to timer.o(i.delay_ms) for delay_ms
+    sm16208.o(i.display_matrix) refers to sm16208.o(i.ReadKeyData) for ReadKeyData
+    sm16208.o(i.display_matrix) refers to sm16208.o(.data) for key_arr
+    sm16208.o(i.process_key_events) refers to sm16208.o(.bss) for key_history
+    sm16208.o(i.process_key_events) refers to sm16208.o(.data) for key_arr
+    timer.o(i.TIM17_Config) refers to apm32e030_rcm.o(i.RCM_EnableAPB2PeriphClock) for RCM_EnableAPB2PeriphClock
+    timer.o(i.TIM17_Config) refers to apm32e030_rcm.o(i.RCM_EnableAPB1PeriphClock) for RCM_EnableAPB1PeriphClock
+    timer.o(i.TIM17_Config) refers to apm32e030_tmr.o(i.TMR_ConfigTimeBase) for TMR_ConfigTimeBase
+    timer.o(i.TIM17_Config) refers to apm32e030_tmr.o(i.TMR_EnableInterrupt) for TMR_EnableInterrupt
+    timer.o(i.TIM17_Config) refers to apm32e030_misc.o(i.NVIC_EnableIRQRequest) for NVIC_EnableIRQRequest
+    timer.o(i.TIM17_Config) refers to apm32e030_tmr.o(i.TMR_Enable) for TMR_Enable
+    timer.o(i.TIM6_Config) refers to apm32e030_rcm.o(i.RCM_EnableAPB2PeriphClock) for RCM_EnableAPB2PeriphClock
+    timer.o(i.TIM6_Config) refers to apm32e030_rcm.o(i.RCM_EnableAPB1PeriphClock) for RCM_EnableAPB1PeriphClock
+    timer.o(i.TIM6_Config) refers to apm32e030_tmr.o(i.TMR_ConfigTimeBase) for TMR_ConfigTimeBase
+    timer.o(i.TIM6_Config) refers to apm32e030_tmr.o(i.TMR_EnableInterrupt) for TMR_EnableInterrupt
+    timer.o(i.TIM6_Config) refers to apm32e030_misc.o(i.NVIC_EnableIRQRequest) for NVIC_EnableIRQRequest
+    timer.o(i.TIM6_Config) refers to apm32e030_tmr.o(i.TMR_Enable) for TMR_Enable
+    timer.o(i.delay_ms) refers to globalvar.o(.data) for TimingDelay
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry10a.o(.ARM.Collect$$$$0000000F) for __rt_final_cpp
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry11a.o(.ARM.Collect$$$$00000011) for __rt_final_exit
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry12b.o(.ARM.Collect$$$$0000000E) for __rt_lib_shutdown_fini
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry7b.o(.ARM.Collect$$$$00000008) for _main_clock
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry8b.o(.ARM.Collect$$$$0000000A) for _main_cpp_init
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry9a.o(.ARM.Collect$$$$0000000B) for _main_init
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry5.o(.ARM.Collect$$$$00000004) for _main_scatterload
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry2.o(.ARM.Collect$$$$00000001) for _main_stk
+    idiv.o(.text) refers to uidiv.o(.text) for __aeabi_uidivmod
+    entry2.o(.ARM.Collect$$$$00000001) refers to entry2.o(.ARM.Collect$$$$00002712) for __lit__00000000
+    entry2.o(.ARM.Collect$$$$00002712) refers to startup_apm32e030.o(STACK) for __initial_sp
+    entry2.o(__vectab_stack_and_reset_area) refers to startup_apm32e030.o(STACK) for __initial_sp
+    entry2.o(__vectab_stack_and_reset_area) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    entry5.o(.ARM.Collect$$$$00000004) refers to init.o(.text) for __scatterload
+    entry9a.o(.ARM.Collect$$$$0000000B) refers to main.o(i.main) for main
+    entry9b.o(.ARM.Collect$$$$0000000C) refers to main.o(i.main) for main
+    init.o(.text) refers to entry5.o(.ARM.Collect$$$$00000004) for __main_after_scatterload
+
+
+==============================================================================
+
+Removing Unused input sections from the image.
+
+    Removing system_apm32e030.o(.rev16_text), (4 bytes).
+    Removing system_apm32e030.o(.revsh_text), (4 bytes).
+    Removing system_apm32e030.o(i.SystemCoreClockUpdate), (184 bytes).
+    Removing system_apm32e030.o(.data), (4 bytes).
+    Removing startup_apm32e030.o(HEAP), (512 bytes).
+    Removing apm32e030_adc.o(.rev16_text), (4 bytes).
+    Removing apm32e030_adc.o(.revsh_text), (4 bytes).
+    Removing apm32e030_adc.o(i.ADC_AnalogWatchdogHighThreshold), (32 bytes).
+    Removing apm32e030_adc.o(i.ADC_AnalogWatchdogLowThreshold), (24 bytes).
+    Removing apm32e030_adc.o(i.ADC_AnalogWatchdogSingleChannel), (32 bytes).
+    Removing apm32e030_adc.o(i.ADC_ClearIntFlag), (12 bytes).
+    Removing apm32e030_adc.o(i.ADC_ClearStatusFlag), (12 bytes).
+    Removing apm32e030_adc.o(i.ADC_ClockMode), (28 bytes).
+    Removing apm32e030_adc.o(i.ADC_Config), (148 bytes).
+    Removing apm32e030_adc.o(i.ADC_ConfigChannel), (24 bytes).
+    Removing apm32e030_adc.o(i.ADC_ConfigStructInit), (16 bytes).
+    Removing apm32e030_adc.o(i.ADC_DMARequestMode), (28 bytes).
+    Removing apm32e030_adc.o(i.ADC_Disable), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_DisableAnalogWatchdog), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_DisableAnalogWatchdogSingleChannel), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_DisableAutoPowerOff), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_DisableContinuousMode), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_DisableDMA), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_DisableDiscMode), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_DisableInterrupt), (16 bytes).
+    Removing apm32e030_adc.o(i.ADC_DisableJitter), (36 bytes).
+    Removing apm32e030_adc.o(i.ADC_DisableOverrunMode), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_DisableTempSensor), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_DisableVrefint), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_DisableWaitMode), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_Enable), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_EnableAnalogWatchdog), (24 bytes).
+    Removing apm32e030_adc.o(i.ADC_EnableAnalogWatchdogSingleChannel), (24 bytes).
+    Removing apm32e030_adc.o(i.ADC_EnableAutoPowerOff), (24 bytes).
+    Removing apm32e030_adc.o(i.ADC_EnableContinuousMode), (24 bytes).
+    Removing apm32e030_adc.o(i.ADC_EnableDMA), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_EnableDiscMode), (24 bytes).
+    Removing apm32e030_adc.o(i.ADC_EnableInterrupt), (16 bytes).
+    Removing apm32e030_adc.o(i.ADC_EnableJitter), (36 bytes).
+    Removing apm32e030_adc.o(i.ADC_EnableOverrunMode), (24 bytes).
+    Removing apm32e030_adc.o(i.ADC_EnableTempSensor), (24 bytes).
+    Removing apm32e030_adc.o(i.ADC_EnableVrefint), (24 bytes).
+    Removing apm32e030_adc.o(i.ADC_EnableWaitMode), (24 bytes).
+    Removing apm32e030_adc.o(i.ADC_ReadCalibrationFactor), (76 bytes).
+    Removing apm32e030_adc.o(i.ADC_ReadConversionValue), (12 bytes).
+    Removing apm32e030_adc.o(i.ADC_ReadIntFlag), (44 bytes).
+    Removing apm32e030_adc.o(i.ADC_ReadStatusFlag), (48 bytes).
+    Removing apm32e030_adc.o(i.ADC_Reset), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_StartConversion), (20 bytes).
+    Removing apm32e030_adc.o(i.ADC_StopConversion), (20 bytes).
+    Removing apm32e030_crc.o(.rev16_text), (4 bytes).
+    Removing apm32e030_crc.o(.revsh_text), (4 bytes).
+    Removing apm32e030_crc.o(i.CRC_CalculateBlockCRC), (36 bytes).
+    Removing apm32e030_crc.o(i.CRC_CalculateCRC), (16 bytes).
+    Removing apm32e030_crc.o(i.CRC_DisableReverseOutputData), (20 bytes).
+    Removing apm32e030_crc.o(i.CRC_EnableReverseOutputData), (20 bytes).
+    Removing apm32e030_crc.o(i.CRC_ReadCRC), (12 bytes).
+    Removing apm32e030_crc.o(i.CRC_ReadIDRegister), (12 bytes).
+    Removing apm32e030_crc.o(i.CRC_Reset), (28 bytes).
+    Removing apm32e030_crc.o(i.CRC_ResetDATA), (20 bytes).
+    Removing apm32e030_crc.o(i.CRC_SelectReverseInputData), (28 bytes).
+    Removing apm32e030_crc.o(i.CRC_WriteIDRegister), (12 bytes).
+    Removing apm32e030_crc.o(i.CRC_WriteInitRegister), (12 bytes).
+    Removing apm32e030_dbg.o(.rev16_text), (4 bytes).
+    Removing apm32e030_dbg.o(.revsh_text), (4 bytes).
+    Removing apm32e030_dbg.o(i.DBG_DisableAPB1Periph), (16 bytes).
+    Removing apm32e030_dbg.o(i.DBG_DisableAPB2Periph), (16 bytes).
+    Removing apm32e030_dbg.o(i.DBG_DisableDebugMode), (16 bytes).
+    Removing apm32e030_dbg.o(i.DBG_EnableAPB1Periph), (16 bytes).
+    Removing apm32e030_dbg.o(i.DBG_EnableAPB2Periph), (16 bytes).
+    Removing apm32e030_dbg.o(i.DBG_EnableDebugMode), (16 bytes).
+    Removing apm32e030_dbg.o(i.DBG_ReadDevId), (16 bytes).
+    Removing apm32e030_dbg.o(i.DBG_ReadRevId), (12 bytes).
+    Removing apm32e030_dma.o(.rev16_text), (4 bytes).
+    Removing apm32e030_dma.o(.revsh_text), (4 bytes).
+    Removing apm32e030_dma.o(i.DMA_ClearIntFlag), (20 bytes).
+    Removing apm32e030_dma.o(i.DMA_ClearStatusFlag), (20 bytes).
+    Removing apm32e030_dma.o(i.DMA_Config), (168 bytes).
+    Removing apm32e030_dma.o(i.DMA_ConfigStructInit), (26 bytes).
+    Removing apm32e030_dma.o(i.DMA_Disable), (10 bytes).
+    Removing apm32e030_dma.o(i.DMA_DisableInterrupt), (8 bytes).
+    Removing apm32e030_dma.o(i.DMA_Enable), (12 bytes).
+    Removing apm32e030_dma.o(i.DMA_EnableInterrupt), (8 bytes).
+    Removing apm32e030_dma.o(i.DMA_ReadDataNumber), (6 bytes).
+    Removing apm32e030_dma.o(i.DMA_ReadIntFlag), (32 bytes).
+    Removing apm32e030_dma.o(i.DMA_ReadStatusFlag), (32 bytes).
+    Removing apm32e030_dma.o(i.DMA_Reset), (116 bytes).
+    Removing apm32e030_dma.o(i.DMA_SetDataNumber), (4 bytes).
+    Removing apm32e030_eint.o(.rev16_text), (4 bytes).
+    Removing apm32e030_eint.o(.revsh_text), (4 bytes).
+    Removing apm32e030_eint.o(i.EINT_ClearIntFlag), (12 bytes).
+    Removing apm32e030_eint.o(i.EINT_ClearStatusFlag), (12 bytes).
+    Removing apm32e030_eint.o(i.EINT_Config), (156 bytes).
+    Removing apm32e030_eint.o(i.EINT_ConfigStructInit), (16 bytes).
+    Removing apm32e030_eint.o(i.EINT_ReadIntFlag), (40 bytes).
+    Removing apm32e030_eint.o(i.EINT_ReadStatusFlag), (28 bytes).
+    Removing apm32e030_eint.o(i.EINT_Reset), (28 bytes).
+    Removing apm32e030_eint.o(i.EINT_SelectSWInterrupt), (16 bytes).
+    Removing apm32e030_fmc.o(.rev16_text), (4 bytes).
+    Removing apm32e030_fmc.o(.revsh_text), (4 bytes).
+    Removing apm32e030_fmc.o(i.FMC_ClearStatusFlag), (16 bytes).
+    Removing apm32e030_fmc.o(i.FMC_ConfigOptionByteUser), (108 bytes).
+    Removing apm32e030_fmc.o(i.FMC_ConfigReadOutProtection), (168 bytes).
+    Removing apm32e030_fmc.o(i.FMC_DisableInterrupt), (16 bytes).
+    Removing apm32e030_fmc.o(i.FMC_DisableOptionByteBOOT), (80 bytes).
+    Removing apm32e030_fmc.o(i.FMC_DisableOptionByteSRAMParity), (80 bytes).
+    Removing apm32e030_fmc.o(i.FMC_DisableOptionByteVDDA), (80 bytes).
+    Removing apm32e030_fmc.o(i.FMC_DisablePrefetchBuffer), (20 bytes).
+    Removing apm32e030_fmc.o(i.FMC_EnableInterrupt), (16 bytes).
+    Removing apm32e030_fmc.o(i.FMC_EnableOptionByteBOOT), (84 bytes).
+    Removing apm32e030_fmc.o(i.FMC_EnableOptionByteSRAMParity), (84 bytes).
+    Removing apm32e030_fmc.o(i.FMC_EnableOptionByteVDDA), (84 bytes).
+    Removing apm32e030_fmc.o(i.FMC_EnablePrefetchBuffer), (20 bytes).
+    Removing apm32e030_fmc.o(i.FMC_EnableWriteProtection), (128 bytes).
+    Removing apm32e030_fmc.o(i.FMC_EraseAllPages), (76 bytes).
+    Removing apm32e030_fmc.o(i.FMC_EraseOptionByte), (184 bytes).
+    Removing apm32e030_fmc.o(i.FMC_ErasePage), (80 bytes).
+    Removing apm32e030_fmc.o(i.FMC_GetReadProtectionStatus), (24 bytes).
+    Removing apm32e030_fmc.o(i.FMC_LaunchOptionByte), (24 bytes).
+    Removing apm32e030_fmc.o(i.FMC_Lock), (20 bytes).
+    Removing apm32e030_fmc.o(i.FMC_LockOptionByte), (20 bytes).
+    Removing apm32e030_fmc.o(i.FMC_ProgramHalfWord), (68 bytes).
+    Removing apm32e030_fmc.o(i.FMC_ProgramOptionByteData), (72 bytes).
+    Removing apm32e030_fmc.o(i.FMC_ProgramWord), (84 bytes).
+    Removing apm32e030_fmc.o(i.FMC_ReadOptionByteUser), (16 bytes).
+    Removing apm32e030_fmc.o(i.FMC_ReadOptionByteWriteProtection), (12 bytes).
+    Removing apm32e030_fmc.o(i.FMC_ReadPrefetchBufferStatus), (24 bytes).
+    Removing apm32e030_fmc.o(i.FMC_ReadState), (48 bytes).
+    Removing apm32e030_fmc.o(i.FMC_ReadStatusFlag), (40 bytes).
+    Removing apm32e030_fmc.o(i.FMC_SetLatency), (56 bytes).
+    Removing apm32e030_fmc.o(i.FMC_Unlock), (24 bytes).
+    Removing apm32e030_fmc.o(i.FMC_UnlockOptionByte), (24 bytes).
+    Removing apm32e030_fmc.o(i.FMC_WaitForReady), (28 bytes).
+    Removing apm32e030_fmc.o(i.FMC_WriteOptionByteUser), (76 bytes).
+    Removing apm32e030_gpio.o(.rev16_text), (4 bytes).
+    Removing apm32e030_gpio.o(.revsh_text), (4 bytes).
+    Removing apm32e030_gpio.o(i.GPIO_ClearBit), (4 bytes).
+    Removing apm32e030_gpio.o(i.GPIO_ConfigPinLock), (22 bytes).
+    Removing apm32e030_gpio.o(i.GPIO_ConfigStructInit), (22 bytes).
+    Removing apm32e030_gpio.o(i.GPIO_ReadInputBit), (20 bytes).
+    Removing apm32e030_gpio.o(i.GPIO_ReadInputPort), (8 bytes).
+    Removing apm32e030_gpio.o(i.GPIO_ReadOutputBit), (20 bytes).
+    Removing apm32e030_gpio.o(i.GPIO_ReadOutputPort), (8 bytes).
+    Removing apm32e030_gpio.o(i.GPIO_Reset), (136 bytes).
+    Removing apm32e030_gpio.o(i.GPIO_SetBit), (4 bytes).
+    Removing apm32e030_gpio.o(i.GPIO_WriteOutputPort), (4 bytes).
+    Removing apm32e030_i2c.o(.rev16_text), (4 bytes).
+    Removing apm32e030_i2c.o(.revsh_text), (4 bytes).
+    Removing apm32e030_i2c.o(i.I2C_ClearIntFlag), (4 bytes).
+    Removing apm32e030_i2c.o(i.I2C_ClearStatusFlag), (4 bytes).
+    Removing apm32e030_i2c.o(i.I2C_Config), (156 bytes).
+    Removing apm32e030_i2c.o(i.I2C_ConfigMasterRequest), (24 bytes).
+    Removing apm32e030_i2c.o(i.I2C_ConfigNumberOfBytes), (42 bytes).
+    Removing apm32e030_i2c.o(i.I2C_ConfigStructInit), (22 bytes).
+    Removing apm32e030_i2c.o(i.I2C_ConfigTimeoutA), (16 bytes).
+    Removing apm32e030_i2c.o(i.I2C_ConfigTimeoutB), (28 bytes).
+    Removing apm32e030_i2c.o(i.I2C_Disable), (10 bytes).
+    Removing apm32e030_i2c.o(i.I2C_Disable10BitAddressHeader), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_Disable10BitAddressingMode), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableAcknowledge), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableAutoEnd), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableBroadcastCall), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableClockTimeout), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableDMA), (28 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableExtendClockTimeout), (10 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableGenerateStart), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableGenerateStop), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableIdleClockTimeout), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableInterrupt), (8 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableOwnAddress2), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisablePEC), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisablePECRequest), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableReload), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableSMBusAlert), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableSMBusDAEN), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableSMBusHAEN), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableSlaveByteControl), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableStopMode), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_DisableStretchClock), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_Enable), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_Enable10BitAddressHeader), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_Enable10BitAddressingMode), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableAcknowledge), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableAutoEnd), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableBroadcastCall), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableClockTimeout), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableDMA), (32 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableExtendClockTimeout), (16 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableGenerateStart), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableGenerateStop), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableIdleClockTimeout), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableInterrupt), (8 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableOwnAddress2), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnablePEC), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnablePECRequest), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableReload), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableSMBusAlert), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableSMBusDAEN), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableSMBusHAEN), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableSlaveByteControl), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableStopMode), (14 bytes).
+    Removing apm32e030_i2c.o(i.I2C_EnableStretchClock), (12 bytes).
+    Removing apm32e030_i2c.o(i.I2C_HandlingTransfer), (44 bytes).
+    Removing apm32e030_i2c.o(i.I2C_OwnAddress2Mask), (40 bytes).
+    Removing apm32e030_i2c.o(i.I2C_ReadAddressMatched), (10 bytes).
+    Removing apm32e030_i2c.o(i.I2C_ReadIntFlag), (76 bytes).
+    Removing apm32e030_i2c.o(i.I2C_ReadPEC), (8 bytes).
+    Removing apm32e030_i2c.o(i.I2C_ReadRegister), (22 bytes).
+    Removing apm32e030_i2c.o(i.I2C_ReadStatusFlag), (22 bytes).
+    Removing apm32e030_i2c.o(i.I2C_ReadTransferDirection), (24 bytes).
+    Removing apm32e030_i2c.o(i.I2C_Reset), (52 bytes).
+    Removing apm32e030_i2c.o(i.I2C_RxData), (8 bytes).
+    Removing apm32e030_i2c.o(i.I2C_SlaveAddress), (30 bytes).
+    Removing apm32e030_i2c.o(i.I2C_SoftwareReset), (22 bytes).
+    Removing apm32e030_i2c.o(i.I2C_TxData), (4 bytes).
+    Removing apm32e030_iwdt.o(.rev16_text), (4 bytes).
+    Removing apm32e030_iwdt.o(.revsh_text), (4 bytes).
+    Removing apm32e030_iwdt.o(i.IWDT_ConfigDivider), (12 bytes).
+    Removing apm32e030_iwdt.o(i.IWDT_ConfigReload), (12 bytes).
+    Removing apm32e030_iwdt.o(i.IWDT_ConfigWindowValue), (12 bytes).
+    Removing apm32e030_iwdt.o(i.IWDT_DisableWriteAccess), (12 bytes).
+    Removing apm32e030_iwdt.o(i.IWDT_Enable), (16 bytes).
+    Removing apm32e030_iwdt.o(i.IWDT_EnableWriteAccess), (16 bytes).
+    Removing apm32e030_iwdt.o(i.IWDT_ReadStatusFlag), (28 bytes).
+    Removing apm32e030_iwdt.o(i.IWDT_Refresh), (16 bytes).
+    Removing apm32e030_misc.o(.rev16_text), (4 bytes).
+    Removing apm32e030_misc.o(.revsh_text), (4 bytes).
+    Removing apm32e030_misc.o(i.NVIC_DisableIRQRequest), (36 bytes).
+    Removing apm32e030_misc.o(i.NVIC_DisableSystemLowPower), (16 bytes).
+    Removing apm32e030_misc.o(i.NVIC_EnableSystemLowPower), (16 bytes).
+    Removing apm32e030_misc.o(i.PMU_EnterHaltModeWFE), (24 bytes).
+    Removing apm32e030_misc.o(i.PMU_EnterHaltModeWFI), (24 bytes).
+    Removing apm32e030_misc.o(i.PMU_EnterWaitMode), (20 bytes).
+    Removing apm32e030_misc.o(i.SysTick_ConfigCLKSource), (36 bytes).
+    Removing apm32e030_ob.o(.rev16_text), (4 bytes).
+    Removing apm32e030_ob.o(.revsh_text), (4 bytes).
+    Removing apm32e030_ob.o(i.OB_OptionBytesBoot1), (28 bytes).
+    Removing apm32e030_ob.o(i.OB_OptionBytesRamParity), (28 bytes).
+    Removing apm32e030_ob.o(i.OB_OptionBytesStandby), (28 bytes).
+    Removing apm32e030_ob.o(i.OB_OptionBytesStop), (28 bytes).
+    Removing apm32e030_ob.o(i.OB_OptionBytesVddaAnalog), (28 bytes).
+    Removing apm32e030_ob.o(i.OB_OptionBytesWatchdog), (24 bytes).
+    Removing apm32e030_ob.o(i.OB_ReadProtectionOptionByte), (24 bytes).
+    Removing apm32e030_pmu.o(.rev16_text), (4 bytes).
+    Removing apm32e030_pmu.o(.revsh_text), (4 bytes).
+    Removing apm32e030_pmu.o(i.PMU_ClearStatusFlag), (44 bytes).
+    Removing apm32e030_pmu.o(i.PMU_DisableBackupAccess), (20 bytes).
+    Removing apm32e030_pmu.o(i.PMU_DisableWakeUpPin), (16 bytes).
+    Removing apm32e030_pmu.o(i.PMU_EnableBackupAccess), (24 bytes).
+    Removing apm32e030_pmu.o(i.PMU_EnableWakeUpPin), (16 bytes).
+    Removing apm32e030_pmu.o(i.PMU_EnterSTANDBYMode), (40 bytes).
+    Removing apm32e030_pmu.o(i.PMU_EnterSTOPMode), (120 bytes).
+    Removing apm32e030_pmu.o(i.PMU_EnterSleepMode), (32 bytes).
+    Removing apm32e030_pmu.o(i.PMU_ReadStatusFlag), (24 bytes).
+    Removing apm32e030_pmu.o(i.PMU_Reset), (20 bytes).
+    Removing apm32e030_rcm.o(.rev16_text), (4 bytes).
+    Removing apm32e030_rcm.o(.revsh_text), (4 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ClearIntFlag), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ClearStatusFlag), (24 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ConfigAHB), (28 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ConfigAPB), (32 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ConfigCLKDIV), (24 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ConfigCOC), (32 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ConfigDriveLSE), (28 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ConfigHSE), (92 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ConfigI2CCLK), (28 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ConfigLSE), (76 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ConfigPLL), (56 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ConfigRTCCLK), (32 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ConfigSYSCLK), (24 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ConfigUSARTCLK), (24 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisableAHBPeriphClock), (16 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisableAHBPeriphReset), (16 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisableAPB1PeriphClock), (16 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisableAPB1PeriphReset), (16 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisableAPB2PeriphClock), (16 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisableAPB2PeriphReset), (16 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisableBackupReset), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisableCCS), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisableHSI), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisableHSI14), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisableHSI14ADC), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisableInterrupt), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisableLSI), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisablePLL), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_DisableRTCCLK), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_EnableAHBPeriphReset), (16 bytes).
+    Removing apm32e030_rcm.o(i.RCM_EnableAPB1PeriphReset), (16 bytes).
+    Removing apm32e030_rcm.o(i.RCM_EnableAPB2PeriphReset), (16 bytes).
+    Removing apm32e030_rcm.o(i.RCM_EnableBackupReset), (24 bytes).
+    Removing apm32e030_rcm.o(i.RCM_EnableCCS), (24 bytes).
+    Removing apm32e030_rcm.o(i.RCM_EnableHSI), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_EnableHSI14), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_EnableHSI14ADC), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_EnableInterrupt), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_EnableLSI), (20 bytes).
+    Removing apm32e030_rcm.o(i.RCM_EnablePLL), (24 bytes).
+    Removing apm32e030_rcm.o(i.RCM_EnableRTCCLK), (24 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ReadADCCLKFreq), (40 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ReadHCLKFreq), (60 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ReadI2C1CLKFreq), (40 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ReadIntFlag), (28 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ReadPCLKFreq), (52 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ReadSYSCLKFreq), (112 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ReadSYSCLKSource), (16 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ReadStatusFlag), (80 bytes).
+    Removing apm32e030_rcm.o(i.RCM_ReadUSART1CLKFreq), (88 bytes).
+    Removing apm32e030_rcm.o(i.RCM_Reset), (124 bytes).
+    Removing apm32e030_rcm.o(i.RCM_SetHSI14Trim), (28 bytes).
+    Removing apm32e030_rcm.o(i.RCM_SetHSITrim), (28 bytes).
+    Removing apm32e030_rcm.o(i.RCM_WaitHSEReady), (48 bytes).
+    Removing apm32e030_rtc.o(.rev16_text), (4 bytes).
+    Removing apm32e030_rtc.o(.revsh_text), (4 bytes).
+    Removing apm32e030_rtc.o(i.RTC_Bcd2ConByte), (26 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ByteConBcd2), (28 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ClearIntFlag), (20 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ClearStatusFlag), (16 bytes).
+    Removing apm32e030_rtc.o(i.RTC_Config), (108 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigAlarm), (192 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigAlarmStructInit), (28 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigAlarmSubSecond), (64 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigCalibOutput), (44 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigDate), (172 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigDateStructInit), (14 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigDayLightSaving), (108 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigFilter), (32 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigOutput), (68 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigOutputType), (32 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigSamplingFreq), (32 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigSmoothCalib), (116 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigStructInit), (14 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigSynchroShift), (116 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigTamperTrigger), (80 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigTime), (196 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ConfigTimeStructInit), (12 bytes).
+    Removing apm32e030_rtc.o(i.RTC_DisableAlarm), (88 bytes).
+    Removing apm32e030_rtc.o(i.RTC_DisableBypassShadow), (28 bytes).
+    Removing apm32e030_rtc.o(i.RTC_DisableCalibOutput), (32 bytes).
+    Removing apm32e030_rtc.o(i.RTC_DisableInit), (20 bytes).
+    Removing apm32e030_rtc.o(i.RTC_DisableInterrupt), (52 bytes).
+    Removing apm32e030_rtc.o(i.RTC_DisablePullUp), (20 bytes).
+    Removing apm32e030_rtc.o(i.RTC_DisableRefClock), (52 bytes).
+    Removing apm32e030_rtc.o(i.RTC_DisableTDE), (20 bytes).
+    Removing apm32e030_rtc.o(i.RTC_DisableTamper), (40 bytes).
+    Removing apm32e030_rtc.o(i.RTC_DisableTimeStamp), (52 bytes).
+    Removing apm32e030_rtc.o(i.RTC_DisableWriteProtection), (16 bytes).
+    Removing apm32e030_rtc.o(i.RTC_EnableAlarm), (32 bytes).
+    Removing apm32e030_rtc.o(i.RTC_EnableBypassShadow), (32 bytes).
+    Removing apm32e030_rtc.o(i.RTC_EnableCalibOutput), (32 bytes).
+    Removing apm32e030_rtc.o(i.RTC_EnableInit), (84 bytes).
+    Removing apm32e030_rtc.o(i.RTC_EnableInterrupt), (52 bytes).
+    Removing apm32e030_rtc.o(i.RTC_EnablePullUp), (24 bytes).
+    Removing apm32e030_rtc.o(i.RTC_EnableRefClock), (52 bytes).
+    Removing apm32e030_rtc.o(i.RTC_EnableTDE), (20 bytes).
+    Removing apm32e030_rtc.o(i.RTC_EnableTamper), (44 bytes).
+    Removing apm32e030_rtc.o(i.RTC_EnableTimeStamp), (56 bytes).
+    Removing apm32e030_rtc.o(i.RTC_EnableWriteProtection), (12 bytes).
+    Removing apm32e030_rtc.o(i.RTC_PinsPrechargeDuration), (32 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ReadAlarm), (248 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ReadAlarmSubSecond), (16 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ReadBackup), (60 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ReadDate), (96 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ReadIntFlag), (64 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ReadStatusFlag), (24 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ReadStoreOperation), (16 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ReadSubSecond), (16 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ReadTime), (92 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ReadTimeDate), (160 bytes).
+    Removing apm32e030_rtc.o(i.RTC_ReadTimeStampSubSecond), (12 bytes).
+    Removing apm32e030_rtc.o(i.RTC_Reset), (108 bytes).
+    Removing apm32e030_rtc.o(i.RTC_WaitForSynchro), (104 bytes).
+    Removing apm32e030_rtc.o(i.RTC_WriteBackup), (56 bytes).
+    Removing apm32e030_spi.o(.rev16_text), (4 bytes).
+    Removing apm32e030_spi.o(.revsh_text), (4 bytes).
+    Removing apm32e030_spi.o(i.SPI_CRCLength), (24 bytes).
+    Removing apm32e030_spi.o(i.SPI_ClearStatusFlag), (8 bytes).
+    Removing apm32e030_spi.o(i.SPI_Config), (160 bytes).
+    Removing apm32e030_spi.o(i.SPI_ConfigDatalength), (24 bytes).
+    Removing apm32e030_spi.o(i.SPI_ConfigFIFOThreshold), (24 bytes).
+    Removing apm32e030_spi.o(i.SPI_ConfigStructInit), (32 bytes).
+    Removing apm32e030_spi.o(i.SPI_Disable), (10 bytes).
+    Removing apm32e030_spi.o(i.SPI_DisableCRC), (12 bytes).
+    Removing apm32e030_spi.o(i.SPI_DisableDMARxBuffer), (10 bytes).
+    Removing apm32e030_spi.o(i.SPI_DisableDMATxBuffer), (10 bytes).
+    Removing apm32e030_spi.o(i.SPI_DisableFrameFormatMode), (10 bytes).
+    Removing apm32e030_spi.o(i.SPI_DisableInternalSlave), (12 bytes).
+    Removing apm32e030_spi.o(i.SPI_DisableInterrupt), (8 bytes).
+    Removing apm32e030_spi.o(i.SPI_DisableNSSPulse), (10 bytes).
+    Removing apm32e030_spi.o(i.SPI_DisableOutputDirection), (12 bytes).
+    Removing apm32e030_spi.o(i.SPI_DisableSSoutput), (10 bytes).
+    Removing apm32e030_spi.o(i.SPI_Enable), (12 bytes).
+    Removing apm32e030_spi.o(i.SPI_EnableCRC), (14 bytes).
+    Removing apm32e030_spi.o(i.SPI_EnableDMARxBuffer), (12 bytes).
+    Removing apm32e030_spi.o(i.SPI_EnableDMATxBuffer), (12 bytes).
+    Removing apm32e030_spi.o(i.SPI_EnableFrameFormatMode), (12 bytes).
+    Removing apm32e030_spi.o(i.SPI_EnableInternalSlave), (14 bytes).
+    Removing apm32e030_spi.o(i.SPI_EnableInterrupt), (8 bytes).
+    Removing apm32e030_spi.o(i.SPI_EnableNSSPulse), (12 bytes).
+    Removing apm32e030_spi.o(i.SPI_EnableOutputDirection), (14 bytes).
+    Removing apm32e030_spi.o(i.SPI_EnableSSoutput), (12 bytes).
+    Removing apm32e030_spi.o(i.SPI_I2S_RxData16), (8 bytes).
+    Removing apm32e030_spi.o(i.SPI_I2S_TxData16), (4 bytes).
+    Removing apm32e030_spi.o(i.SPI_LastDMATransfer), (20 bytes).
+    Removing apm32e030_spi.o(i.SPI_ReadCRCPolynomial), (8 bytes).
+    Removing apm32e030_spi.o(i.SPI_ReadIntFlag), (38 bytes).
+    Removing apm32e030_spi.o(i.SPI_ReadReceptionFIFOLeve), (10 bytes).
+    Removing apm32e030_spi.o(i.SPI_ReadRxCRC), (8 bytes).
+    Removing apm32e030_spi.o(i.SPI_ReadStatusFlag), (20 bytes).
+    Removing apm32e030_spi.o(i.SPI_ReadTransmissionFIFOLeve), (10 bytes).
+    Removing apm32e030_spi.o(i.SPI_ReadTxCRC), (8 bytes).
+    Removing apm32e030_spi.o(i.SPI_Reset), (48 bytes).
+    Removing apm32e030_spi.o(i.SPI_RxData8), (6 bytes).
+    Removing apm32e030_spi.o(i.SPI_TxCRC), (14 bytes).
+    Removing apm32e030_spi.o(i.SPI_TxData8), (4 bytes).
+    Removing apm32e030_syscfg.o(.rev16_text), (4 bytes).
+    Removing apm32e030_syscfg.o(.revsh_text), (4 bytes).
+    Removing apm32e030_syscfg.o(i.SYSCFG_BreakLock), (64 bytes).
+    Removing apm32e030_syscfg.o(i.SYSCFG_ClearStatusFlag), (16 bytes).
+    Removing apm32e030_syscfg.o(i.SYSCFG_DisableDMAChannelRemap), (16 bytes).
+    Removing apm32e030_syscfg.o(i.SYSCFG_DisableI2CFastModePlus), (16 bytes).
+    Removing apm32e030_syscfg.o(i.SYSCFG_EINTLine), (192 bytes).
+    Removing apm32e030_syscfg.o(i.SYSCFG_EnableDMAChannelRemap), (16 bytes).
+    Removing apm32e030_syscfg.o(i.SYSCFG_EnableI2CFastModePlus), (16 bytes).
+    Removing apm32e030_syscfg.o(i.SYSCFG_MemoryRemapSelect), (24 bytes).
+    Removing apm32e030_syscfg.o(i.SYSCFG_ReadStatusFlag), (28 bytes).
+    Removing apm32e030_syscfg.o(i.SYSCFG_Reset), (40 bytes).
+    Removing apm32e030_tmr.o(.rev16_text), (4 bytes).
+    Removing apm32e030_tmr.o(.revsh_text), (4 bytes).
+    Removing apm32e030_tmr.o(i.TI1Config), (92 bytes).
+    Removing apm32e030_tmr.o(i.TI2Config), (108 bytes).
+    Removing apm32e030_tmr.o(i.TI3Config), (96 bytes).
+    Removing apm32e030_tmr.o(i.TI4Config), (112 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ClearOC1Ref), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ClearOC2Ref), (24 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ClearOC3Ref), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ClearOC4Ref), (24 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ClearStatusFlag), (6 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigBDT), (42 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigBDTStructInit), (18 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigCounterMode), (38 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigDIV), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigDMA), (8 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigEncodeInterface), (82 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigExternalClockMode1), (52 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigExternalClockMode2), (36 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigExternalTrigger), (70 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigITRxExternalClock), (26 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigInternalClock), (10 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigRemap), (16 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigTIxExternalClock), (60 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigTimeBaseStruct), (18 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ConfigUPdateRequest), (26 bytes).
+    Removing apm32e030_tmr.o(i.TMR_DisableAUTOReload), (10 bytes).
+    Removing apm32e030_tmr.o(i.TMR_DisableCCDMA), (10 bytes).
+    Removing apm32e030_tmr.o(i.TMR_DisableCCPreload), (10 bytes).
+    Removing apm32e030_tmr.o(i.TMR_DisableCCxChannel), (12 bytes).
+    Removing apm32e030_tmr.o(i.TMR_DisableCCxNChannel), (12 bytes).
+    Removing apm32e030_tmr.o(i.TMR_DisableDMASoure), (8 bytes).
+    Removing apm32e030_tmr.o(i.TMR_DisableHallSensor), (10 bytes).
+    Removing apm32e030_tmr.o(i.TMR_DisableInterrupt), (8 bytes).
+    Removing apm32e030_tmr.o(i.TMR_DisableMasterSlaveMode), (10 bytes).
+    Removing apm32e030_tmr.o(i.TMR_DisableNGUpdate), (10 bytes).
+    Removing apm32e030_tmr.o(i.TMR_DisableSelectCOM), (10 bytes).
+    Removing apm32e030_tmr.o(i.TMR_EnableAUTOReload), (12 bytes).
+    Removing apm32e030_tmr.o(i.TMR_EnableCCDMA), (12 bytes).
+    Removing apm32e030_tmr.o(i.TMR_EnableCCPreload), (12 bytes).
+    Removing apm32e030_tmr.o(i.TMR_EnableCCxChannel), (12 bytes).
+    Removing apm32e030_tmr.o(i.TMR_EnableCCxNChannel), (12 bytes).
+    Removing apm32e030_tmr.o(i.TMR_EnableDMASoure), (8 bytes).
+    Removing apm32e030_tmr.o(i.TMR_EnableHallSensor), (12 bytes).
+    Removing apm32e030_tmr.o(i.TMR_EnableMasterSlaveMode), (12 bytes).
+    Removing apm32e030_tmr.o(i.TMR_EnableNGUpdate), (12 bytes).
+    Removing apm32e030_tmr.o(i.TMR_EnableSelectCOM), (12 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ForcedOC1Config), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ForcedOC2Config), (24 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ForcedOC3Config), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ForcedOC4Config), (24 bytes).
+    Removing apm32e030_tmr.o(i.TMR_GenerateEvent), (8 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ICConfig), (118 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ICConfigStructInit), (18 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC1FastConfit), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC1NPolarityConfig), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC1PolarityConfig), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC1PreloadConfig), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC2FastConfit), (24 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC2NPolarityConfig), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC2PolarityConfig), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC2PreloadConfig), (24 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC3Config), (200 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC3FastConfit), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC3NPolarityConfig), (24 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC3PolarityConfig), (24 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC3PreloadConfig), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC4Config), (132 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC4FastConfit), (24 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC4PolarityConfig), (24 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OC4PreloadConfig), (24 bytes).
+    Removing apm32e030_tmr.o(i.TMR_OCConfigStructInit), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_PWMConfig), (124 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ReadCaputer1), (8 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ReadCaputer2), (8 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ReadCaputer3), (8 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ReadCaputer4), (8 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ReadCounter), (6 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ReadDiv), (6 bytes).
+    Removing apm32e030_tmr.o(i.TMR_ReadStatusFlag), (18 bytes).
+    Removing apm32e030_tmr.o(i.TMR_Reset), (184 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SelectInputTrigger), (26 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SelectOCREFClear), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SelectOCxMode), (108 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SelectOnePulseMode), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SelectOutputTrigger), (20 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SelectSlaveMode), (16 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SetAutoReload), (4 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SetClockDivision), (24 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SetCompare1), (4 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SetCompare2), (4 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SetCompare3), (4 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SetCompare4), (4 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SetCounter), (4 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SetIC1Prescal), (26 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SetIC2Prescal), (30 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SetIC3Prescal), (26 bytes).
+    Removing apm32e030_tmr.o(i.TMR_SetIC4Prescal), (30 bytes).
+    Removing apm32e030_usart.o(.rev16_text), (4 bytes).
+    Removing apm32e030_usart.o(.revsh_text), (4 bytes).
+    Removing apm32e030_usart.o(i.USART_Address), (42 bytes).
+    Removing apm32e030_usart.o(i.USART_ClearIntFlag), (8 bytes).
+    Removing apm32e030_usart.o(i.USART_ClearStatusFlag), (4 bytes).
+    Removing apm32e030_usart.o(i.USART_Config), (216 bytes).
+    Removing apm32e030_usart.o(i.USART_ConfigAddressDetection), (20 bytes).
+    Removing apm32e030_usart.o(i.USART_ConfigAutoBaudRate), (24 bytes).
+    Removing apm32e030_usart.o(i.USART_ConfigDEPolarity), (24 bytes).
+    Removing apm32e030_usart.o(i.USART_ConfigDMAReceptionError), (24 bytes).
+    Removing apm32e030_usart.o(i.USART_ConfigMuteModeWakeUp), (24 bytes).
+    Removing apm32e030_usart.o(i.USART_ConfigOverrunDetection), (24 bytes).
+    Removing apm32e030_usart.o(i.USART_ConfigStructInit), (24 bytes).
+    Removing apm32e030_usart.o(i.USART_ConfigSyncClock), (80 bytes).
+    Removing apm32e030_usart.o(i.USART_ConfigSyncClockStructInit), (12 bytes).
+    Removing apm32e030_usart.o(i.USART_DEAssertionTimeValue), (34 bytes).
+    Removing apm32e030_usart.o(i.USART_DEDeassertionTimeValue), (34 bytes).
+    Removing apm32e030_usart.o(i.USART_Disable), (10 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableAutoBaudRate), (12 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableDE), (12 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableDMA), (50 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableDataInv), (12 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableDirectionMode), (46 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableHalfDuplex), (10 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableInterrupt), (46 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableInvPin), (60 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableMSBFirst), (12 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableMuteMode), (12 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableOneBitMethod), (12 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableOverSampling8), (12 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableReceiverTimeOut), (12 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableRequest), (48 bytes).
+    Removing apm32e030_usart.o(i.USART_DisableSWAPPin), (12 bytes).
+    Removing apm32e030_usart.o(i.USART_Enable), (12 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableAutoBaudRate), (14 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableDE), (14 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableDMA), (58 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableDataInv), (14 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableDirectionMode), (54 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableHalfDuplex), (12 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableInterrupt), (46 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableInvPin), (68 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableMSBFirst), (14 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableMuteMode), (14 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableOneBitMethod), (14 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableOverSampling8), (14 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableReceiverTimeOut), (14 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableRequest), (56 bytes).
+    Removing apm32e030_usart.o(i.USART_EnableSWAPPin), (14 bytes).
+    Removing apm32e030_usart.o(i.USART_ReadIntFlag), (160 bytes).
+    Removing apm32e030_usart.o(i.USART_ReadStatusFlag), (18 bytes).
+    Removing apm32e030_usart.o(i.USART_ReceiverTimeOutValue), (20 bytes).
+    Removing apm32e030_usart.o(i.USART_Reset), (60 bytes).
+    Removing apm32e030_usart.o(i.USART_RxData), (10 bytes).
+    Removing apm32e030_usart.o(i.USART_TxData), (8 bytes).
+    Removing apm32e030_wwdt.o(.rev16_text), (4 bytes).
+    Removing apm32e030_wwdt.o(.revsh_text), (4 bytes).
+    Removing apm32e030_wwdt.o(i.WWDT_ClearStatusFlag), (20 bytes).
+    Removing apm32e030_wwdt.o(i.WWDT_ConfigCounter), (16 bytes).
+    Removing apm32e030_wwdt.o(i.WWDT_ConfigWindowValue), (32 bytes).
+    Removing apm32e030_wwdt.o(i.WWDT_Enable), (40 bytes).
+    Removing apm32e030_wwdt.o(i.WWDT_EnableEWI), (24 bytes).
+    Removing apm32e030_wwdt.o(i.WWDT_ReadStatusFlag), (12 bytes).
+    Removing apm32e030_wwdt.o(i.WWDT_Reset), (20 bytes).
+    Removing apm32e030_wwdt.o(i.WWDT_SetTimebase), (44 bytes).
+    Removing apm32e030_int.o(.rev16_text), (4 bytes).
+    Removing apm32e030_int.o(.revsh_text), (4 bytes).
+    Removing main.o(.rev16_text), (4 bytes).
+    Removing main.o(.revsh_text), (4 bytes).
+    Removing main.o(i.Delay), (24 bytes).
+    Removing audio.o(.rev16_text), (4 bytes).
+    Removing audio.o(.revsh_text), (4 bytes).
+    Removing globalvar.o(.rev16_text), (4 bytes).
+    Removing globalvar.o(.revsh_text), (4 bytes).
+    Removing globalvar.o(i.ReadTimeSetting), (24 bytes).
+    Removing globalvar.o(i.WriteTimeSetting), (36 bytes).
+    Removing gpio.o(.rev16_text), (4 bytes).
+    Removing gpio.o(.revsh_text), (4 bytes).
+    Removing sm16208.o(.rev16_text), (4 bytes).
+    Removing sm16208.o(.revsh_text), (4 bytes).
+    Removing sm16208.o(i.ReadKeyData), (168 bytes).
+    Removing sm16208.o(i.display_matrix), (264 bytes).
+    Removing timer.o(.rev16_text), (4 bytes).
+    Removing timer.o(.revsh_text), (4 bytes).
+    Removing timer.o(.data), (1 bytes).
+    Removing apm32e030_rtc.o(i.__ARM_common_switch8), (28 bytes).
+
+610 unused section(s) (total 19283 bytes) removed from the image.
+
+==============================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    ../clib/microlib/division.c              0x00000000   Number         0  idiv.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_adc.c 0x00000000   Number         0  apm32e030_adc.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_crc.c 0x00000000   Number         0  apm32e030_crc.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_dbg.c 0x00000000   Number         0  apm32e030_dbg.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_dma.c 0x00000000   Number         0  apm32e030_dma.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_eint.c 0x00000000   Number         0  apm32e030_eint.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_fmc.c 0x00000000   Number         0  apm32e030_fmc.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_gpio.c 0x00000000   Number         0  apm32e030_gpio.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_i2c.c 0x00000000   Number         0  apm32e030_i2c.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_iwdt.c 0x00000000   Number         0  apm32e030_iwdt.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_misc.c 0x00000000   Number         0  apm32e030_misc.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_ob.c 0x00000000   Number         0  apm32e030_ob.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_pmu.c 0x00000000   Number         0  apm32e030_pmu.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_rcm.c 0x00000000   Number         0  apm32e030_rcm.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_rtc.c 0x00000000   Number         0  apm32e030_rtc.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_spi.c 0x00000000   Number         0  apm32e030_spi.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_syscfg.c 0x00000000   Number         0  apm32e030_syscfg.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_tmr.c 0x00000000   Number         0  apm32e030_tmr.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_usart.c 0x00000000   Number         0  apm32e030_usart.o ABSOLUTE
+    ..\Driver\APM32E030_StdPeriphDriver\src\apm32e030_wwdt.c 0x00000000   Number         0  apm32e030_wwdt.o ABSOLUTE
+    ..\Src\GPIO.c                            0x00000000   Number         0  gpio.o ABSOLUTE
+    ..\Src\GlobalVar.c                       0x00000000   Number         0  globalvar.o ABSOLUTE
+    ..\Src\SM16208.c                         0x00000000   Number         0  sm16208.o ABSOLUTE
+    ..\Src\apm32e030_int.c                   0x00000000   Number         0  apm32e030_int.o ABSOLUTE
+    ..\Src\audio.c                           0x00000000   Number         0  audio.o ABSOLUTE
+    ..\Src\main.c                            0x00000000   Number         0  main.o ABSOLUTE
+    ..\Src\startup_apm32e030.s               0x00000000   Number         0  startup_apm32e030.o ABSOLUTE
+    ..\Src\system_apm32e030.c                0x00000000   Number         0  system_apm32e030.o ABSOLUTE
+    ..\Src\timer.c                           0x00000000   Number         0  timer.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_adc.c 0x00000000   Number         0  apm32e030_adc.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_crc.c 0x00000000   Number         0  apm32e030_crc.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_dbg.c 0x00000000   Number         0  apm32e030_dbg.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_dma.c 0x00000000   Number         0  apm32e030_dma.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_eint.c 0x00000000   Number         0  apm32e030_eint.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_fmc.c 0x00000000   Number         0  apm32e030_fmc.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_gpio.c 0x00000000   Number         0  apm32e030_gpio.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_i2c.c 0x00000000   Number         0  apm32e030_i2c.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_iwdt.c 0x00000000   Number         0  apm32e030_iwdt.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_misc.c 0x00000000   Number         0  apm32e030_misc.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_ob.c 0x00000000   Number         0  apm32e030_ob.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_pmu.c 0x00000000   Number         0  apm32e030_pmu.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_rcm.c 0x00000000   Number         0  apm32e030_rcm.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_rtc.c 0x00000000   Number         0  apm32e030_rtc.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_spi.c 0x00000000   Number         0  apm32e030_spi.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_syscfg.c 0x00000000   Number         0  apm32e030_syscfg.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_tmr.c 0x00000000   Number         0  apm32e030_tmr.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_usart.c 0x00000000   Number         0  apm32e030_usart.o ABSOLUTE
+    ..\\Driver\\APM32E030_StdPeriphDriver\\src\\apm32e030_wwdt.c 0x00000000   Number         0  apm32e030_wwdt.o ABSOLUTE
+    ..\\Src\\GPIO.c                          0x00000000   Number         0  gpio.o ABSOLUTE
+    ..\\Src\\GlobalVar.c                     0x00000000   Number         0  globalvar.o ABSOLUTE
+    ..\\Src\\SM16208.c                       0x00000000   Number         0  sm16208.o ABSOLUTE
+    ..\\Src\\apm32e030_int.c                 0x00000000   Number         0  apm32e030_int.o ABSOLUTE
+    ..\\Src\\audio.c                         0x00000000   Number         0  audio.o ABSOLUTE
+    ..\\Src\\main.c                          0x00000000   Number         0  main.o ABSOLUTE
+    ..\\Src\\system_apm32e030.c              0x00000000   Number         0  system_apm32e030.o ABSOLUTE
+    ..\\Src\\timer.c                         0x00000000   Number         0  timer.o ABSOLUTE
+    dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
+    handlers.s                               0x00000000   Number         0  handlers.o ABSOLUTE
+    init.s                                   0x00000000   Number         0  init.o ABSOLUTE
+    RESET                                    0x08000000   Section      180  startup_apm32e030.o(RESET)
+    .ARM.Collect$$$$00000000                 0x080000b4   Section        0  entry.o(.ARM.Collect$$$$00000000)
+    .ARM.Collect$$$$00000001                 0x080000b4   Section        4  entry2.o(.ARM.Collect$$$$00000001)
+    .ARM.Collect$$$$00000004                 0x080000b8   Section        4  entry5.o(.ARM.Collect$$$$00000004)
+    .ARM.Collect$$$$00000008                 0x080000bc   Section        0  entry7b.o(.ARM.Collect$$$$00000008)
+    .ARM.Collect$$$$0000000A                 0x080000bc   Section        0  entry8b.o(.ARM.Collect$$$$0000000A)
+    .ARM.Collect$$$$0000000B                 0x080000bc   Section        8  entry9a.o(.ARM.Collect$$$$0000000B)
+    .ARM.Collect$$$$0000000E                 0x080000c4   Section        4  entry12b.o(.ARM.Collect$$$$0000000E)
+    .ARM.Collect$$$$0000000F                 0x080000c8   Section        0  entry10a.o(.ARM.Collect$$$$0000000F)
+    .ARM.Collect$$$$00000011                 0x080000c8   Section        0  entry11a.o(.ARM.Collect$$$$00000011)
+    .ARM.Collect$$$$00002712                 0x080000c8   Section        4  entry2.o(.ARM.Collect$$$$00002712)
+    __lit__00000000                          0x080000c8   Data           4  entry2.o(.ARM.Collect$$$$00002712)
+    .text                                    0x080000cc   Section       28  startup_apm32e030.o(.text)
+    .text                                    0x080000e8   Section        0  uidiv.o(.text)
+    .text                                    0x08000114   Section        0  idiv.o(.text)
+    .text                                    0x0800013c   Section       36  init.o(.text)
+    i.ADPCM_Decode                           0x08000160   Section        0  audio.o(i.ADPCM_Decode)
+    i.Audio_Sop                              0x08000220   Section        0  audio.o(i.Audio_Sop)
+    i.Audio_Start                            0x0800024c   Section        0  audio.o(i.Audio_Start)
+    i.EnableAllGpio                          0x08000290   Section        0  gpio.o(i.EnableAllGpio)
+    i.GPIO_Config                            0x080002a4   Section        0  apm32e030_gpio.o(i.GPIO_Config)
+    i.GPIO_ConfigPinAF                       0x0800032e   Section        0  apm32e030_gpio.o(i.GPIO_ConfigPinAF)
+    i.GPIO_WriteBitValue                     0x08000374   Section        0  apm32e030_gpio.o(i.GPIO_WriteBitValue)
+    i.HardFault_Handler                      0x08000380   Section        0  apm32e030_int.o(i.HardFault_Handler)
+    i.NMI_Handler                            0x08000382   Section        0  apm32e030_int.o(i.NMI_Handler)
+    i.NVIC_EnableIRQRequest                  0x08000384   Section        0  apm32e030_misc.o(i.NVIC_EnableIRQRequest)
+    i.PendSV_Handler                         0x080003b4   Section        0  apm32e030_int.o(i.PendSV_Handler)
+    i.RCM_EnableAHBPeriphClock               0x080003b8   Section        0  apm32e030_rcm.o(i.RCM_EnableAHBPeriphClock)
+    i.RCM_EnableAPB1PeriphClock              0x080003c8   Section        0  apm32e030_rcm.o(i.RCM_EnableAPB1PeriphClock)
+    i.RCM_EnableAPB2PeriphClock              0x080003d8   Section        0  apm32e030_rcm.o(i.RCM_EnableAPB2PeriphClock)
+    i.SM16208_Init                           0x080003e8   Section        0  sm16208.o(i.SM16208_Init)
+    i.SVC_Handler                            0x08000520   Section        0  apm32e030_int.o(i.SVC_Handler)
+    i.Set_Speaker_Duty                       0x08000524   Section        0  gpio.o(i.Set_Speaker_Duty)
+    i.SpeakerInit                            0x0800053c   Section        0  gpio.o(i.SpeakerInit)
+    i.SysTick_Handler                        0x080005f8   Section        0  apm32e030_int.o(i.SysTick_Handler)
+    i.SystemClock72M                         0x080005fc   Section        0  system_apm32e030.o(i.SystemClock72M)
+    SystemClock72M                           0x080005fd   Thumb Code   222  system_apm32e030.o(i.SystemClock72M)
+    i.SystemClockConfig                      0x080006e4   Section        0  system_apm32e030.o(i.SystemClockConfig)
+    SystemClockConfig                        0x080006e5   Thumb Code     8  system_apm32e030.o(i.SystemClockConfig)
+    i.SystemInit                             0x080006ec   Section        0  system_apm32e030.o(i.SystemInit)
+    i.TIM17_Config                           0x08000774   Section        0  timer.o(i.TIM17_Config)
+    i.TIM6_Config                            0x080007c0   Section        0  timer.o(i.TIM6_Config)
+    i.TMR17_IRQHandler                       0x0800080c   Section        0  apm32e030_int.o(i.TMR17_IRQHandler)
+    i.TMR6_IRQHandler                        0x080008d0   Section        0  apm32e030_int.o(i.TMR6_IRQHandler)
+    i.TMR_ClearIntFlag                       0x08000908   Section        0  apm32e030_tmr.o(i.TMR_ClearIntFlag)
+    i.TMR_ConfigTimeBase                     0x08000910   Section        0  apm32e030_tmr.o(i.TMR_ConfigTimeBase)
+    i.TMR_Disable                            0x080009a8   Section        0  apm32e030_tmr.o(i.TMR_Disable)
+    i.TMR_DisablePWMOutputs                  0x080009b2   Section        0  apm32e030_tmr.o(i.TMR_DisablePWMOutputs)
+    i.TMR_Enable                             0x080009be   Section        0  apm32e030_tmr.o(i.TMR_Enable)
+    i.TMR_EnableInterrupt                    0x080009ca   Section        0  apm32e030_tmr.o(i.TMR_EnableInterrupt)
+    i.TMR_EnablePWMOutputs                   0x080009d2   Section        0  apm32e030_tmr.o(i.TMR_EnablePWMOutputs)
+    i.TMR_OC1Config                          0x080009e0   Section        0  apm32e030_tmr.o(i.TMR_OC1Config)
+    i.TMR_OC2Config                          0x08000aac   Section        0  apm32e030_tmr.o(i.TMR_OC2Config)
+    i.TMR_ReadIntFlag                        0x08000b74   Section        0  apm32e030_tmr.o(i.TMR_ReadIntFlag)
+    i.__NVIC_SetPriority                     0x08000b90   Section        0  apm32e030_misc.o(i.__NVIC_SetPriority)
+    __NVIC_SetPriority                       0x08000b91   Thumb Code   110  apm32e030_misc.o(i.__NVIC_SetPriority)
+    i.__scatterload_copy                     0x08000c08   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x08000c16   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x08000c18   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i.delay_ms                               0x08000c28   Section        0  timer.o(i.delay_ms)
+    i.main                                   0x08000c3c   Section        0  main.o(i.main)
+    i.process_key_events                     0x08000c70   Section        0  sm16208.o(i.process_key_events)
+    .constdata                               0x08000d48   Section     3010  audio.o(.constdata)
+    .data                                    0x20000000   Section        8  audio.o(.data)
+    .data                                    0x20000008   Section       24  globalvar.o(.data)
+    .data                                    0x20000020   Section       48  sm16208.o(.data)
+    .bss                                     0x20000050   Section       24  sm16208.o(.bss)
+    STACK                                    0x20000068   Section     1024  startup_apm32e030.o(STACK)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv3M$S$PE$A:L22$X:L11$S22$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$EBA8$MICROLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    __ARM_use_no_argv                        0x00000000   Number         0  main.o ABSOLUTE
+    __arm_fini_                               - Undefined Weak Reference
+    __cpp_initialize__aeabi_                  - Undefined Weak Reference
+    __cxa_finalize                            - Undefined Weak Reference
+    __decompress                              - Undefined Weak Reference
+    _clock_init                               - Undefined Weak Reference
+    _microlib_exit                            - Undefined Weak Reference
+    __Vectors_Size                           0x000000b4   Number         0  startup_apm32e030.o ABSOLUTE
+    __Vectors                                0x08000000   Data           4  startup_apm32e030.o(RESET)
+    __Vectors_End                            0x080000b4   Data           0  startup_apm32e030.o(RESET)
+    __main                                   0x080000b5   Thumb Code     0  entry.o(.ARM.Collect$$$$00000000)
+    _main_stk                                0x080000b5   Thumb Code     0  entry2.o(.ARM.Collect$$$$00000001)
+    _main_scatterload                        0x080000b9   Thumb Code     0  entry5.o(.ARM.Collect$$$$00000004)
+    __main_after_scatterload                 0x080000bd   Thumb Code     0  entry5.o(.ARM.Collect$$$$00000004)
+    _main_clock                              0x080000bd   Thumb Code     0  entry7b.o(.ARM.Collect$$$$00000008)
+    _main_cpp_init                           0x080000bd   Thumb Code     0  entry8b.o(.ARM.Collect$$$$0000000A)
+    _main_init                               0x080000bd   Thumb Code     0  entry9a.o(.ARM.Collect$$$$0000000B)
+    __rt_lib_shutdown_fini                   0x080000c5   Thumb Code     0  entry12b.o(.ARM.Collect$$$$0000000E)
+    __rt_final_cpp                           0x080000c9   Thumb Code     0  entry10a.o(.ARM.Collect$$$$0000000F)
+    __rt_final_exit                          0x080000c9   Thumb Code     0  entry11a.o(.ARM.Collect$$$$00000011)
+    Reset_Handler                            0x080000cd   Thumb Code     8  startup_apm32e030.o(.text)
+    ADC1_IRQHandler                          0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    DMA1_CH1_IRQHandler                      0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    DMA1_CH2_3_IRQHandler                    0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    DMA1_CH4_5_IRQHandler                    0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    EINT0_1_IRQHandler                       0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    EINT2_3_IRQHandler                       0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    EINT4_15_IRQHandler                      0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    FLASH_IRQHandler                         0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    I2C1_IRQHandler                          0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    I2C2_IRQHandler                          0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    RCM_IRQHandler                           0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    RTC_IRQHandler                           0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    SPI1_IRQHandler                          0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    SPI2_IRQHandler                          0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    TMR14_IRQHandler                         0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    TMR15_IRQHandler                         0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    TMR16_IRQHandler                         0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    TMR1_BRK_UP_TRG_COM_IRQHandler           0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    TMR1_CC_IRQHandler                       0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    TMR3_IRQHandler                          0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    USART1_IRQHandler                        0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    USART2_IRQHandler                        0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    WWDT_IRQHandler                          0x080000df   Thumb Code     0  startup_apm32e030.o(.text)
+    __aeabi_uidiv                            0x080000e9   Thumb Code     0  uidiv.o(.text)
+    __aeabi_uidivmod                         0x080000e9   Thumb Code    44  uidiv.o(.text)
+    __aeabi_idiv                             0x08000115   Thumb Code     0  idiv.o(.text)
+    __aeabi_idivmod                          0x08000115   Thumb Code    40  idiv.o(.text)
+    __scatterload                            0x0800013d   Thumb Code    28  init.o(.text)
+    __scatterload_rt2                        0x0800013d   Thumb Code     0  init.o(.text)
+    ADPCM_Decode                             0x08000161   Thumb Code   170  audio.o(i.ADPCM_Decode)
+    Audio_Sop                                0x08000221   Thumb Code    30  audio.o(i.Audio_Sop)
+    Audio_Start                              0x0800024d   Thumb Code    40  audio.o(i.Audio_Start)
+    EnableAllGpio                            0x08000291   Thumb Code    20  gpio.o(i.EnableAllGpio)
+    GPIO_Config                              0x080002a5   Thumb Code   138  apm32e030_gpio.o(i.GPIO_Config)
+    GPIO_ConfigPinAF                         0x0800032f   Thumb Code    70  apm32e030_gpio.o(i.GPIO_ConfigPinAF)
+    GPIO_WriteBitValue                       0x08000375   Thumb Code    12  apm32e030_gpio.o(i.GPIO_WriteBitValue)
+    HardFault_Handler                        0x08000381   Thumb Code     2  apm32e030_int.o(i.HardFault_Handler)
+    NMI_Handler                              0x08000383   Thumb Code     2  apm32e030_int.o(i.NMI_Handler)
+    NVIC_EnableIRQRequest                    0x08000385   Thumb Code    44  apm32e030_misc.o(i.NVIC_EnableIRQRequest)
+    PendSV_Handler                           0x080003b5   Thumb Code     2  apm32e030_int.o(i.PendSV_Handler)
+    RCM_EnableAHBPeriphClock                 0x080003b9   Thumb Code    12  apm32e030_rcm.o(i.RCM_EnableAHBPeriphClock)
+    RCM_EnableAPB1PeriphClock                0x080003c9   Thumb Code    12  apm32e030_rcm.o(i.RCM_EnableAPB1PeriphClock)
+    RCM_EnableAPB2PeriphClock                0x080003d9   Thumb Code    12  apm32e030_rcm.o(i.RCM_EnableAPB2PeriphClock)
+    SM16208_Init                             0x080003e9   Thumb Code   306  sm16208.o(i.SM16208_Init)
+    SVC_Handler                              0x08000521   Thumb Code     2  apm32e030_int.o(i.SVC_Handler)
+    Set_Speaker_Duty                         0x08000525   Thumb Code    20  gpio.o(i.Set_Speaker_Duty)
+    SpeakerInit                              0x0800053d   Thumb Code   180  gpio.o(i.SpeakerInit)
+    SysTick_Handler                          0x080005f9   Thumb Code     2  apm32e030_int.o(i.SysTick_Handler)
+    SystemInit                               0x080006ed   Thumb Code   120  system_apm32e030.o(i.SystemInit)
+    TIM17_Config                             0x08000775   Thumb Code    70  timer.o(i.TIM17_Config)
+    TIM6_Config                              0x080007c1   Thumb Code    68  timer.o(i.TIM6_Config)
+    TMR17_IRQHandler                         0x0800080d   Thumb Code   172  apm32e030_int.o(i.TMR17_IRQHandler)
+    TMR6_IRQHandler                          0x080008d1   Thumb Code    46  apm32e030_int.o(i.TMR6_IRQHandler)
+    TMR_ClearIntFlag                         0x08000909   Thumb Code     6  apm32e030_tmr.o(i.TMR_ClearIntFlag)
+    TMR_ConfigTimeBase                       0x08000911   Thumb Code   128  apm32e030_tmr.o(i.TMR_ConfigTimeBase)
+    TMR_Disable                              0x080009a9   Thumb Code    10  apm32e030_tmr.o(i.TMR_Disable)
+    TMR_DisablePWMOutputs                    0x080009b3   Thumb Code    12  apm32e030_tmr.o(i.TMR_DisablePWMOutputs)
+    TMR_Enable                               0x080009bf   Thumb Code    12  apm32e030_tmr.o(i.TMR_Enable)
+    TMR_EnableInterrupt                      0x080009cb   Thumb Code     8  apm32e030_tmr.o(i.TMR_EnableInterrupt)
+    TMR_EnablePWMOutputs                     0x080009d3   Thumb Code    14  apm32e030_tmr.o(i.TMR_EnablePWMOutputs)
+    TMR_OC1Config                            0x080009e1   Thumb Code   188  apm32e030_tmr.o(i.TMR_OC1Config)
+    TMR_OC2Config                            0x08000aad   Thumb Code   196  apm32e030_tmr.o(i.TMR_OC2Config)
+    TMR_ReadIntFlag                          0x08000b75   Thumb Code    26  apm32e030_tmr.o(i.TMR_ReadIntFlag)
+    __scatterload_copy                       0x08000c09   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x08000c17   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x08000c19   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    delay_ms                                 0x08000c29   Thumb Code    16  timer.o(i.delay_ms)
+    main                                     0x08000c3d   Thumb Code    48  main.o(i.main)
+    process_key_events                       0x08000c71   Thumb Code   198  sm16208.o(i.process_key_events)
+    ima_step_table                           0x08000d48   Data         178  audio.o(.constdata)
+    ima_index_table                          0x08000dfa   Data          16  audio.o(.constdata)
+    audio_adpcm_data                         0x08000e0a   Data        2816  audio.o(.constdata)
+    Region$$Table$$Base                      0x0800190c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0800192c   Number         0  anon$$obj.o(Region$$Table)
+    predictor                                0x20000000   Data           2  audio.o(.data)
+    step_index                               0x20000002   Data           1  audio.o(.data)
+    adpcm_byte_pos                           0x20000004   Data           2  audio.o(.data)
+    use_high_nibble                          0x20000006   Data           1  audio.o(.data)
+    playing                                  0x20000007   Data           1  audio.o(.data)
+    TimingDelay                              0x20000008   Data           4  globalvar.o(.data)
+    workTimeSetting                          0x2000000c   Data           2  globalvar.o(.data)
+    workTime                                 0x2000000e   Data           2  globalvar.o(.data)
+    fall_flag                                0x20000010   Data           1  globalvar.o(.data)
+    fall_delay                               0x20000012   Data           2  globalvar.o(.data)
+    release_delay                            0x20000014   Data           2  globalvar.o(.data)
+    keyState                                 0x20000016   Data           1  globalvar.o(.data)
+    work_event                               0x20000017   Data           1  globalvar.o(.data)
+    debugData1                               0x20000018   Data           2  globalvar.o(.data)
+    debugData2                               0x2000001a   Data           2  globalvar.o(.data)
+    debugData3                               0x2000001c   Data           2  globalvar.o(.data)
+    debugData4                               0x2000001e   Data           2  globalvar.o(.data)
+    image_matrix                             0x20000020   Data           8  sm16208.o(.data)
+    key_arr                                  0x20000028   Data           8  sm16208.o(.data)
+    key_filter                               0x20000030   Data           8  sm16208.o(.data)
+    key_filter_pre                           0x20000038   Data           8  sm16208.o(.data)
+    image_arr                                0x20000040   Data          16  sm16208.o(.data)
+    key_history                              0x20000050   Data          24  sm16208.o(.bss)
+    __initial_sp                             0x20000468   Data           0  startup_apm32e030.o(STACK)
+
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x080000b5
+
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x0000197c, Max: 0x00010000, ABSOLUTE)
+
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x0000192c, Max: 0x00010000, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x08000000   0x08000000   0x000000b4   Data   RO           69    RESET               startup_apm32e030.o
+    0x080000b4   0x080000b4   0x00000000   Code   RO         4080  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x080000b4   0x080000b4   0x00000004   Code   RO         4087    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x080000b8   0x080000b8   0x00000004   Code   RO         4090    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x080000bc   0x080000bc   0x00000000   Code   RO         4092    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x080000bc   0x080000bc   0x00000000   Code   RO         4094    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x080000bc   0x080000bc   0x00000008   Code   RO         4095    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x080000c4   0x080000c4   0x00000004   Code   RO         4102    .ARM.Collect$$$$0000000E  mc_p.l(entry12b.o)
+    0x080000c8   0x080000c8   0x00000000   Code   RO         4097    .ARM.Collect$$$$0000000F  mc_p.l(entry10a.o)
+    0x080000c8   0x080000c8   0x00000000   Code   RO         4099    .ARM.Collect$$$$00000011  mc_p.l(entry11a.o)
+    0x080000c8   0x080000c8   0x00000004   Code   RO         4088    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x080000cc   0x080000cc   0x0000001c   Code   RO           70    .text               startup_apm32e030.o
+    0x080000e8   0x080000e8   0x0000002c   Code   RO         4083    .text               mc_p.l(uidiv.o)
+    0x08000114   0x08000114   0x00000028   Code   RO         4085    .text               mc_p.l(idiv.o)
+    0x0800013c   0x0800013c   0x00000024   Code   RO         4103    .text               mc_p.l(init.o)
+    0x08000160   0x08000160   0x000000c0   Code   RO         3899    i.ADPCM_Decode      audio.o
+    0x08000220   0x08000220   0x0000002c   Code   RO         3900    i.Audio_Sop         audio.o
+    0x0800024c   0x0800024c   0x00000044   Code   RO         3901    i.Audio_Start       audio.o
+    0x08000290   0x08000290   0x00000014   Code   RO         3970    i.EnableAllGpio     gpio.o
+    0x080002a4   0x080002a4   0x0000008a   Code   RO          885    i.GPIO_Config       apm32e030_gpio.o
+    0x0800032e   0x0800032e   0x00000046   Code   RO          886    i.GPIO_ConfigPinAF  apm32e030_gpio.o
+    0x08000374   0x08000374   0x0000000c   Code   RO          895    i.GPIO_WriteBitValue  apm32e030_gpio.o
+    0x08000380   0x08000380   0x00000002   Code   RO         3782    i.HardFault_Handler  apm32e030_int.o
+    0x08000382   0x08000382   0x00000002   Code   RO         3783    i.NMI_Handler       apm32e030_int.o
+    0x08000384   0x08000384   0x00000030   Code   RO         1465    i.NVIC_EnableIRQRequest  apm32e030_misc.o
+    0x080003b4   0x080003b4   0x00000002   Code   RO         3784    i.PendSV_Handler    apm32e030_int.o
+    0x080003b6   0x080003b6   0x00000002   PAD
+    0x080003b8   0x080003b8   0x00000010   Code   RO         1701    i.RCM_EnableAHBPeriphClock  apm32e030_rcm.o
+    0x080003c8   0x080003c8   0x00000010   Code   RO         1703    i.RCM_EnableAPB1PeriphClock  apm32e030_rcm.o
+    0x080003d8   0x080003d8   0x00000010   Code   RO         1705    i.RCM_EnableAPB2PeriphClock  apm32e030_rcm.o
+    0x080003e8   0x080003e8   0x00000138   Code   RO         4003    i.SM16208_Init      sm16208.o
+    0x08000520   0x08000520   0x00000002   Code   RO         3785    i.SVC_Handler       apm32e030_int.o
+    0x08000522   0x08000522   0x00000002   PAD
+    0x08000524   0x08000524   0x00000018   Code   RO         3971    i.Set_Speaker_Duty  gpio.o
+    0x0800053c   0x0800053c   0x000000bc   Code   RO         3972    i.SpeakerInit       gpio.o
+    0x080005f8   0x080005f8   0x00000002   Code   RO         3786    i.SysTick_Handler   apm32e030_int.o
+    0x080005fa   0x080005fa   0x00000002   PAD
+    0x080005fc   0x080005fc   0x000000e8   Code   RO            3    i.SystemClock72M    system_apm32e030.o
+    0x080006e4   0x080006e4   0x00000008   Code   RO            4    i.SystemClockConfig  system_apm32e030.o
+    0x080006ec   0x080006ec   0x00000088   Code   RO            6    i.SystemInit        system_apm32e030.o
+    0x08000774   0x08000774   0x0000004c   Code   RO         4047    i.TIM17_Config      timer.o
+    0x080007c0   0x080007c0   0x0000004c   Code   RO         4048    i.TIM6_Config       timer.o
+    0x0800080c   0x0800080c   0x000000c4   Code   RO         3787    i.TMR17_IRQHandler  apm32e030_int.o
+    0x080008d0   0x080008d0   0x00000038   Code   RO         3788    i.TMR6_IRQHandler   apm32e030_int.o
+    0x08000908   0x08000908   0x00000006   Code   RO         2737    i.TMR_ClearIntFlag  apm32e030_tmr.o
+    0x0800090e   0x0800090e   0x00000002   PAD
+    0x08000910   0x08000910   0x00000098   Code   RO         2756    i.TMR_ConfigTimeBase  apm32e030_tmr.o
+    0x080009a8   0x080009a8   0x0000000a   Code   RO         2759    i.TMR_Disable       apm32e030_tmr.o
+    0x080009b2   0x080009b2   0x0000000c   Code   RO         2770    i.TMR_DisablePWMOutputs  apm32e030_tmr.o
+    0x080009be   0x080009be   0x0000000c   Code   RO         2772    i.TMR_Enable        apm32e030_tmr.o
+    0x080009ca   0x080009ca   0x00000008   Code   RO         2780    i.TMR_EnableInterrupt  apm32e030_tmr.o
+    0x080009d2   0x080009d2   0x0000000e   Code   RO         2783    i.TMR_EnablePWMOutputs  apm32e030_tmr.o
+    0x080009e0   0x080009e0   0x000000cc   Code   RO         2792    i.TMR_OC1Config     apm32e030_tmr.o
+    0x08000aac   0x08000aac   0x000000c8   Code   RO         2797    i.TMR_OC2Config     apm32e030_tmr.o
+    0x08000b74   0x08000b74   0x0000001a   Code   RO         2819    i.TMR_ReadIntFlag   apm32e030_tmr.o
+    0x08000b8e   0x08000b8e   0x00000002   PAD
+    0x08000b90   0x08000b90   0x00000078   Code   RO         1471    i.__NVIC_SetPriority  apm32e030_misc.o
+    0x08000c08   0x08000c08   0x0000000e   Code   RO         4107    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x08000c16   0x08000c16   0x00000002   Code   RO         4108    i.__scatterload_null  mc_p.l(handlers.o)
+    0x08000c18   0x08000c18   0x0000000e   Code   RO         4109    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x08000c26   0x08000c26   0x00000002   PAD
+    0x08000c28   0x08000c28   0x00000014   Code   RO         4049    i.delay_ms          timer.o
+    0x08000c3c   0x08000c3c   0x00000034   Code   RO         3864    i.main              main.o
+    0x08000c70   0x08000c70   0x000000d8   Code   RO         4005    i.process_key_events  sm16208.o
+    0x08000d48   0x08000d48   0x00000bc2   Data   RO         3902    .constdata          audio.o
+    0x0800190a   0x0800190a   0x00000002   PAD
+    0x0800190c   0x0800190c   0x00000020   Data   RO         4105    Region$$Table       anon$$obj.o
+
+
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0800192c, Size: 0x00000468, Max: 0x00002000, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x20000000   0x0800192c   0x00000008   Data   RW         3903    .data               audio.o
+    0x20000008   0x08001934   0x00000018   Data   RW         3940    .data               globalvar.o
+    0x20000020   0x0800194c   0x00000030   Data   RW         4007    .data               sm16208.o
+    0x20000050        -       0x00000018   Zero   RW         4006    .bss                sm16208.o
+    0x20000068        -       0x00000400   Zero   RW           67    STACK               startup_apm32e030.o
+
+
+==============================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+       220          0          0          0          0       4046   apm32e030_gpio.o
+       262         34          0          0          0       3704   apm32e030_int.o
+       168         14          0          0          0       9108   apm32e030_misc.o
+        48         12          0          0          0       1559   apm32e030_rcm.o
+       644         44          0          0          0      12478   apm32e030_tmr.o
+       304         64       3010          8          0       2375   audio.o
+         0          0          0         24          0       1014   globalvar.o
+       232         12          0          0          0       1453   gpio.o
+        52          4          0          0          0        419   main.o
+       528         24          0         48         24       2351   sm16208.o
+        28          8        180          0       1024        580   startup_apm32e030.o
+       376         26          0          0          0      44881   system_apm32e030.o
+       172         18          0          0          0       1304   timer.o
+
+    ----------------------------------------------------------------------
+      3044        260       3224         80       1048      85272   Object Totals
+         0          0         32          0          0          0   (incl. Generated)
+        10          0          2          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Member Name
+
+         0          0          0          0          0          0   entry.o
+         0          0          0          0          0          0   entry10a.o
+         0          0          0          0          0          0   entry11a.o
+         4          0          0          0          0          0   entry12b.o
+         8          4          0          0          0          0   entry2.o
+         4          0          0          0          0          0   entry5.o
+         0          0          0          0          0          0   entry7b.o
+         0          0          0          0          0          0   entry8b.o
+         8          4          0          0          0          0   entry9a.o
+        30          0          0          0          0          0   handlers.o
+        40          0          0          0          0         72   idiv.o
+        36          8          0          0          0         68   init.o
+        44          0          0          0          0         72   uidiv.o
+
+    ----------------------------------------------------------------------
+       176         16          0          0          0        212   Library Totals
+         2          0          0          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
+
+       174         16          0          0          0        212   mc_p.l
+
+    ----------------------------------------------------------------------
+       176         16          0          0          0        212   Library Totals
+
+    ----------------------------------------------------------------------
+
+==============================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+      3220        276       3224         80       1048      84008   Grand Totals
+      3220        276       3224         80       1048      84008   ELF Image Totals
+      3220        276       3224         80          0          0   ROM Totals
+
+==============================================================================
+
+    Total RO  Size (Code + RO Data)                 6444 (   6.29kB)
+    Total RW  Size (RW Data + ZI Data)              1128 (   1.10kB)
+    Total ROM Size (Code + RO Data + RW Data)       6524 (   6.37kB)
+
+==============================================================================
+
