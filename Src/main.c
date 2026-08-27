@@ -1,85 +1,40 @@
-/*!
- * @file        main.c
- *
- * @brief       Main program body
- *
- * @version     V1.0.2
- *
- * @date        2025-05-15
- *
+/* USER CODE BEGIN Header */
+/**
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
  * @attention
  *
- *  Copyright (C) 2024-2025 Geehy Semiconductor
+ * Copyright (c) 2026 STMicroelectronics.
+ * All rights reserved.
  *
- *  You may not use this file except in compliance with the
- *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
  *
- *  The program is only for reference, which is distributed in the hope
- *  that it will be useful and instructional for customers to develop
- *  their software. Unless required by applicable law or agreed to in
- *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
- *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the GEEHY SOFTWARE PACKAGE LICENSE for the governing permissions
- *  and limitations under the License.
+ ******************************************************************************
  */
-
-/* Includes */
-#include "stdio.h"
+/* USER CODE END Header */
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
 #include "GlobalVar.h"
+#include "audio.h"
+#include "SM16208.h"
 
-/** @addtogroup Examples
-  @{
-  */
+void SystemClock_Config(void);
 
-/** @addtogroup GPIO_Toggle
-  @{
-  */
-
-/** @defgroup GPIO_Toggle_Macros Macros
-  @{
-  */
-
-/**@} end of group GPIO_Toggle_Macros */
-
-/** @defgroup GPIO_Toggle_Enumerations Enumerations
-  @{
-  */
-
-/**@} end of group GPIO_Toggle_Enumerations */
-
-/** @defgroup GPIO_Toggle_Structures Structures
-  @{
-  */
-
-/**@} end of group GPIO_Toggle_Structures */
-
-/** @defgroup GPIO_Toggle_Variables Variables
-  @{
-  */
-
-/**@} end of group GPIO_Toggle_Variables */
-
-/** @defgroup GPIO_Toggle_Functions Functions
-  @{
-  */
-
-/* Delay */
-void Delay(void);
-
-/*!
- * @brief       Main program
- *
- * @param       None
- *
- * @retval      None
- *
- * @note
+/**
+ * @brief  The application entry point.
+ * @retval int
  */
 int main(void)
 {
+    HAL_Init();
+    SystemClock_Config();
     EnableAllGpio();
 
-    TIM6_Config();//period timer
+    TIM16_Config();//period timer
     TIM17_Config();//8kHz timer
     delay_ms(100);
 
@@ -100,22 +55,60 @@ int main(void)
     }
 }
 
-/*!
- * @brief       Delay
- *
- * @param       None
- *
- * @retval      None
- *
- * @note
+/**
+ * @brief System Clock Configuration
+ * @retval None
  */
-void Delay(void)
+void SystemClock_Config(void)
 {
-    volatile uint32_t delay = 0xffff5;
+    RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+    RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-    while (delay--);
+    /** Configure the main internal regulator output voltage
+     */
+    HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1);
+
+    /** Initializes the RCC Oscillators according to the specified parameters
+     * in the RCC_OscInitTypeDef structure.
+     */
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+    RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+    RCC_OscInitStruct.HSIDiv = RCC_HSI_DIV1;
+    RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+    RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+    RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV1;
+    RCC_OscInitStruct.PLL.PLLN = 8;
+    RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+    RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
+    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+    {
+        Error_Handler();
+    }
+
+    /** Initializes the CPU, AHB and APB buses clocks
+     */
+    RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1;
+    RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+    RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+    RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+
+    if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+    {
+        Error_Handler();
+    }
 }
 
-/**@} end of group GPIO_Toggle_Functions */
-/**@} end of group GPIO_Toggle */
-/**@} end of group Examples */
+
+void Error_Handler(void)
+{
+    /* USER CODE BEGIN Error_Handler_Debug */
+    /* User can add his own implementation to report the HAL error return state */
+    __disable_irq();
+    while (1)
+    {
+    }
+    /* USER CODE END Error_Handler_Debug */
+}
+
+

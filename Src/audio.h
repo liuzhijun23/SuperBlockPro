@@ -1,7 +1,8 @@
 #ifndef AUDIO_H_
 #define AUDIO_H_
 
-#include "main.h"
+#include "stm32g0xx.h"
+#include "GlobalVar.h"
 
 #define AUDIO_SAMPLE_RATE     8000
 #define AUDIO_TOTAL_SAMPLES   5632

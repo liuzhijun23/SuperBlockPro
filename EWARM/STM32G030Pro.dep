@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <fileVersion>5</fileVersion>
+    <fileChecksum>1785700734</fileChecksum>
+    <configuration>
+        <name>STM32G030Pro</name>
+        <outputs>
+            <file>$PROJ_DIR$\..\Src\GlobalVar.c</file>
+            <file>$PROJ_DIR$\..\Src\GPIO.c</file>
+            <file>$PROJ_DIR$\..\Src\stm32g0xx_hal_msp.c</file>
+            <file>$PROJ_DIR$\..\Src\audio.c</file>
+            <file>$PROJ_DIR$\..\Src\main.c</file>
+            <file>$PROJ_DIR$\..\Src\SM16208.c</file>
+            <file>$PROJ_DIR$\..\Src\stm32g0xx_it.c</file>
+            <file>$PROJ_DIR$\..\Src\system_stm32g0xx.c</file>
+            <file>$PROJ_DIR$\..\Src\timer.c</file>
+        </outputs>
+        <forcedrebuild>
+            <name>[REBUILD_ALL]</name>
+        </forcedrebuild>
+    </configuration>
+</project>

@@ -1,10 +1,12 @@
 #ifndef GPIO_H_
 #define GPIO_H_
-#include "main.h"
+#include "GlobalVar.h"
 
 
 #define SPEAKER_ARR     255
 
+extern TIM_HandleTypeDef htim14;
+extern TIM_HandleTypeDef htim3;
 extern u16 voiceArr1[];
 
 void EnableAllGpio(void);

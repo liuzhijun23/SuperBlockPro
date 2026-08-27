@@ -1,79 +1,74 @@
 #include "GPIO.h"
 #include "timer.h"
 #include "GlobalVar.h"
-#include "apm32e030_rcm.h"
+
+TIM_HandleTypeDef htim14;
+TIM_HandleTypeDef htim3;
+TIM_OC_InitTypeDef ocHandle;
 
 void EnableAllGpio(void)
 {
-    RCM_EnableAHBPeriphClock(RCM_AHB_PERIPH_GPIOA);
-    RCM_EnableAHBPeriphClock(RCM_AHB_PERIPH_GPIOB);
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
 }
 
-//PWM频率=72M/4/256=70.3kHz
+
 void SpeakerInit(void)
 {
-    TMR_TimeBase_T  timeBaseConfig;
-    TMR_OCConfig_T  occonfig;
-    GPIO_Config_T   gpioconfig;
-    /* Enable Clock */
-    RCM_EnableAHBPeriphClock(RCM_AHB_PERIPH_GPIOA);
-    RCM_EnableAPB2PeriphClock(RCM_APB2_PERIPH_SYSCFG);
-    RCM_EnableAPB2PeriphClock(RCM_APB2_PERIPH_TMR15);
+    __HAL_RCC_TIM14_CLK_ENABLE();
 
-    /*  Connect TMR1 to CH1 */
-    GPIO_ConfigPinAF(GPIOA, GPIO_PIN_SOURCE_2, GPIO_AF_PIN0);
-    GPIO_ConfigPinAF(GPIOA, GPIO_PIN_SOURCE_3, GPIO_AF_PIN0);
-    gpioconfig.mode  = GPIO_MODE_AF;
-    gpioconfig.outtype = GPIO_OUT_TYPE_PP;
-    gpioconfig.pin   = GPIO_PIN_2|GPIO_PIN_3;
-    gpioconfig.pupd  = GPIO_PUPD_NO;
-    gpioconfig.speed = GPIO_SPEED_50MHz;
-    GPIO_Config(GPIOA, &gpioconfig);
+    GPIO_InitTypeDef g;
+    g.Pin = GPIO_PIN_4;
+    g.Mode = GPIO_MODE_AF_PP;
+    g.Pull = GPIO_NOPULL;
+    g.Speed = GPIO_SPEED_FREQ_HIGH;
+    g.Alternate = GPIO_AF4_TIM14;   // 关键！AF0
+    HAL_GPIO_Init(GPIOA, &g);
 
-    /* Set clockDivision = 1 */
-    timeBaseConfig.clockDivision =  TMR_CKD_DIV1;
-    /* Up-counter */
-    timeBaseConfig.counterMode =  TMR_COUNTER_MODE_UP;
-    /* Set divider = 71 .So TMR1 clock freq ~= 72/(71+1) = 1MHZ */
-    timeBaseConfig.div = 3 ;
-    /* Set counter = 999 */
-    timeBaseConfig.period = SPEAKER_ARR;
-    /* Repetition counter = 0x0 */
-    timeBaseConfig.repetitionCounter =  0;
-    TMR_ConfigTimeBase(TMR1, &timeBaseConfig);
+    htim14.Instance = TIM14;
+    htim14.Init.Prescaler = 3;                 // 假设系统时钟 48MHz → 定时器时钟 1MHz
+    htim14.Init.CounterMode = TIM_COUNTERMODE_UP;
+    htim14.Init.Period = SPEAKER_ARR;                   // 1MHz / 1000 = 1kHz PWM 频率
+    htim14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+    htim14.Init.RepetitionCounter = 0;
+    htim14.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+    HAL_TIM_PWM_Init(&htim14);
 
-    /* PWM1 mode */
-    occonfig.OC_Mode =  TMR_OC_MODE_PWM1;
-    /* Idle State is reset */
-    occonfig.OC_Idlestate  = TMR_OCIDLESTATE_RESET;
-    /* NIdle State is reset */
-    occonfig.OC_NIdlestate = TMR_OCNIDLESTATE_RESET;
-    /* Enable CH1N ouput */
-    occonfig.OC_OutputNState =  TMR_OUTPUT_NSTATE_DISABLE;
-    /* Enable CH1 ouput */
-    occonfig.OC_OutputState  =  TMR_OUTPUT_STATE_ENABLE;
-    /* CH1  polarity is high */
-    occonfig.OC_Polarity  = TMR_OC_POLARITY_HIGH;
-    /* CH1N polarity is high */
-    occonfig.OC_NPolarity = TMR_OC_NPOLARITY_HIGH;
-    /* Set compare value */
-    occonfig.Pulse = 128;
-    TMR_OC1Config(TMR15, &occonfig);
+    ocHandle.OCMode=TIM_OCMODE_PWM1; //模式选择PWM1
+    ocHandle.Pulse=0;            //设置比较值,此值用来确定占空比，默认比较值为自动重装载值的一半,即占空比为50%
+    ocHandle.OCPolarity=TIM_OCPOLARITY_HIGH; //输出比较极性为低 
+    HAL_TIM_PWM_ConfigChannel(&htim14,&ocHandle,TIM_CHANNEL_1);//配置TIM3通道3
 
-    occonfig.OC_Polarity  = TMR_OC_POLARITY_LOW;
-    TMR_OC2Config(TMR15, &occonfig);
+    __HAL_RCC_TIM3_CLK_ENABLE();
 
-    /* Enable PWM output */
-    TMR_EnablePWMOutputs(TMR15);
-    /*  Enable TMR1  */
-    TMR_Enable(TMR15);
+    g.Pin = GPIO_PIN_6;
+    g.Mode = GPIO_MODE_AF_PP;
+    g.Pull = GPIO_NOPULL;
+    g.Speed = GPIO_SPEED_FREQ_HIGH;
+    g.Alternate = GPIO_AF1_TIM3;   // 关键！AF0
+    HAL_GPIO_Init(GPIOA, &g);
+
+    htim3.Instance = TIM3;
+    htim3.Init.Prescaler = 3;                 // 假设系统时钟 48MHz → 定时器时钟 1MHz
+    htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+    htim3.Init.Period = SPEAKER_ARR;                   // 1MHz / 1000 = 1kHz PWM 频率
+    htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+    htim3.Init.RepetitionCounter = 0;
+    htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+    HAL_TIM_PWM_Init(&htim3);
+
+    ocHandle.OCMode=TIM_OCMODE_PWM1; //模式选择PWM1
+    ocHandle.Pulse=0;            //设置比较值,此值用来确定占空比，默认比较值为自动重装载值的一半,即占空比为50%
+    ocHandle.OCPolarity=TIM_OCPOLARITY_HIGH; //输出比较极性为低 
+    HAL_TIM_PWM_ConfigChannel(&htim3,&ocHandle,TIM_CHANNEL_1);//配置TIM3通道3
 }
+
 
 void Set_Speaker_Duty(uint16_t duty_ch1, uint16_t duty_ch2)
 {
     if (duty_ch1 > SPEAKER_ARR) duty_ch1 = SPEAKER_ARR;
     if (duty_ch2 > SPEAKER_ARR) duty_ch2 = SPEAKER_ARR;
 
-    TMR15->CC1 = duty_ch1;
-    TMR15->CC2 = duty_ch2;
+    TIM14->CCR1 = duty_ch1;
+    TIM3->CCR1 = duty_ch2;
 }

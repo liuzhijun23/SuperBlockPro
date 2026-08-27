@@ -1,6 +1,5 @@
 #include "SM16208.h"
 #include "timer.h"
-#include "apm32e030_gpio.h"
 
 uint8_t image_matrix[8] = { 0x3C, 0x42, 0xA5, 0x81, 0xA5, 0x99, 0x42, 0x3C };
 u8 key_arr[8];
@@ -18,85 +17,81 @@ u8 image_arr[][8] = {
 
 void SM16208_Init(void)
 {
-    GPIO_Config_T g;
+    GPIO_InitTypeDef g;
 
-    g.pin = SDI_PIN;
-    g.mode = GPIO_MODE_OUT;
-    g.outtype = GPIO_OUT_TYPE_PP;
-    g.speed = GPIO_SPEED_50MHz;
-    g.pupd = GPIO_PUPD_NO;
-    GPIO_Config(SDI_GPIO, &g);
+    g.Pin = SDI_PIN ;
+	g.Speed = GPIO_SPEED_FREQ_HIGH;
+	g.Mode = GPIO_MODE_OUTPUT_PP;
+	HAL_GPIO_Init(SDI_GPIO, &g);
 
-    g.pin = SCK_PIN ;
-    GPIO_Config(SCK_GPIO, &g);
+    g.Pin = SCK_PIN ;
+    HAL_GPIO_Init(SCK_GPIO, &g);
 
-    g.pin = LE_PIN ;
-    GPIO_Config(LE_GPIO, &g);
+    g.Pin = LE_PIN ;
+    HAL_GPIO_Init(LE_GPIO, &g);
 
-    g.pin = OE_PIN ;
-    GPIO_Config(OE_GPIO, &g);
+    g.Pin = OE_PIN ;
+    HAL_GPIO_Init(OE_GPIO, &g);
 
-    g.pin = A2_PIN ;
-    GPIO_Config(A2_GPIO, &g);
+    g.Pin = A2_PIN ;
+    HAL_GPIO_Init(A2_GPIO, &g);
 
-    g.pin = A1_PIN ;
-    GPIO_Config(A1_GPIO, &g);
+    g.Pin = A1_PIN ;
+    HAL_GPIO_Init(A1_GPIO, &g);
 
-    g.pin = A0_PIN ;
-    GPIO_Config( A0_GPIO, &g);
+    g.Pin = A0_PIN ;
+    HAL_GPIO_Init( A0_GPIO, &g);
 
-    g.pin = POWER_PIN ;
-    GPIO_Config(POWER_GPIO, &g);
+    g.Pin = POWER_PIN ;
+    HAL_GPIO_Init(POWER_GPIO, &g);
 
     SET_POWER_PIN(1);
 
-    g.pin = KEY0_PIN;
-	g.speed = GPIO_SPEED_50MHz;
-	g.mode = GPIO_MODE_IN;
-    g.outtype = GPIO_OUT_TYPE_OD;
-    g.pupd = GPIO_PUPD_NO;
-	GPIO_Config(KEY0_GPIO, &g); 
+    g.Pin = KEY0_PIN;
+	g.Speed = GPIO_SPEED_FREQ_HIGH;
+	g.Mode = GPIO_MODE_INPUT;
+	HAL_GPIO_Init(KEY0_GPIO, &g); 
 
-    g.pin = KEY1_PIN;  
-    GPIO_Config(KEY1_GPIO, &g);   
+    g.Pin = KEY1_PIN;  
+    HAL_GPIO_Init(KEY1_GPIO, &g);   
 
-    g.pin = KEY2_PIN;  
-    GPIO_Config(KEY2_GPIO, &g);  
+    g.Pin = KEY2_PIN;  
+    HAL_GPIO_Init(KEY2_GPIO, &g);  
 
-    g.pin = KEY3_PIN;  
-    GPIO_Config(KEY3_GPIO, &g); 
+    g.Pin = KEY3_PIN;  
+    HAL_GPIO_Init(KEY3_GPIO, &g); 
 
-    g.pin = KEY4_PIN;  
-    GPIO_Config(KEY4_GPIO, &g); 
+    g.Pin = KEY4_PIN;  
+    HAL_GPIO_Init(KEY4_GPIO, &g); 
 
-    g.pin = KEY5_PIN;  
-    GPIO_Config(KEY5_GPIO, &g); 
+    g.Pin = KEY5_PIN;  
+    HAL_GPIO_Init(KEY5_GPIO, &g); 
 
-    g.pin = KEY6_PIN;  
-    GPIO_Config(KEY6_GPIO, &g); 
+    g.Pin = KEY6_PIN;  
+    HAL_GPIO_Init(KEY6_GPIO, &g); 
 
-    g.pin = KEY7_PIN;  
-    GPIO_Config(KEY7_GPIO, &g); 
+    g.Pin = KEY7_PIN;  
+    HAL_GPIO_Init(KEY7_GPIO, &g); 
 }
 
 u8 ReadKeyData(void)
 {
     u8 data = 0;
-    if(GPIO_ReadInputBit(KEY0_GPIO,KEY0_PIN))
+    if(HAL_GPIO_ReadPin(KEY0_GPIO,KEY0_PIN))
         data |= 0x01;
-    if(GPIO_ReadInputBit(KEY1_GPIO,KEY1_PIN))
+    if(HAL_GPIO_ReadPin(KEY1_GPIO,KEY1_PIN) == 1)
         data |= 0x02;
-    if(GPIO_ReadInputBit(KEY2_GPIO,KEY2_PIN))
+    if(HAL_GPIO_ReadPin(KEY2_GPIO,KEY2_PIN) == 1)
         data |= 0x04;   
-    if(GPIO_ReadInputBit(KEY3_GPIO,KEY3_PIN))
+    if(HAL_GPIO_ReadPin(KEY3_GPIO,KEY3_PIN) == 1)
         data |= 0x08; 
-    if(GPIO_ReadInputBit(KEY4_GPIO,KEY4_PIN))
+    if(HAL_GPIO_ReadPin(KEY4_GPIO,KEY4_PIN) == 1)
         data |= 0x10;
-    if(GPIO_ReadInputBit(KEY5_GPIO,KEY5_PIN))
+    if(HAL_GPIO_ReadPin(KEY5_GPIO,KEY5_PIN) == 1)
         data |= 0x20;
-    if(GPIO_ReadInputBit(KEY6_GPIO,KEY6_PIN))
+    if(HAL_GPIO_ReadPin(KEY6_GPIO,KEY6_PIN) == 1)
         data |= 0x40;
-    if(GPIO_ReadInputBit(KEY7_GPIO,KEY7_PIN))
+    if(HAL_GPIO_ReadPin(KEY7_GPIO,KEY7_PIN) == 1)
         data |= 0x80;
     return data;
 }
@@ -115,43 +110,43 @@ void display_matrix(u8* matrix)
         {
             if(send_data & 0x8000)
             {
-                GPIO_WriteBitValue(SDI_GPIO,SDI_PIN,Bit_SET);
+                HAL_GPIO_WritePin(SDI_GPIO,SDI_PIN,GPIO_PIN_SET);
             }
             else
             {
-                GPIO_WriteBitValue(SDI_GPIO,SDI_PIN,BIT_RESET);
+                HAL_GPIO_WritePin(SDI_GPIO,SDI_PIN,GPIO_PIN_RESET);
             }
 
-            GPIO_WriteBitValue(SCK_GPIO,SCK_PIN,Bit_SET);
-            GPIO_WriteBitValue(SCK_GPIO,SCK_PIN,BIT_RESET);
+            HAL_GPIO_WritePin(SCK_GPIO,SCK_PIN,GPIO_PIN_SET);
+            HAL_GPIO_WritePin(SCK_GPIO,SCK_PIN,GPIO_PIN_RESET);
             send_data <<= 1;
         }
         
         // 3. 产生锁存信号，更新列驱动
-        GPIO_WriteBitValue(LE_GPIO,LE_PIN,BIT_SET);
-        GPIO_WriteBitValue(LE_GPIO,LE_PIN,BIT_RESET);
+        HAL_GPIO_WritePin(LE_GPIO,LE_PIN,GPIO_PIN_SET);
+        HAL_GPIO_WritePin(LE_GPIO,LE_PIN,GPIO_PIN_RESET);
         
         // 4. 消影：关闭显示
-        GPIO_WriteBitValue(OE_GPIO,OE_PIN,BIT_SET);
+        HAL_GPIO_WritePin(OE_GPIO,OE_PIN,GPIO_PIN_SET);
         
         // 5. 切换行选：通过 3 根线控制 SM5166 选通当前行
         if(row&0x04)
-            GPIO_WriteBitValue(A2_GPIO,A2_PIN,BIT_SET);
+            HAL_GPIO_WritePin(A2_GPIO,A2_PIN,GPIO_PIN_SET);
         else
-            GPIO_WriteBitValue(A2_GPIO,A2_PIN,BIT_RESET);
+            HAL_GPIO_WritePin(A2_GPIO,A2_PIN,GPIO_PIN_RESET);
 
         if(row&0x02)
-            GPIO_WriteBitValue(A1_GPIO,A1_PIN,BIT_SET);
+            HAL_GPIO_WritePin(A1_GPIO,A1_PIN,GPIO_PIN_SET);
         else
-            GPIO_WriteBitValue(A1_GPIO,A1_PIN,BIT_RESET);
+            HAL_GPIO_WritePin(A1_GPIO,A1_PIN,GPIO_PIN_RESET);
 
         if(row&0x01)
-            GPIO_WriteBitValue(A0_GPIO,A0_PIN,BIT_SET);
+            HAL_GPIO_WritePin(A0_GPIO,A0_PIN,GPIO_PIN_SET);
         else
-            GPIO_WriteBitValue(A0_GPIO,A0_PIN,BIT_RESET);
+            HAL_GPIO_WritePin(A0_GPIO,A0_PIN,GPIO_PIN_RESET);
         
         // 6. 开启显示并延时
-        GPIO_WriteBitValue(OE_GPIO,OE_PIN,BIT_RESET);
+        HAL_GPIO_WritePin(OE_GPIO,OE_PIN,GPIO_PIN_RESET);
 
         delay_ms(1); // 每一行点亮 1 毫秒
        

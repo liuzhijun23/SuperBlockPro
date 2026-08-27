@@ -1,7 +1,5 @@
 #include "timer.h"
 #include "GlobalVar.h"
-#include "apm32e030_tmr.h"
-#include "apm32e030_rcm.h"
 
 //延时函数初始化
 //为确保准确度,请保证时钟频率最好为4的倍数,最低8Mhz
@@ -9,33 +7,22 @@
 
 volatile u8 fac_us = 0; // us延时倍乘数
 
+TIM_HandleTypeDef TIM16_Handler;
+TIM_HandleTypeDef TIM17_Handler;
 
-void TIM6_Config(void)
+void TIM16_Config(void)
 {
-    TMR_TimeBase_T  timeBaseConfig;
+    __HAL_RCC_TIM16_CLK_ENABLE();
+    HAL_NVIC_SetPriority(TIM16_IRQn,2,1);
+    HAL_NVIC_EnableIRQ(TIM16_IRQn);
 
-    RCM_EnableAPB2PeriphClock(RCM_APB2_PERIPH_SYSCFG);
-    RCM_EnableAPB1PeriphClock(RCM_APB1_PERIPH_TMR6);
-
-    /* Set clockDivision = 1 */
-    timeBaseConfig.clockDivision =  TMR_CKD_DIV1;
-    /* Up-counter */
-    timeBaseConfig.counterMode =  TMR_COUNTER_MODE_UP;
-    /* Set divider = 71.So TMR1 clock freq ~= 72/(71 + 1) = 1MHZ */
-    timeBaseConfig.div = 71 ;
-    /* Set counter = 0xffff */
-    timeBaseConfig.period = 1000-1;
-    /* Repetition counter = 0x0 */
-    timeBaseConfig.repetitionCounter =  0;
-
-    TMR_ConfigTimeBase(TMR6, &timeBaseConfig);
-
-    /* Enable update interrupt*/
-    TMR_EnableInterrupt(TMR6, TMR_INT_UPDATE);
-    NVIC_EnableIRQRequest(TMR6_IRQn, 2);
-
-    /*  Enable TMR14  */
-    TMR_Enable(TMR6);
+    TIM16_Handler.Instance=TIM16;                          //通用定时器7
+    TIM16_Handler.Init.Prescaler=63;                     //分频系数
+    TIM16_Handler.Init.CounterMode=TIM_COUNTERMODE_UP;    //向上计数器
+    TIM16_Handler.Init.Period=1000-1;                        //自动装载值
+    TIM16_Handler.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;//时钟分频因子
+    HAL_TIM_Base_Init(&TIM16_Handler);
+    HAL_TIM_Base_Start_IT(&TIM16_Handler); //使能定时器7和定时器7更新中断：TIM_IT_UPDATE  
 }
 
 void delay_ms(u32 nms)
@@ -47,28 +34,15 @@ void delay_ms(u32 nms)
 //周期72M/36/250=8K
 void TIM17_Config(void)
 {
-    TMR_TimeBase_T  timeBaseConfig;
+    __HAL_RCC_TIM17_CLK_ENABLE();
+    HAL_NVIC_SetPriority(TIM17_IRQn,2,1);
+    HAL_NVIC_EnableIRQ(TIM17_IRQn);
 
-    RCM_EnableAPB2PeriphClock(RCM_APB2_PERIPH_SYSCFG);
-    RCM_EnableAPB1PeriphClock(RCM_APB2_PERIPH_TMR17);
-
-    /* Set clockDivision = 1 */
-    timeBaseConfig.clockDivision =  TMR_CKD_DIV1;
-    /* Up-counter */
-    timeBaseConfig.counterMode =  TMR_COUNTER_MODE_UP;
-    /* Set divider = 71.So TMR1 clock freq ~= 72/(71 + 1) = 1MHZ */
-    timeBaseConfig.div = 35 ;
-    /* Set counter = 0xffff */
-    timeBaseConfig.period = 250-1;
-    /* Repetition counter = 0x0 */
-    timeBaseConfig.repetitionCounter =  0;
-
-    TMR_ConfigTimeBase(TMR17, &timeBaseConfig);
-
-    /* Enable update interrupt*/
-    TMR_EnableInterrupt(TMR17, TMR_INT_UPDATE);
-    NVIC_EnableIRQRequest(TMR17_IRQn, 2);
-
-    /*  Enable TMR14  */
-    TMR_Enable(TMR17);
+    TIM17_Handler.Instance=TIM17;                          //通用定时器7
+    TIM17_Handler.Init.Prescaler=31;                     //分频系数
+    TIM17_Handler.Init.CounterMode=TIM_COUNTERMODE_UP;    //向上计数器
+    TIM17_Handler.Init.Period=249;                        //自动装载值
+    TIM17_Handler.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;//时钟分频因子
+    HAL_TIM_Base_Init(&TIM17_Handler);
+    //HAL_TIM_Base_Start_IT(&TIM17_Handler); //使能定时器7和定时器7更新中断：TIM_IT_UPDATE  
 }

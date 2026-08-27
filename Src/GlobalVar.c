@@ -27,14 +27,21 @@ u16 ReadTimeSetting(void)
 
 void WriteTimeSetting(u16 time)
 {
-    FMC_Unlock();
+    FLASH_EraseInitTypeDef eraseInit;
+    uint32_t pageError = 0;
 
-    /* 写入前必须整页擦除（APM32E030 页大小 1KB） */
-    if (FMC_ErasePage(FLASH_USER_PAGE_ADDR) == FMC_STATE_COMPLETE)
+    HAL_FLASH_Unlock();
+
+    /* 写入前必须整页擦除 */
+    eraseInit.TypeErase = FLASH_TYPEERASE_PAGES;
+    eraseInit.Page = (FLASH_USER_PAGE_ADDR - FLASH_BASE) / FLASH_PAGE_SIZE;
+    eraseInit.NbPages = 1;
+    if (HAL_FLASHEx_Erase(&eraseInit, &pageError) == HAL_OK)
     {
-        /* 按 half-word(16位) 编程 */
-        FMC_ProgramHalfWord(WORKING_TIME_SAVE_ADDR, time);
+        /* G0仅支持64位双字编程，高48位保持1(0xFF) */
+        HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, WORKING_TIME_SAVE_ADDR,
+                          0xFFFFFFFFFFFF0000ULL | (u64)time);
     }
 
-    FMC_Lock();
+    HAL_FLASH_Lock();
 }

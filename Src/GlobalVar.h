@@ -1,20 +1,48 @@
 #ifndef _GLOBAL_VAR_H
 #define _GLOBAL_VAR_H
+#include "stm32g0xx.h"
+#include "stm32g0xx_hal.h"
 
-#include "apm32e030.h"
-#include "apm32e030_tmr.h"
-#include "apm32e030_rcm.h"
-#include "apm32e030_gpio.h"
-#include "apm32e030_fmc.h"
+typedef int32_t  s32;
+typedef int16_t s16;
+typedef int8_t  s8;
 
-#include "timer.h"
-#include "GPIO.h"
-#include "audio.h"
-#include "SM16208.h"
-#include "main.h"
+typedef const int32_t sc32;  
+typedef const int16_t sc16;  
+typedef const int8_t sc8;  
 
-/* APM32E030 无数据EEPROM，用内部Flash最后一页(1KB)存储参数 */
-#define FLASH_USER_PAGE_ADDR    0x0800FC00
+typedef __IO int32_t  vs32;
+typedef __IO int16_t  vs16;
+typedef __IO int8_t   vs8;
+
+typedef __I int32_t vsc32;  
+typedef __I int16_t vsc16; 
+typedef __I int8_t vsc8;   
+
+typedef uint32_t  u32;
+typedef uint16_t u16;
+typedef uint8_t  u8;
+
+typedef const uint32_t uc32;  
+typedef const uint16_t uc16;  
+typedef const uint8_t uc8; 
+
+typedef __IO uint32_t  vu32;
+typedef __IO uint16_t vu16;
+typedef __IO uint8_t  vu8;
+
+typedef __I uint32_t vuc32;  
+typedef __I uint16_t vuc16; 
+typedef __I uint8_t vuc8;  	
+
+typedef int64_t		s64;
+typedef uint64_t	u64;
+
+#define false   0
+#define true    1
+
+/* STM32G030K8 无数据EEPROM，用内部Flash最后一页(2KB)存储参数 */
+#define FLASH_USER_PAGE_ADDR    0x0800F800
 #define WORKING_TIME_SAVE_ADDR  FLASH_USER_PAGE_ADDR
 #define WORK_TIME_DEFAULT       60      //默认工作时间，单位分钟
 

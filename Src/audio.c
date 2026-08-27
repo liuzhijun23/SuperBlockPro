@@ -1,7 +1,6 @@
 #include "audio.h"
 #include "GPIO.h"
 #include "timer.h"
-#include "GlobalVar.h"
 
 const int16_t ima_step_table[89] = {
     7,8,9,10,11,12,13,14,16,17,19,21,23,25,28,31,
@@ -210,8 +209,10 @@ void Audio_Start(void)
     use_high_nibble = 0;
     playing         = 1;
    
-    TMR_EnablePWMOutputs(TMR15);
-    TMR_Enable(TMR17);
+    HAL_TIM_PWM_Start(&htim14,TIM_CHANNEL_1);//开启PWM通道1
+    HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);//开启PWM通道1
+
+    HAL_TIM_Base_Start_IT(&TIM17_Handler);
 }
 
 void Audio_Sop(void)
@@ -219,9 +220,10 @@ void Audio_Sop(void)
     playing = 0;
 
     Set_Speaker_Duty(128,128);
+    HAL_TIM_PWM_Stop(&htim14,TIM_CHANNEL_1);//开启PWM通道1
+    HAL_TIM_PWM_Stop(&htim3,TIM_CHANNEL_1);//开启PWM通道1
 
-    TMR_DisablePWMOutputs(TMR15);
-    TMR_Disable(TMR17);
+    HAL_TIM_Base_Stop_IT(&TIM17_Handler);
     
 }
 
