@@ -28,9 +28,12 @@ void SystemClock_Config(void);
  * @brief  The application entry point.
  * @retval int
  */
+u32 test_count = 0;
+
 int main(void)
 {
     HAL_Init();
+    HAL_SuspendTick(); 
     SystemClock_Config();
     EnableAllGpio();
 
@@ -49,6 +52,10 @@ int main(void)
            
             debugData1 = 0;
         }
+
+        test_count++;
+
+        delay_ms(10);
 
         //display_matrix(image_arr[1]);
         //display_matrix(key_filter);
