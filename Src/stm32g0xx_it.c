@@ -159,7 +159,7 @@ void TIM17_IRQHandler(void)
         // V_diff = (pwm_val - (256-pwm_val))/256 * Vcc = (2*pwm_val-256)/256 * Vcc
         uint8_t pwm_val = (uint8_t)((sample + 32768) >> 8);
 
-        Set_Speaker_Duty(pwm_val, pwm_val);
+        Set_Speaker_Duty(pwm_val, 255-pwm_val);
     }
 }
 
