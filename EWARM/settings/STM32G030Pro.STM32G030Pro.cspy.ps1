@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "C:\Program Files\IAR Systems\Embedded Workbench 9.1\common\bin\cspybat" -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.general.xcl" --backend -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.driver.xcl" 
+& "D:\Program Files\IAR Systems\Embedded Workbench 9.1\common\bin\cspybat" -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.general.xcl" --backend -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.driver.xcl" 
 }
 else
 {
-& "C:\Program Files\IAR Systems\Embedded Workbench 9.1\common\bin\cspybat" -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.general.xcl" --debug_file=$debugfile --backend -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.driver.xcl" 
+& "D:\Program Files\IAR Systems\Embedded Workbench 9.1\common\bin\cspybat" -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.general.xcl" --debug_file=$debugfile --backend -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.driver.xcl" 
 }

@@ -33,7 +33,7 @@ u32 test_count = 0;
 int main(void)
 {
     HAL_Init();
-    HAL_SuspendTick(); 
+   // HAL_SuspendTick(); 
     SystemClock_Config();
     EnableAllGpio();
 
@@ -43,6 +43,8 @@ int main(void)
 
     SM16208_Init();
     SpeakerInit();
+
+    debugData1 = 1;
 
     while (1)
     {
@@ -55,9 +57,7 @@ int main(void)
 
         test_count++;
 
-        delay_ms(10);
-
-        //display_matrix(image_arr[1]);
+        display_matrix(image_arr[0]);
         //display_matrix(key_filter);
     }
 }

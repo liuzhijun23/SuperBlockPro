@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"C:\Program Files\IAR Systems\Embedded Workbench 9.1\common\bin\cspybat" -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.general.xcl" --backend -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.driver.xcl" 
+"D:\Program Files\IAR Systems\Embedded Workbench 9.1\common\bin\cspybat" -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.general.xcl" --backend -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"C:\Program Files\IAR Systems\Embedded Workbench 9.1\common\bin\cspybat" -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.general.xcl" "--debug_file=%~1" --backend -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.driver.xcl" 
+"D:\Program Files\IAR Systems\Embedded Workbench 9.1\common\bin\cspybat" -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.general.xcl" "--debug_file=%~1" --backend -f "F:\SuperBlock\SuperBlockPro\EWARM\settings\STM32G030Pro.STM32G030Pro.driver.xcl" 
 
 @echo off 
 :end
