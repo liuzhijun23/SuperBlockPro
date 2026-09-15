@@ -46,8 +46,11 @@ typedef uint64_t	u64;
 #define WORKING_TIME_SAVE_ADDR  FLASH_USER_PAGE_ADDR
 #define WORK_TIME_DEFAULT       60      //默认工作时间，单位分钟
 
-u16 ReadTimeSetting(void);
-void WriteTimeSetting(u16 time);
+enum {
+    SHOW_LEVEL=0,
+    SHOW_2,
+    SHOW_0,
+};
 
 extern __IO uint32_t TimingDelay;
 extern u16 workTimeSetting;//工作时间设定，单位分钟
@@ -57,9 +60,18 @@ extern __IO u16 fall_delay;
 extern __IO u16 release_delay;
 extern __IO u8 keyState;
 extern __IO u8 work_event;
+extern u8 pass_mission_flag;
+extern u8 show_flag;
+extern u16 curr_level;
+extern u8 play_audio_flag;
 
 extern u32 debugData1;
 extern u32 debugData2;
 extern u32 debugData3;
 extern u32 debugData4;
+
+u16 ReadTimeSetting(void);
+void WriteTimeSetting(u16 time);
+
+
 #endif

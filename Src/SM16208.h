@@ -36,7 +36,7 @@
 #define KEY1_GPIO   GPIOB
 #define KEY1_PIN    GPIO_PIN_2
 
-#define KEY2_GPIO   GPIOB
+#define KEY2_GPIO   GPIOA
 #define KEY2_PIN    GPIO_PIN_8
 
 #define KEY3_GPIO   GPIOA
@@ -56,8 +56,15 @@
 
 #define CONFIRM_NUM     3
 
-extern u8 image_arr[][8];
+enum {
+    IMAG_INDEX_DARK = 0,
+    IMAG_INDEX_LIGHT,
+    IMAG_INDEX_2,
+    IMAG_INDEX_0,
+};
 
+extern u8 image_arr[][8];
+extern u8 level_arr[][8];
 extern u8 key_arr[8];
 extern u8 key_history[8][CONFIRM_NUM];
 extern u8 key_filter[8];
@@ -68,5 +75,6 @@ void SM16208_Init(void);
 void display_matrix(u8* matrix);
 void process_key_events();
 u8 ReadKeyData(void);
+u8 CompareArr(u8* arr1,u8 *arr2,u8 len);
 
 #endif

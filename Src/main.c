@@ -30,6 +30,45 @@ void SystemClock_Config(void);
  */
 u32 test_count = 0;
 
+void ShowLedProc(void)
+{
+    static u16 show_cnt = 0;
+    switch (show_flag)
+    {
+    case SHOW_LEVEL:
+        display_matrix(level_arr[curr_level]);
+        if(pass_mission_flag)
+        {
+            if(CompareArr(key_filter,image_arr[0],8))
+            {
+                pass_mission_flag = 0;
+                show_flag = SHOW_2;
+                show_cnt = 0;
+            }
+        }
+        break;
+    case SHOW_2:
+        display_matrix(image_arr[IMAG_INDEX_2]);
+        if(show_cnt++ > 200)
+        {
+            show_cnt = 0;
+            show_flag = SHOW_0;
+        }
+        break;
+    case SHOW_0:
+        display_matrix(image_arr[IMAG_INDEX_0]);
+        if(show_cnt++ > 200)
+        {
+            show_cnt = 0;
+            curr_level++;
+            show_flag = SHOW_LEVEL;
+        }
+        break;
+    default:
+        break;
+    }
+}
+
 int main(void)
 {
     HAL_Init();
@@ -44,21 +83,16 @@ int main(void)
     SM16208_Init();
     SpeakerInit();
 
-    debugData1 = 1;
-
     while (1)
     {
-        if(debugData1)
+        if(play_audio_flag)
         {
             Audio_Start();
-           
-            debugData1 = 0;
+            play_audio_flag = 0;
         }
 
-        test_count++;
+        ShowLedProc();
 
-        display_matrix(image_arr[0]);
-        //display_matrix(key_filter);
     }
 }
 

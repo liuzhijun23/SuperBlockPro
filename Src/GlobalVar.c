@@ -8,6 +8,10 @@ __IO u16 fall_delay = 0;
 __IO u16 release_delay = 0;
 __IO u8 keyState = 0;
 __IO u8 work_event = 0;
+u8 pass_mission_flag = 0;
+u8 show_flag = SHOW_LEVEL;
+u16 curr_level = 0;
+u8 play_audio_flag = 1;
 
 u32 debugData1 = 0;
 u32 debugData2 = 0;

@@ -9,11 +9,19 @@ u8 key_filter_pre[8];
 
 //u8 image_arr[8] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 //u8 image_arr[8] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
+
 u8 image_arr[][8] = {
-    { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF },
     { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+    { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF },
+    { 0x00, 0x00, 0x3C, 0x20, 0x3C, 0x04, 0x3C, 0x00 },
+    { 0x00, 0x00, 0x3C, 0x24, 0x24, 0x24, 0x3C, 0x00 },
+};
+u8 level_arr[][8] = {
     { 0x00, 0x0E, 0x06, 0x02, 0x60, 0x70, 0x20, 0x00 },
     { 0x00, 0x00, 0x70, 0x30, 0x10, 0x00, 0x00, 0x00 },
+    { 0x00, 0x00, 0x00, 0x00, 0x40, 0x50, 0x58, 0x7C },
+    { 0x02, 0x07, 0x06, 0x00, 0x1C, 0x18, 0x38, 0x38,},
+    { 0x00, 0x00, 0x00, 0x60, 0x70, 0x78, 0x60, 0x00 },
 };
 
 
@@ -24,6 +32,7 @@ void SM16208_Init(void)
     g.Pin = SDI_PIN ;
 	g.Speed = GPIO_SPEED_FREQ_HIGH;
 	g.Mode = GPIO_MODE_OUTPUT_PP;
+    g.Pull = GPIO_PULLUP;
 	HAL_GPIO_Init(SDI_GPIO, &g);
 
     g.Pin = SCK_PIN ;
@@ -47,11 +56,12 @@ void SM16208_Init(void)
     g.Pin = POWER_PIN ;
     HAL_GPIO_Init(POWER_GPIO, &g);
 
-    SET_POWER_PIN(1);
+    SET_POWER_PIN(0);
 
     g.Pin = KEY0_PIN;
 	g.Speed = GPIO_SPEED_FREQ_HIGH;
 	g.Mode = GPIO_MODE_INPUT;
+    g.Pull = GPIO_PULLDOWN;
 	HAL_GPIO_Init(KEY0_GPIO, &g); 
 
     g.Pin = KEY1_PIN;  
@@ -100,8 +110,8 @@ u8 ReadKeyData(void)
 
 void display_matrix(u8* matrix)
 {
-    uint8_t row = 2;
-    //for (uint8_t row = 0; row < 8; row++) 
+    uint8_t row = 0;
+    for (row = 0; row < 8; row++) 
     {
         
         // 1. 获取当前行的 8位 列数据
@@ -121,12 +131,14 @@ void display_matrix(u8* matrix)
             }
 
             HAL_GPIO_WritePin(SCK_GPIO,SCK_PIN,GPIO_PIN_SET);
+            asm("NOP");asm("NOP");asm("NOP");asm("NOP");asm("NOP");asm("NOP");
             HAL_GPIO_WritePin(SCK_GPIO,SCK_PIN,GPIO_PIN_RESET);
             send_data <<= 1;
         }
         
         // 3. 产生锁存信号，更新列驱动
         HAL_GPIO_WritePin(LE_GPIO,LE_PIN,GPIO_PIN_SET);
+        asm("NOP");asm("NOP");asm("NOP");asm("NOP");asm("NOP");asm("NOP");
         HAL_GPIO_WritePin(LE_GPIO,LE_PIN,GPIO_PIN_RESET);
         
         // 4. 消影：关闭显示
@@ -155,6 +167,17 @@ void display_matrix(u8* matrix)
        
         key_arr[row] = ReadKeyData();
         
+        process_key_events();
+
+        if(pass_mission_flag == 0)
+        {
+            if(CompareArr(key_filter,matrix,8))
+            {
+                pass_mission_flag = 1;
+                play_audio_flag = 1;
+            }
+        }
+       
     }
 }
 
@@ -212,4 +235,22 @@ void process_key_events()
             }
         }
     }
+}
+
+
+u8 CompareArr(u8* arr1,u8 *arr2,u8 len)
+{
+    u8 equalCnt = 0;
+    for(int i=0;i<8;i++)
+    {
+        if(0xFF-key_arr[i] == arr2[i])
+            equalCnt++;
+    }
+    if(equalCnt == 8)
+    {
+        return 1;
+    }
+    else
+        return 0;
+    
 }

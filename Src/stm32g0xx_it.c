@@ -111,7 +111,9 @@ void TIM16_IRQHandler(void)
             TimingDelay--;
         }
 
-        process_key_events();
+        //display_matrix(image_arr[0]);
+
+        //process_key_events();
     }
 }
 
