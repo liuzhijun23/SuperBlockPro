@@ -19,13 +19,14 @@ u8 GreenDn = 0;
 u8 BlueUp = 0;
 u8 BlueDn = 0;
 u8 ledColor = NONE;
+u16 levelSaved = 0;
 
 u32 debugData1 = 0;
 u32 debugData2 = 0;
 u32 debugData3 = 0;
 u32 debugData4 = 0;
 
-u16 ReadTimeSetting(void)
+u16 ReadLevelSetting(void)
 {
     /* Flash内容可直接通过地址读取；未写入过(0xFFFF)时返回默认值 */
     u16 time = *(__IO u16 *)WORKING_TIME_SAVE_ADDR;
@@ -36,7 +37,7 @@ u16 ReadTimeSetting(void)
     return time;
 }
 
-void WriteTimeSetting(u16 time)
+void WriteLevelSetting(u16 time)
 {
     FLASH_EraseInitTypeDef eraseInit;
     uint32_t pageError = 0;

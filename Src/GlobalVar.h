@@ -81,14 +81,15 @@ extern u8 GreenDn;
 extern u8 BlueUp;
 extern u8 BlueDn;
 extern u8 ledColor;
+extern u16 levelSaved;
 
 extern u32 debugData1;
 extern u32 debugData2;
 extern u32 debugData3;
 extern u32 debugData4;
 
-u16 ReadTimeSetting(void);
-void WriteTimeSetting(u16 time);
+u16 ReadLevelSetting(void);
+void WriteLevelSetting(u16 time);
 
 
 #endif

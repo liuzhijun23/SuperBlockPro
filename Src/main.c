@@ -87,6 +87,7 @@ void ShowLedProc(void)
             show_cnt = 0;
             curr_level++;
             show_flag = SHOW_LEVEL;
+            WriteLevelSetting(curr_level);
         }
         break;
     default:
@@ -108,6 +109,9 @@ int main(void)
     SM16208_Init();
     SpeakerInit();
 
+    levelSaved = ReadLevelSetting();
+    curr_level = levelSaved;
+
     while (1)
     {
         if(play_audio_flag)
@@ -117,6 +121,12 @@ int main(void)
         }
 
         ShowLedProc();
+
+        if(debugData1 == 1)
+        {
+            debugData1 = 0;
+            WriteLevelSetting(debugData2);
+        }
 
     }
 }

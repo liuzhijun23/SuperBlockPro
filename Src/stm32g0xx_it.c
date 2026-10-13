@@ -123,8 +123,6 @@ void TIM17_IRQHandler(void)
     {
         __HAL_TIM_CLEAR_FLAG(&TIM17_Handler, TIM_FLAG_UPDATE);
 
-        debugData2++;
-
         if (!playing) return;
     
         if (adpcm_byte_pos >= AUDIO_ADPCM_SIZE) {
