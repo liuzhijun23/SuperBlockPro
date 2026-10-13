@@ -48,8 +48,18 @@ typedef uint64_t	u64;
 
 enum {
     SHOW_LEVEL=0,
+    SHOW_PASS,
+    SHOW_WAIT,
     SHOW_2,
     SHOW_0,
+};
+
+enum {
+    NONE=0,
+    RED,
+    GREEN,
+    BLUE,
+    YELLOR
 };
 
 extern __IO uint32_t TimingDelay;
@@ -64,6 +74,13 @@ extern u8 pass_mission_flag;
 extern u8 show_flag;
 extern u16 curr_level;
 extern u8 play_audio_flag;
+extern u8 RedUp;
+extern u8 RedDn;
+extern u8 GreenUp;
+extern u8 GreenDn;
+extern u8 BlueUp;
+extern u8 BlueDn;
+extern u8 ledColor;
 
 extern u32 debugData1;
 extern u32 debugData2;

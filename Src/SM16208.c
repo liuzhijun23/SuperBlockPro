@@ -115,7 +115,37 @@ void display_matrix(u8* matrix)
     {
         
         // 1. 获取当前行的 8位 列数据
-        u16 col_data = matrix[row]<<6;
+        u16 col_data = (matrix[row]<<6);
+
+        // u16 rgbVal = RedUp+(GreenUp<<1)+(BlueUp<<2)+(RedDn<<3)+(GreenDn<<4)+(BlueDn<<5);
+        // if(row<4)
+        //    col_data |= rgbVal;
+
+        u16 rgbVal;
+        if(ledColor == RED)
+        {
+            rgbVal = 0x01;
+            if(row < 4)
+                col_data |= rgbVal;
+        }
+        else if(ledColor == BLUE)
+        {
+            rgbVal = 1<<5;
+            if(row < 4)
+                col_data |= rgbVal;
+        }
+        else if(ledColor == GREEN)
+        {
+            rgbVal = 1<<1;
+            if(row>4)
+                col_data |= rgbVal;
+        }
+        else if(ledColor == YELLOR)
+        {
+            rgbVal = (1<<3)+ (1<<4);
+            if(row>4)
+                col_data |= rgbVal;
+        }
         
         // 2. 串行发送 16 位数据给 SM16208（OUT0~OUT7 对应低字节）
         uint16_t send_data = (uint16_t)col_data; 
@@ -175,6 +205,7 @@ void display_matrix(u8* matrix)
             {
                 pass_mission_flag = 1;
                 play_audio_flag = 1;
+                show_flag = SHOW_PASS;
             }
         }
        

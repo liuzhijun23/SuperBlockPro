@@ -12,6 +12,13 @@ u8 pass_mission_flag = 0;
 u8 show_flag = SHOW_LEVEL;
 u16 curr_level = 0;
 u8 play_audio_flag = 1;
+u8 RedUp = 0;
+u8 RedDn = 0;
+u8 GreenUp = 0;
+u8 GreenDn = 0;
+u8 BlueUp = 0;
+u8 BlueDn = 0;
+u8 ledColor = NONE;
 
 u32 debugData1 = 0;
 u32 debugData2 = 0;

@@ -36,6 +36,31 @@ void ShowLedProc(void)
     switch (show_flag)
     {
     case SHOW_LEVEL:
+        ledColor = RED;
+        display_matrix(level_arr[curr_level]);
+        break;
+    case SHOW_PASS:
+        display_matrix(level_arr[curr_level]);
+        show_cnt++;
+        if(show_cnt > 100)
+        {
+            show_flag = SHOW_WAIT;
+            show_cnt = 0;
+            ledColor = RED;
+        }
+        else
+        {
+            if(show_cnt%40 == 10)
+                ledColor = RED;
+            else if(show_cnt%40 == 20)
+                ledColor = BLUE;
+            else if(show_cnt%40 == 30)
+                ledColor = YELLOR;
+            else if(show_cnt % 40 == 0)
+                ledColor = GREEN;
+        }
+        break;
+    case SHOW_WAIT:
         display_matrix(level_arr[curr_level]);
         if(pass_mission_flag)
         {
