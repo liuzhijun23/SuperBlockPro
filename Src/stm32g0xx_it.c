@@ -25,6 +25,7 @@
 #include "SM16208.h"
 #include "audio.h"
 #include "GPIO.h"
+#include "key_detect.h"
 
 
 /******************************************************************************/
@@ -110,6 +111,8 @@ void TIM16_IRQHandler(void)
         {
             TimingDelay--;
         }
+
+        Key_Detect_Scan();   /* 按键检测: 每 1ms 调用, 内部 10ms 节拍 */
 
         //display_matrix(image_arr[0]);
 

@@ -20,6 +20,11 @@ u8 BlueUp = 0;
 u8 BlueDn = 0;
 u8 ledColor = NONE;
 u16 levelSaved = 0;
+u8 MLED1 = 0;
+u8 MLED2 = 0;
+u8 powerKeyState = 0;
+u8 leftKeyState = 0;
+u8 rightKeyState = 0;
 
 u32 debugData1 = 0;
 u32 debugData2 = 0;

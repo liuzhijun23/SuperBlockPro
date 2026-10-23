@@ -146,6 +146,11 @@ void display_matrix(u8* matrix)
             if(row>4)
                 col_data |= rgbVal;
         }
+
+        if(row==7)
+        {
+            col_data |= (MLED1<<15)+(MLED2<<14);
+        }
         
         // 2. 串行发送 16 位数据给 SM16208（OUT0~OUT7 对应低字节）
         uint16_t send_data = (uint16_t)col_data; 

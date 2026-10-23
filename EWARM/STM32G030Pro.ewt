@@ -1424,36 +1424,6 @@
         </settings>
     </configuration>
     <group>
-        <name>Src</name>
-        <file>
-            <name>$PROJ_DIR$\..\Src\audio.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Src\GlobalVar.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Src\GPIO.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Src\main.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Src\SM16208.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Src\stm32g0xx_hal_msp.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Src\stm32g0xx_it.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Src\system_stm32g0xx.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Src\timer.c</name>
-        </file>
-    </group>
-    <group>
         <name>Drivers</name>
         <group>
             <name>STM32G0xx_HAL_Driver</name>
@@ -1511,6 +1481,42 @@
         <name>EWARM</name>
         <file>
             <name>$PROJ_DIR$\startup_stm32g030xx.s</name>
+        </file>
+    </group>
+    <group>
+        <name>Src</name>
+        <file>
+            <name>$PROJ_DIR$\..\Src\audio.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\boot_anim.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\GlobalVar.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\GPIO.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\key_detect.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\main.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\SM16208.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\stm32g0xx_hal_msp.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\stm32g0xx_it.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\system_stm32g0xx.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\timer.c</name>
         </file>
     </group>
 </project>

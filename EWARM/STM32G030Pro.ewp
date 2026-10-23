@@ -1146,10 +1146,16 @@
             <name>$PROJ_DIR$\..\Src\audio.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\Src\boot_anim.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\Src\GlobalVar.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\Src\GPIO.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\key_detect.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\Src\main.c</name>

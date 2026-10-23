@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <fileVersion>5</fileVersion>
-    <fileChecksum>2998860045</fileChecksum>
+    <fileChecksum>864103472</fileChecksum>
     <configuration>
         <name>STM32G030Pro</name>
         <outputs>
@@ -110,6 +110,14 @@
             <file>$PROJ_DIR$\Out\Obj\Drivers\STM32G0xx_HAL_Driver\stm32g0xx_ll_rcc.o</file>
             <file>$PROJ_DIR$\..\Drivers\STM32G0xx_HAL_Driver\Inc\stm32g0xx_hal_dma.h</file>
             <file>$PROJ_DIR$\..\Src\GPIO.h</file>
+            <file>$PROJ_DIR$\..\Src\key_detect.c</file>
+            <file>$PROJ_DIR$\..\Src\key_detect.h</file>
+            <file>$PROJ_DIR$\..\Src\boot_anim.h</file>
+            <file>$PROJ_DIR$\..\Src\boot_anim.c</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Product_string.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\string.h</file>
+            <file>$PROJ_DIR$\Out\Obj\Src\key_detect.o</file>
+            <file>$PROJ_DIR$\Out\Obj\Src\boot_anim.o</file>
         </outputs>
         <file>
             <name>$PROJ_DIR$\..\Src\GPIO.c</name>
@@ -167,7 +175,7 @@
             <inputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 39 49 27 70 33 40 24 26 76 86 94 98 96 81 75 51 61 44 56 97 93 64 100 38 95 29 46 103 45 53 79 41 63 60 25 85 71 43 36 54 91 101 82 73 104</file>
+                    <file> 39 49 27 70 33 40 24 26 76 86 94 98 96 81 75 51 61 44 56 97 93 64 100 38 95 29 46 103 45 53 79 41 63 60 25 85 71 43 36 54 91 101 82 73 104 106</file>
                 </tool>
             </inputs>
         </file>
@@ -182,7 +190,7 @@
             <inputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 39 49 27 70 33 40 24 26 76 86 94 98 96 81 75 51 61 44 56 97 93 64 100 38 95 29 46 103 45 53 79 41 63 60 25 85 71 43 36 101 73 82</file>
+                    <file> 39 49 27 70 33 40 24 26 76 86 94 98 96 81 75 51 61 44 56 97 93 64 100 38 95 29 46 103 45 53 79 41 63 60 25 85 71 43 36 101 73 82 104 106 107</file>
                 </tool>
             </inputs>
         </file>
@@ -477,7 +485,7 @@
             <inputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 66 68 87 47 37 77 84 55 78 74 65 90 52 89 88 30 35 59 83 92 99 72 48 34 102 50 67 32 57 28 31</file>
+                    <file> 66 68 112 87 47 111 37 77 84 55 78 74 65 90 52 89 88 30 35 59 83 92 99 72 48 34 102 50 67 32 57 28 31</file>
                 </tool>
             </inputs>
         </file>
@@ -520,6 +528,40 @@
                 </tool>
             </inputs>
         </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\key_detect.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 111</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 106 40 24 26 76 86 94 98 96 81 75 51 61 44 56 97 49 27 70 33 93 64 100 38 95 29 46 103 45 53 79 41 63 60 25 85 71 43 36 104 101</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Src\boot_anim.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 112</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 107 40 24 26 76 86 94 98 96 81 75 51 61 44 56 97 49 27 70 33 93 64 100 38 95 29 46 103 45 53 79 41 63 60 25 85 71 43 36 82 101 110 109</file>
+                </tool>
+            </inputs>
+        </file>
+        <forcedrebuild>
+            <name>[MULTI_TOOL]</name>
+            <tool>ILINK</tool>
+        </forcedrebuild>
         <forcedrebuild>
             <name>[REBUILD_ALL]</name>
         </forcedrebuild>

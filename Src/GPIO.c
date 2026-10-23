@@ -73,3 +73,27 @@ void Set_Speaker_Duty(uint16_t duty_ch1, uint16_t duty_ch2)
     TIM14->CCR1 = duty_ch1;
     TIM3->CCR1 = duty_ch2;
 }
+
+void KeyInit(void)
+{
+    GPIO_InitTypeDef g;
+    g.Pin = KEY_POS_PIN;
+    g.Mode = GPIO_MODE_OUTPUT_PP;
+    g.Pull = GPIO_NOPULL;
+    g.Speed = GPIO_SPEED_FREQ_HIGH;
+    HAL_GPIO_Init(KEY_POS_GPIO, &g);
+
+    HAL_GPIO_WritePin(KEY_POS_GPIO,KEY_POS_PIN,1);
+
+    g.Pin = POWER_KEY_PIN;
+    g.Mode = GPIO_MODE_INPUT;
+    g.Pull = GPIO_PULLDOWN;
+    g.Speed = GPIO_SPEED_FREQ_HIGH;
+    HAL_GPIO_Init(POWER_KEY_GPIO, &g);
+
+    g.Pin = LEFT_KEY_PIN;
+    HAL_GPIO_Init(LEFT_KEY_GPIO, &g);
+
+    g.Pin = RIGHT_KEY_PIN;
+    HAL_GPIO_Init(RIGHT_KEY_GPIO, &g);
+}

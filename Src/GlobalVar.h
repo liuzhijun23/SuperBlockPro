@@ -82,6 +82,12 @@ extern u8 BlueUp;
 extern u8 BlueDn;
 extern u8 ledColor;
 extern u16 levelSaved;
+extern u8 MLED1;
+extern u8 MLED2;
+
+extern u8 powerKeyState;
+extern u8 leftKeyState;
+extern u8 rightKeyState;
 
 extern u32 debugData1;
 extern u32 debugData2;

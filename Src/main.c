@@ -21,6 +21,9 @@
 #include "GlobalVar.h"
 #include "audio.h"
 #include "SM16208.h"
+#include "GPIO.h"
+#include "key_detect.h"
+#include "boot_anim.h"
 
 void SystemClock_Config(void);
 
@@ -108,6 +111,10 @@ int main(void)
 
     SM16208_Init();
     SpeakerInit();
+    KeyInit();
+    Key_Detect_Init();
+
+    Boot_Animation();   /* 开机动画: 潮水式扫过并渐隐 */
 
     levelSaved = ReadLevelSetting();
     curr_level = levelSaved;
@@ -127,7 +134,57 @@ int main(void)
             debugData1 = 0;
             WriteLevelSetting(debugData2);
         }
+        else if(debugData1 == 2)
+        {
+            debugData1 = 0;
+            Boot_Animation();
+        }
 
+        powerKeyState = POWER_KEY_STATUS();
+        leftKeyState = LEFT_KEY_STATUS();
+        rightKeyState = RIGHT_KEY_STATUS();
+
+        /* 按键事件处理: 从事件队列取事件并分发 */
+        {
+            KeyEvt_t ev = Key_GetEvent();
+            switch (ev)
+            {
+            case KEY_EVT_POWER_LONG:       /* 1  电源键长按 */  
+                debugData2 = 1;     
+                break;
+            case KEY_EVT_LEFT_SHORT:       /* 2  左键短按 */    
+                debugData2 = 2;      
+                break;
+            case KEY_EVT_RIGHT_SHORT:      /* 3  右键短按 */   
+                debugData2 = 3;      
+                break;
+            case KEY_EVT_LEFT_LONG:        /* 4  左键长按 */   
+                debugData2 = 4;      
+                break;
+            case KEY_EVT_RIGHT_LONG:       /* 5  右键长按 */   
+                debugData2 = 5;          
+                break;
+            case KEY_EVT_LR_LONG:          /* 6  左右键同时长按 */  
+                debugData2 = 6;    
+                break;
+            case KEY_EVT_POWER_LEFT_LONG:  /* 7  电源+左键长按 */ 
+                debugData2 = 7;    
+                break;
+            case KEY_EVT_POWER_RIGHT_LONG: /* 8  电源+右键长按 */    
+                debugData2 = 8;    
+                break;
+            case KEY_EVT_POWER_DOUBLE:     /* 9  电源键快按2下 */    
+                debugData2 = 9;    
+                break;
+            case KEY_EVT_POWER_SHORT:      /* 10 电源键短按 */ 
+                debugData2 = 10;          
+                break;
+            case KEY_EVT_LR_SHORT:         /* 11 左右键同时短按 */  
+                debugData2 = 11;    
+                break;
+            default: break;
+            }
+        }
     }
 }
 
