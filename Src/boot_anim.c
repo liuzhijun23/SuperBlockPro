@@ -99,6 +99,9 @@ void Boot_Animation(void)
 {
     uint8_t brightness[8];
     uint8_t col;
+
+    Display_ScanStop();   /* 动画直接驱动显示引脚，先暂停 TIM16 中断扫描 */
+
     uint32_t start = HAL_GetTick();
     uint32_t elapsed;
     for (;;)
@@ -112,4 +115,5 @@ void Boot_Animation(void)
     }
     /* Clear the latch as well as disabling output before returning. */
     sm16208_send_row(0, 0, PWM_UNIT_US);
+    Display_ScanStart();  /* 动画结束，恢复中断逐行扫描 */
 }

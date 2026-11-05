@@ -114,7 +114,7 @@ void TIM16_IRQHandler(void)
 
         Key_Detect_Scan();   /* 按键检测: 每 1ms 调用, 内部 10ms 节拍 */
 
-        //display_matrix(image_arr[0]);
+        display_matrix(disp_ptr);   /* 每 1ms 刷新一行，禁止 delay */
 
         //process_key_events();
     }

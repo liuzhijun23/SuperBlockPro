@@ -89,6 +89,8 @@ extern u8 powerKeyState;
 extern u8 leftKeyState;
 extern u8 rightKeyState;
 
+extern u8 *disp_ptr;
+
 extern u32 debugData1;
 extern u32 debugData2;
 extern u32 debugData3;

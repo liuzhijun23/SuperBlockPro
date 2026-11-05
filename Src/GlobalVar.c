@@ -26,6 +26,8 @@ u8 powerKeyState = 0;
 u8 leftKeyState = 0;
 u8 rightKeyState = 0;
 
+u8 *disp_ptr = NULL;
+
 u32 debugData1 = 0;
 u32 debugData2 = 0;
 u32 debugData3 = 0;

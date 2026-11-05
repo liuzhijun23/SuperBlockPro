@@ -59,8 +59,17 @@
 enum {
     IMAG_INDEX_DARK = 0,
     IMAG_INDEX_LIGHT,
-    IMAG_INDEX_2,
     IMAG_INDEX_0,
+    IMAG_INDEX_1,
+    IMAG_INDEX_2,
+    IMAG_INDEX_3,
+    IMAG_INDEX_4,
+    IMAG_INDEX_5,
+    IMAG_INDEX_6,
+    IMAG_INDEX_7,
+    IMAG_INDEX_8,
+    IMAG_INDEX_9,
+    
 };
 
 extern u8 image_arr[][8];
@@ -72,9 +81,12 @@ extern u8 key_filter_pre[8];
 
 
 void SM16208_Init(void);
-void display_matrix(u8* matrix);
+void Display_ScanStart(void);
+void Display_ScanStop(void);
+void display_matrix(u8* matrix);   /* 仅供 TIM16 1ms 中断调用，每次刷新一行 */
 void process_key_events();
 u8 ReadKeyData(void);
 u8 CompareArr(u8* arr1,u8 *arr2,u8 len);
+void ShowLevel(u16 level);
 
 #endif
