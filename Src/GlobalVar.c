@@ -8,17 +8,14 @@ __IO u16 fall_delay = 0;
 __IO u16 release_delay = 0;
 __IO u8 keyState = 0;
 __IO u8 work_event = 0;
-u8 pass_mission_flag = 0;
-u8 show_flag = SHOW_LEVEL;
 u16 curr_level = 0;
-u8 play_audio_flag = 1;
 u8 RedUp = 0;
 u8 RedDn = 0;
 u8 GreenUp = 0;
 u8 GreenDn = 0;
 u8 BlueUp = 0;
 u8 BlueDn = 0;
-u8 ledColor = NONE;
+volatile u8 ledColor = NONE;
 u16 levelSaved = 0;
 u8 MLED1 = 0;
 u8 MLED2 = 0;
@@ -26,7 +23,7 @@ u8 powerKeyState = 0;
 u8 leftKeyState = 0;
 u8 rightKeyState = 0;
 
-u8 *disp_ptr = NULL;
+u8 * volatile disp_ptr = NULL;
 
 u32 debugData1 = 0;
 u32 debugData2 = 0;

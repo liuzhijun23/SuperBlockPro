@@ -24,89 +24,150 @@
 #include "GPIO.h"
 #include "key_detect.h"
 #include "boot_anim.h"
+#include "timer.h"
+#include <string.h>
 
 void SystemClock_Config(void);
 
-/**
- * @brief  The application entry point.
- * @retval int
- */
-u32 test_count = 0;
-
-void ShowLedProc(void)
+/* Game transitions run in the main loop; TIM16 only scans the board. */
+typedef enum
 {
-    static u16 show_cnt = 0;
-    switch (show_flag)
+    GAME_SHOW_NUMBER,
+    GAME_PLAY,
+    GAME_CELEBRATE,
+    GAME_WAIT_CLEAR,
+    GAME_COMPLETE
+} GameState;
+
+#define NUMBER_MS         1800u
+#define PASS_MS           2600u
+#define PASS_BLINK_MS     1200u
+#define BOARD_BLINK_MS     180u
+#define COLOR_STEP_MS      150u
+
+static GameState game_state;
+static u32 state_started;
+static u16 digit_divisor;
+
+static void Game_Enter(GameState state, u32 now)
+{
+    game_state = state;
+    state_started = now;
+    switch (state)
     {
-    case SHOW_LEVEL:
+    case GAME_SHOW_NUMBER:
+    {
+        u16 number = curr_level + 1u;
+        digit_divisor = 1u;
+        while (number / digit_divisor >= 10u)
+            digit_divisor *= 10u;
+        disp_ptr = image_arr[IMAG_INDEX_0 + number / digit_divisor];
         ledColor = RED;
-        display_matrix(level_arr[curr_level]);
         break;
-    case SHOW_PASS:
-        display_matrix(level_arr[curr_level]);
-        show_cnt++;
-        if(show_cnt > 100)
-        {
-            show_flag = SHOW_WAIT;
-            show_cnt = 0;
-            ledColor = RED;
-        }
-        else
-        {
-            if(show_cnt%40 == 10)
-                ledColor = RED;
-            else if(show_cnt%40 == 20)
-                ledColor = BLUE;
-            else if(show_cnt%40 == 30)
-                ledColor = YELLOR;
-            else if(show_cnt % 40 == 0)
-                ledColor = GREEN;
-        }
+    }
+    case GAME_PLAY:
+    case GAME_CELEBRATE:
+    case GAME_WAIT_CLEAR:
+        disp_ptr = level_arr[curr_level];
+        ledColor = RED;
         break;
-    case SHOW_WAIT:
-        display_matrix(level_arr[curr_level]);
-        if(pass_mission_flag)
+    case GAME_COMPLETE:
+        disp_ptr = image_arr[IMAG_INDEX_DARK];
+        ledColor = NONE;
+        break;
+    }
+}
+
+static void Game_Update(u32 now)
+{
+    u32 elapsed = now - state_started;
+    u8 pressed[8];
+    static const u8 colors[] = { RED, GREEN, YELLOR, BLUE };
+
+    switch (game_state)
+    {
+    case GAME_SHOW_NUMBER:
+        if (elapsed >= NUMBER_MS)
         {
-            if(CompareArr(key_filter,image_arr[0],8))
+            digit_divisor /= 10u;
+            if (digit_divisor == 0u)
+                Game_Enter(GAME_PLAY, now);
+            else
             {
-                pass_mission_flag = 0;
-                show_flag = SHOW_2;
-                show_cnt = 0;
+                u16 digit = ((curr_level + 1u) / digit_divisor) % 10u;
+                disp_ptr = image_arr[IMAG_INDEX_0 + digit];
+                state_started = now;
             }
         }
         break;
-    case SHOW_2:
-        display_matrix(image_arr[IMAG_INDEX_2]);
-        if(show_cnt++ > 200)
+    case GAME_PLAY:
+        if (Board_ReadPressed(pressed) &&
+            memcmp(pressed, level_arr[curr_level], sizeof(pressed)) == 0)
         {
-            show_cnt = 0;
-            show_flag = SHOW_0;
+            Game_Enter(GAME_CELEBRATE, now);
+            Audio_Start();
         }
         break;
-    case SHOW_0:
-        display_matrix(image_arr[IMAG_INDEX_0]);
-        if(show_cnt++ > 200)
+    case GAME_CELEBRATE:
+        if (elapsed >= PASS_MS)
+            Game_Enter(GAME_WAIT_CLEAR, now);
+        else
         {
-            show_cnt = 0;
-            curr_level++;
-            show_flag = SHOW_LEVEL;
-            WriteLevelSetting(curr_level);
+            if (elapsed < PASS_BLINK_MS && (elapsed / BOARD_BLINK_MS) % 2u)
+                disp_ptr = image_arr[IMAG_INDEX_DARK];
+            else
+                disp_ptr = level_arr[curr_level];
+            ledColor = colors[(elapsed / COLOR_STEP_MS) % sizeof(colors)];
         }
         break;
-    default:
+    case GAME_WAIT_CLEAR:
+        if (Board_ReadPressed(pressed) &&
+            memcmp(pressed, image_arr[IMAG_INDEX_DARK], sizeof(pressed)) == 0)
+        {
+            if (curr_level + 1u < level_count)
+            {
+                ++curr_level;
+                WriteLevelSetting(curr_level);
+                Game_Enter(GAME_SHOW_NUMBER, HAL_GetTick());
+            }
+            else
+                Game_Enter(GAME_COMPLETE, now);
+        }
         break;
+    case GAME_COMPLETE:
+        break;
+    }
+}
+
+static void Game_HandleKey(KeyEvt_t ev, u32 now)
+{
+    if (ev != KEY_EVT_NONE)
+        debugData2 = (u32)ev;
+
+    /* Keep the automatic clear-and-advance flow intact during a celebration. */
+    if (game_state == GAME_CELEBRATE || game_state == GAME_WAIT_CLEAR)
+        return;
+
+    if (ev == KEY_EVT_LEFT_SHORT && curr_level > 0u)
+    {
+        --curr_level;
+        Game_Enter(GAME_SHOW_NUMBER, now);
+    }
+    else if (ev == KEY_EVT_RIGHT_SHORT && curr_level + 1u < level_count)
+    {
+        ++curr_level;
+        Game_Enter(GAME_SHOW_NUMBER, now);
     }
 }
 
 int main(void)
 {
     HAL_Init();
-   // HAL_SuspendTick(); 
     SystemClock_Config();
     EnableAllGpio();
 
-    TIM16_Config();//period timer
-    TIM17_Config();//8kHz timer
+    TIM16_Config();
+    TIM17_Config();
     delay_ms(100);
 
     SM16208_Init();
@@ -114,83 +175,40 @@ int main(void)
     KeyInit();
     Key_Detect_Init();
 
-    disp_ptr = image_arr[2];
-
+    disp_ptr = image_arr[IMAG_INDEX_DARK];
     Boot_Animation();
-    Display_ScanStart();
 
     levelSaved = ReadLevelSetting();
-    curr_level = levelSaved;
+    curr_level = (levelSaved < level_count) ? levelSaved : 0u;
+    Game_Enter(GAME_SHOW_NUMBER, HAL_GetTick());
+    Audio_Start();
 
     while (1)
     {
-        if(play_audio_flag)
-        {
-            Audio_Start();
-            play_audio_flag = 0;
-        }
-
-        if(debugData1 == 1)
+        if (debugData1 == 1)
         {
             debugData1 = 0;
-            WriteLevelSetting(debugData2);
+            if (debugData2 < level_count)
+                WriteLevelSetting((u16)debugData2);
         }
-        else if(debugData1 == 2)
+        else if (debugData1 == 2)
         {
             debugData1 = 0;
             Boot_Animation();
+            Game_Enter(GAME_SHOW_NUMBER, HAL_GetTick());
         }
-        else if(debugData1 == 3)
+        else if (debugData1 == 3)
         {
             debugData1 = 0;
-            ShowLevel(curr_level);
+            Game_Enter(GAME_SHOW_NUMBER, HAL_GetTick());
         }
 
         powerKeyState = POWER_KEY_STATUS();
         leftKeyState = LEFT_KEY_STATUS();
         rightKeyState = RIGHT_KEY_STATUS();
 
-        /* 按键事件处理: 从事件队列取事件并分�?*/
-        {
-            KeyEvt_t ev = Key_GetEvent();
-            switch (ev)
-            {
-            case KEY_EVT_POWER_LONG:       /* 1  电源键长�?*/  
-                debugData2 = 1;     
-                break;
-            case KEY_EVT_LEFT_SHORT:       /* 2  左键短按 */    
-                debugData2 = 2;      
-                break;
-            case KEY_EVT_RIGHT_SHORT:      /* 3  右键短按 */   
-                debugData2 = 3;      
-                break;
-            case KEY_EVT_LEFT_LONG:        /* 4  左键长按 */   
-                debugData2 = 4;      
-                break;
-            case KEY_EVT_RIGHT_LONG:       /* 5  右键长按 */   
-                debugData2 = 5;          
-                break;
-            case KEY_EVT_LR_LONG:          /* 6  左右键同时长�?*/  
-                debugData2 = 6;    
-                break;
-            case KEY_EVT_POWER_LEFT_LONG:  /* 7  电源+左键长按 */ 
-                debugData2 = 7;    
-                break;
-            case KEY_EVT_POWER_RIGHT_LONG: /* 8  电源+右键长按 */    
-                debugData2 = 8;    
-                break;
-            case KEY_EVT_POWER_DOUBLE:     /* 9  电源键快�?�?*/    
-                debugData2 = 9;    
-                break;
-            case KEY_EVT_POWER_SHORT:      /* 10 电源键短�?*/ 
-                debugData2 = 10;          
-                break;
-            case KEY_EVT_LR_SHORT:         /* 11 左右键同时短�?*/  
-                debugData2 = 11;    
-                break;
-            default: break;
-            }
-        }
+        Game_HandleKey(Key_GetEvent(), HAL_GetTick());
+        Game_Update(HAL_GetTick());
     }
 }
 

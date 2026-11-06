@@ -77,16 +77,14 @@ extern u8 level_arr[][8];
 extern u8 key_arr[8];
 extern u8 key_history[8][CONFIRM_NUM];
 extern u8 key_filter[8];
-extern u8 key_filter_pre[8];
+extern const u16 level_count;
 
 
 void SM16208_Init(void);
 void Display_ScanStart(void);
 void Display_ScanStop(void);
 void display_matrix(u8* matrix);   /* 仅供 TIM16 1ms 中断调用，每次刷新一行 */
-void process_key_events();
 u8 ReadKeyData(void);
-u8 CompareArr(u8* arr1,u8 *arr2,u8 len);
-void ShowLevel(u16 level);
+u8 Board_ReadPressed(u8 pressed[8]);
 
 #endif

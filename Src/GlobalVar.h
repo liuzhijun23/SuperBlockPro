@@ -47,14 +47,6 @@ typedef uint64_t	u64;
 #define WORK_TIME_DEFAULT       60      //默认工作时间，单位分钟
 
 enum {
-    SHOW_LEVEL=0,
-    SHOW_PASS,
-    SHOW_WAIT,
-    SHOW_2,
-    SHOW_0,
-};
-
-enum {
     NONE=0,
     RED,
     GREEN,
@@ -70,17 +62,14 @@ extern __IO u16 fall_delay;
 extern __IO u16 release_delay;
 extern __IO u8 keyState;
 extern __IO u8 work_event;
-extern u8 pass_mission_flag;
-extern u8 show_flag;
 extern u16 curr_level;
-extern u8 play_audio_flag;
 extern u8 RedUp;
 extern u8 RedDn;
 extern u8 GreenUp;
 extern u8 GreenDn;
 extern u8 BlueUp;
 extern u8 BlueDn;
-extern u8 ledColor;
+extern volatile u8 ledColor;
 extern u16 levelSaved;
 extern u8 MLED1;
 extern u8 MLED2;
@@ -89,7 +78,7 @@ extern u8 powerKeyState;
 extern u8 leftKeyState;
 extern u8 rightKeyState;
 
-extern u8 *disp_ptr;
+extern u8 * volatile disp_ptr;
 
 extern u32 debugData1;
 extern u32 debugData2;

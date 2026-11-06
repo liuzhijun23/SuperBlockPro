@@ -1,11 +1,11 @@
 #include "SM16208.h"
-#include "timer.h"
 
 uint8_t image_matrix[8] = { 0x3C, 0x42, 0xA5, 0x81, 0xA5, 0x99, 0x42, 0x3C };
 u8 key_arr[8];
 u8 key_history[8][CONFIRM_NUM];
 u8 key_filter[8];
-u8 key_filter_pre[8];
+static u8 board_pressed[8];
+static volatile u8 board_frames;
 
 //u8 image_arr[8] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 //u8 image_arr[8] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
@@ -38,6 +38,8 @@ u8 level_arr[][8] = {
     { 0x30, 0x3C, 0x1C, 0x1C, 0x00, 0x1C, 0x1C, 0x78 },//9
     { 0x00, 0x28, 0x3C, 0x3C, 0x00, 0x24, 0x3E, 0x3E },//10
 };
+
+const u16 level_count = sizeof(level_arr) / sizeof(level_arr[0]);
 
 
 void SM16208_Init(void)
@@ -132,6 +134,7 @@ void Display_ScanStart(void)
 {
     scan_row = 0;
     scan_row_valid = 0;
+    board_frames = 0;
     display_scan_en = 1;
 }
 
@@ -140,6 +143,7 @@ void Display_ScanStop(void)
 {
     display_scan_en = 0;
     scan_row_valid = 0;
+    board_frames = 0;
     HAL_GPIO_WritePin(OE_GPIO, OE_PIN, GPIO_PIN_SET);
 }
 
@@ -154,25 +158,31 @@ void display_matrix(u8* matrix)
     uint16_t send_data;
     int i;
 
-    if (!display_scan_en)
+    if (!display_scan_en || matrix == NULL)
         return;
 
     row = scan_row;
 
     if (scan_row_valid)
     {
-        uint8_t key_row = (row + 7) & 0x07;
+        uint8_t key_row = (row + 7u) & 0x07u;
+        u8 *history = key_history[key_row];
+        u8 all_high, all_low;
         key_arr[key_row] = ReadKeyData();
-        process_key_events();
+        history[2] = history[1];
+        history[1] = history[0];
+        history[0] = key_arr[key_row];
+        all_high = history[0] & history[1] & history[2];
+        all_low = (u8)~(history[0] | history[1] | history[2]);
+        key_filter[key_row] = (key_filter[key_row] | all_high) & (u8)~all_low;
 
-        if (pass_mission_flag == 0)
+        /* Publish only after every row has been sampled. Keys are active-low. */
+        if (row == 0u)
         {
-            if (CompareArr(key_filter, matrix, 8))
-            {
-                pass_mission_flag = 1;
-                play_audio_flag = 1;
-                show_flag = SHOW_PASS;
-            }
+            for (i = 0; i < 8; ++i)
+                board_pressed[i] = (u8)~key_filter[i];
+            if (board_frames < CONFIRM_NUM)
+                ++board_frames;
         }
     }
 
@@ -248,93 +258,17 @@ void display_matrix(u8* matrix)
     scan_row = (row + 1) & 0x07;
 }
 
-void process_key_events() 
+/* Copy a single completed board frame before the ISR can replace it. */
+u8 Board_ReadPressed(u8 pressed[8])
 {
-    for (uint8_t r = 0; r < 8; r++) 
-    {
-        // ------------------------------------------------------------
-        // 步骤 1：滚动更新历史记录缓存（将最新的实时扫描数据推入�?        // ------------------------------------------------------------
-        key_history[r][2] = key_history[r][1];
-        key_history[r][1] = key_history[r][0];
-        key_history[r][0] = key_arr[r]; // 塞入最新实时数�?
-        // ------------------------------------------------------------
-        // 步骤 2：双边消抖判定（确保按下和抬起都必须连续3次一致）
-        // ------------------------------------------------------------
-        uint8_t all_ones  = key_history[r][0] & key_history[r][1] & key_history[r][2];
-        uint8_t all_zeros = (~key_history[r][0]) & (~key_history[r][1]) & (~key_history[r][2]);
-        
-        // 备份当前状态为“上一次状态”，然后更新“当前状态�?        key_filter_pre[r] = key_filter[r]; 
-        key_filter[r] = (key_filter[r] | all_ones) & (~all_zeros);
-
-        // ------------------------------------------------------------
-        // 步骤 3：核心——边沿检测（找出哪些键的电平发生了跳变）
-        // ------------------------------------------------------------
-        // 异或运算：只要当前状态和上次状态不一样，对应位就变成 1
-        uint8_t changed_bits = key_filter[r] ^ key_filter_pre[r];
-
-        if (changed_bits != 0) 
-        {
-            // 找出哪些位是�?0 �?1 (按下)
-            uint8_t press_events = changed_bits & key_filter[r];
-            
-            // 找出哪些位是�?1 �?0 (抬起)
-            uint8_t release_events = changed_bits & (~key_filter[r]);
-
-            // ------------------------------------------------------------
-            // 步骤 4：分发事件，遍历该行�?8 个通道
-            // ------------------------------------------------------------
-            for (uint8_t c = 0; c < 8; c++) 
-            {
-                uint8_t mask = (1 << c);
-                
-                // // 检测按�?                // if (press_events & mask) {
-                //     on_key_pressed(r, c); // 触发按下回调
-                // }
-                
-                // // 检测抬�?                // if (release_events & mask) {
-                //     on_key_released(r, c); // 触发抬起回调
-                // }
-            }
-        }
-    }
-}
-
-
-u8 CompareArr(u8* arr1,u8 *arr2,u8 len)
-{
-    u8 equalCnt = 0;
-    for(int i=0;i<8;i++)
-    {
-        if(0xFF-key_arr[i] == arr2[i])
-            equalCnt++;
-    }
-    if(equalCnt == 8)
-    {
-        return 1;
-    }
-    else
-        return 0;
-    
-}
-
-void ShowLevel(u16 level)
-{
-    u16 divisor = 1000;
-    u8 started = 0;
-
-    while (divisor != 0)
-    {
-        u8 digit = (level / divisor) % 10;
-
-        if (digit != 0)
-            started = 1;
-
-        if (started)
-        {
-            disp_ptr = image_arr[IMAG_INDEX_0 + digit];
-            delay_ms(1000);
-        }
-
-        divisor /= 10;
-    }
+    u32 primask = __get_PRIMASK();
+    u8 ready;
+    u8 i;
+    __disable_irq();
+    ready = (board_frames >= CONFIRM_NUM);
+    if (ready)
+        for (i = 0; i < 8; ++i)
+            pressed[i] = board_pressed[i];
+    __set_PRIMASK(primask);
+    return ready;
 }
