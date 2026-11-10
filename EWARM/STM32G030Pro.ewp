@@ -1149,6 +1149,9 @@
             <name>$PROJ_DIR$\..\Src\boot_anim.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\Src\rotate_anim.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\Src\GlobalVar.c</name>
         </file>
         <file>

@@ -24,6 +24,7 @@
 #include "GPIO.h"
 #include "key_detect.h"
 #include "boot_anim.h"
+#include "rotate_anim.h"
 #include "timer.h"
 #include <string.h>
 
@@ -48,6 +49,44 @@ typedef enum
 static GameState game_state;
 static u32 state_started;
 static u16 digit_divisor;
+
+/* Debug-only overlay: preserve both game state and its elapsed time. */
+static u8 rotate_active;
+static u32 rotate_started;
+static u8 *rotate_saved_frame;
+static u8 rotate_saved_color;
+
+static void Rotate_Start(u32 now)
+{
+    if (!rotate_active)
+    {
+        rotate_saved_frame = disp_ptr;
+        rotate_saved_color = ledColor;
+        rotate_started = now;
+        rotate_active = 1u;
+    }
+}
+
+static void Rotate_Update(u32 now)
+{
+    static u8 frames[2][8];
+    static u8 next_frame;
+    u32 elapsed = now - rotate_started;
+
+    if (Rotate_Render(elapsed, frames[next_frame]))
+    {
+        disp_ptr = rotate_saved_frame;
+        ledColor = rotate_saved_color;
+        state_started += elapsed;
+        rotate_active = 0u;
+    }
+    else
+    {
+        /* Publish all eight rows atomically; never edit the displayed buffer. */
+        disp_ptr = frames[next_frame];
+        next_frame ^= 1u;
+    }
+}
 
 static void Game_Enter(GameState state, u32 now)
 {
@@ -185,6 +224,20 @@ int main(void)
 
     while (1)
     {
+        if (debugData1 == 4)
+        {
+            debugData1 = 0;
+            Rotate_Start(HAL_GetTick());
+        }
+
+        if (rotate_active)
+        {
+            /* Discard key events during the overlay rather than replaying later. */
+            (void)Key_GetEvent();
+            Rotate_Update(HAL_GetTick());
+            continue;
+        }
+
         if (debugData1 == 1)
         {
             debugData1 = 0;
