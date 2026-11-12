@@ -53,7 +53,7 @@ static u16 digit_divisor;
 /* Debug-only overlay: preserve both game state and its elapsed time. */
 static u8 rotate_active;
 static u32 rotate_started;
-static u8 *rotate_saved_frame;
+static const u8 *rotate_saved_frame;
 static u8 rotate_saved_color;
 
 static void Rotate_Start(u32 now)
