@@ -48,11 +48,12 @@ typedef uint64_t	u64;
 
 enum {
     NONE=0,
-    RED,
-    GREEN,
-    BLUE,
-    YELLOR
+    RED    = 1u << 0,
+    GREEN  = 1u << 1,
+    BLUE   = 1u << 2,
+    YELLOW = 1u << 3,
 };
+
 
 extern __IO uint32_t TimingDelay;
 extern u16 workTimeSetting;//工作时间设定，单位分钟
@@ -73,6 +74,10 @@ extern volatile u8 ledColor;
 extern u16 levelSaved;
 extern u8 MLED1;
 extern u8 MLED2;
+extern u8 redLed;
+extern u8 greeLed;
+extern u8 blueLed;
+extern u8 yellowLed;
 
 extern u8 powerKeyState;
 extern u8 leftKeyState;

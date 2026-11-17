@@ -69,11 +69,15 @@ enum {
     IMAG_INDEX_7,
     IMAG_INDEX_8,
     IMAG_INDEX_9,
-    
 };
 
+typedef struct {
+    u8 color;
+    u8 data[8];
+} strDispData;
+
 extern const u8 image_arr[][8];
-extern const u8 level_arr[][8];
+extern const strDispData level_arr[];
 extern u8 key_arr[8];
 extern u8 key_history[8][CONFIRM_NUM];
 extern u8 key_filter[8];

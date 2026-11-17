@@ -22,6 +22,10 @@ u8 MLED2 = 0;
 u8 powerKeyState = 0;
 u8 leftKeyState = 0;
 u8 rightKeyState = 0;
+u8 redLed = 0;
+u8 greeLed = 0;
+u8 blueLed = 0;
+u8 yellowLed = 0;
 
 const u8 * volatile disp_ptr = NULL;
 

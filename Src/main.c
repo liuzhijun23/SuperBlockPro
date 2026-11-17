@@ -101,14 +101,14 @@ static void Game_Enter(GameState state, u32 now)
         while (number / digit_divisor >= 10u)
             digit_divisor *= 10u;
         disp_ptr = image_arr[IMAG_INDEX_0 + number / digit_divisor];
-        ledColor = RED;
+        ledColor = level_arr[curr_level].color;
         break;
     }
     case GAME_PLAY:
     case GAME_CELEBRATE:
     case GAME_WAIT_CLEAR:
-        disp_ptr = level_arr[curr_level];
-        ledColor = RED;
+        disp_ptr = level_arr[curr_level].data;
+        ledColor = level_arr[curr_level].color;
         break;
     case GAME_COMPLETE:
         disp_ptr = image_arr[IMAG_INDEX_DARK];
@@ -121,7 +121,7 @@ static void Game_Update(u32 now)
 {
     u32 elapsed = now - state_started;
     u8 pressed[8];
-    static const u8 colors[] = { RED, GREEN, YELLOR, BLUE };
+    static const u8 colors[] = { RED, GREEN, YELLOW, BLUE };
 
     switch (game_state)
     {
@@ -141,7 +141,7 @@ static void Game_Update(u32 now)
         break;
     case GAME_PLAY:
         if (Board_ReadPressed(pressed) &&
-            memcmp(pressed, level_arr[curr_level], sizeof(pressed)) == 0)
+            memcmp(pressed, level_arr[curr_level].data, sizeof(pressed)) == 0)
         {
             Game_Enter(GAME_CELEBRATE, now);
             Audio_Start();
@@ -155,7 +155,7 @@ static void Game_Update(u32 now)
             if (elapsed < PASS_BLINK_MS && (elapsed / BOARD_BLINK_MS) % 2u)
                 disp_ptr = image_arr[IMAG_INDEX_DARK];
             else
-                disp_ptr = level_arr[curr_level];
+                disp_ptr = level_arr[curr_level].data;
             ledColor = colors[(elapsed / COLOR_STEP_MS) % sizeof(colors)];
         }
         break;

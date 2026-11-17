@@ -42,3 +42,17 @@
 6	260	8161487428670664	F:/SuperBlock/SuperBlockPro/EWARM/Out/Obj/Src/SM16208.o	2d9470bbe369562f
 264	336	8161487429425791	F:/SuperBlock/SuperBlockPro/EWARM/Out/Exe/STM32G030Pro.out	8725140166de1faa
 348	359	8161487429695793	F:/SuperBlock/SuperBlockPro/EWARM/Out/Exe/super_block.bin	79742efa0917502f
+8	332	8162690607762922	F:/SuperBlock/SuperBlockPro/EWARM/Out/Obj/Src/GlobalVar.o	a407329bc000703f
+9	378	8162690608211597	F:/SuperBlock/SuperBlockPro/EWARM/Out/Obj/Src/boot_anim.o	9a8e6defea22e3d1
+23	394	8162690608335494	F:/SuperBlock/SuperBlockPro/EWARM/Out/Obj/Src/main.o	cf8d6c535edacb39
+27	402	8162690608445463	F:/SuperBlock/SuperBlockPro/EWARM/Out/Obj/Src/stm32g0xx_it.o	aedd2fb23d86705b
+29	421	8162690608645455	F:/SuperBlock/SuperBlockPro/EWARM/Out/Obj/Src/timer.o	839c16ec025b84ed
+10	436	8162690608575465	F:/SuperBlock/SuperBlockPro/EWARM/Out/Obj/Src/audio.o	430205cc1508b7bd
+4	471	8162690608908072	F:/SuperBlock/SuperBlockPro/EWARM/Out/Obj/Src/GPIO.o	8fb37bbc6fbe945b
+11	487	8162690609191049	F:/SuperBlock/SuperBlockPro/EWARM/Out/Obj/Src/key_detect.o	f3f9580a0d15db50
+25	535	8162690609551047	F:/SuperBlock/SuperBlockPro/EWARM/Out/Obj/Src/SM16208.o	2d9470bbe369562f
+539	680	8162690611260729	F:/SuperBlock/SuperBlockPro/EWARM/Out/Exe/STM32G030Pro.out	8725140166de1faa
+692	713	8162690611641596	F:/SuperBlock/SuperBlockPro/EWARM/Out/Exe/super_block.bin	79742efa0917502f
+0	204	8162690698071418	F:/SuperBlock/SuperBlockPro/EWARM/Out/Obj/Src/SM16208.o	2d9470bbe369562f
+208	280	8162690698851886	F:/SuperBlock/SuperBlockPro/EWARM/Out/Exe/STM32G030Pro.out	8725140166de1faa
+292	302	8162690699111940	F:/SuperBlock/SuperBlockPro/EWARM/Out/Exe/super_block.bin	79742efa0917502f
