@@ -78,6 +78,7 @@ extern u8 redLed;
 extern u8 greeLed;
 extern u8 blueLed;
 extern u8 yellowLed;
+extern u8 progress_val;
 
 extern u8 powerKeyState;
 extern u8 leftKeyState;

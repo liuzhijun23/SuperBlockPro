@@ -69,6 +69,12 @@ enum {
     IMAG_INDEX_7,
     IMAG_INDEX_8,
     IMAG_INDEX_9,
+    IMAG_INDEX_S,
+    IMAG_INDEX_A,
+    IMAG_INDEX_B,
+    IMAG_INDEX_C,
+    IMAG_INDEX_D,
+    IMAG_INDEX_E,
 };
 
 typedef struct {

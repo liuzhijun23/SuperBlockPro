@@ -255,6 +255,11 @@ int main(void)
             debugData1 = 0;
             Game_Enter(GAME_SHOW_NUMBER, HAL_GetTick());
         }
+        else if (debugData1 == 4)
+        {
+            debugData1 = 0;
+            disp_ptr = image_arr[IMAG_INDEX_B];
+        }
 
         powerKeyState = POWER_KEY_STATUS();
         leftKeyState = LEFT_KEY_STATUS();
