@@ -72,13 +72,13 @@ extern u8 BlueUp;
 extern u8 BlueDn;
 extern volatile u8 ledColor;
 extern u16 levelSaved;
-extern u8 MLED1;
-extern u8 MLED2;
+extern volatile u8 MLED1;
+extern volatile u8 MLED2;
 extern u8 redLed;
 extern u8 greeLed;
 extern u8 blueLed;
 extern u8 yellowLed;
-extern u8 progress_val;
+extern volatile u8 progress_val;
 
 extern u8 powerKeyState;
 extern u8 leftKeyState;

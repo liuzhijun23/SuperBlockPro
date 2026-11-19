@@ -1,5 +1,4 @@
 #include "SM16208.h"
-#include "math.h"
 
 uint8_t image_matrix[8] = { 0x3C, 0x42, 0xA5, 0x81, 0xA5, 0x99, 0x42, 0x3C };
 u8 key_arr[8];
@@ -1219,21 +1218,13 @@ void display_matrix(const u8* matrix)
             col_data |= rgbVal;
     }
 
-    u8 progress = round(progress_val/20);
-    u8 pd = 0;
-    if(progress>= 4)
-        pd = 3;
-    else if(progress == 3)
-        pd = 4;
-    else if(progress == 2)
-        pd = 5;
-    else if(progress == 1)
-        pd = 6;
-    else
-        pd = 7;
-    if (row > pd)
+    /* Five bar segments: >80, >60, >40, >20 and >0 percent. */
+    u8 percent = progress_val;
+    u8 segments = percent >= 100u ? 5u : (u8)((percent + 19u) / 20u);
+    if (segments != 0u && row >= 8u - segments)
     {
-        col_data |= (MLED1 << 15) + (MLED2 << 14);
+        col_data |= (u16)MLED1 << 15;
+        col_data |= (u16)MLED2 << 14;
     }
 
     // 2. 串行发�?16 位数据给 SM16208（OUT0~OUT7 对应低字节）

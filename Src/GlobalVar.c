@@ -17,8 +17,8 @@ u8 BlueUp = 0;
 u8 BlueDn = 0;
 volatile u8 ledColor = NONE;
 u16 levelSaved = 0;
-u8 MLED1 = 0;
-u8 MLED2 = 0;
+volatile u8 MLED1 = 0;
+volatile u8 MLED2 = 0;
 u8 powerKeyState = 0;
 u8 leftKeyState = 0;
 u8 rightKeyState = 0;
@@ -26,7 +26,7 @@ u8 redLed = 0;
 u8 greeLed = 0;
 u8 blueLed = 0;
 u8 yellowLed = 0;
-u8 progress_val = 0;//计时模式剩余进度，最高100
+volatile u8 progress_val = 0;//计时模式剩余进度，最高100
 
 const u8 * volatile disp_ptr = NULL;
 
