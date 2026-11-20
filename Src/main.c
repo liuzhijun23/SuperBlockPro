@@ -34,9 +34,11 @@ void SystemClock_Config(void);
 typedef enum
 {
     GAME_SHOW_NUMBER,
+    GAME_NUMBER_GAP,
     GAME_PLAY,
     GAME_TIMED_INTRO,
     GAME_TIMED_PLAY,
+    GAME_TIMED_EXPIRED,
     GAME_RESULT,
     GAME_CELEBRATE,
     GAME_WAIT_CLEAR,
@@ -44,6 +46,7 @@ typedef enum
 } GameState;
 
 #define NUMBER_MS         1800u
+#define NUMBER_GAP_MS      250u
 #define PASS_MS           2600u
 #define PASS_BLINK_MS     1200u
 #define BOARD_BLINK_MS     180u
@@ -59,7 +62,6 @@ typedef enum
 #define INTRO_BAR_BLINK_MS   400u
 
 static u8 timed_result;
-static u8 timed_passed;
 static u8 result_image;
 
 static u8 Game_IsTimedLevel(void)
@@ -133,7 +135,6 @@ static void Game_Enter(GameState state, u32 now)
     {
         u16 number = curr_level + 1u;
         timed_result = 0u;
-        timed_passed = 0u;
         progress_val = 0u;
         MLED1 = MLED2 = 0u;
         digit_divisor = 1u;
@@ -148,8 +149,16 @@ static void Game_Enter(GameState state, u32 now)
     case GAME_WAIT_CLEAR:
         disp_ptr = level_arr[curr_level].data;
         ledColor = level_arr[curr_level].color;
-        if (state == GAME_WAIT_CLEAR && timed_result)
-            disp_ptr = image_arr[result_image];
+        break;
+    case GAME_NUMBER_GAP:
+        disp_ptr = image_arr[IMAG_INDEX_DARK];
+        break;
+    case GAME_TIMED_EXPIRED:
+        /* Keep the puzzle playable after timeout; its grade is locked to E. */
+        disp_ptr = level_arr[curr_level].data;
+        ledColor = level_arr[curr_level].color;
+        progress_val = 0u;
+        MLED1 = MLED2 = 0u;
         break;
     case GAME_TIMED_INTRO:
         disp_ptr = image_arr[IMAG_INDEX_LIGHT];
@@ -178,6 +187,18 @@ static void Game_Enter(GameState state, u32 now)
     }
 }
 
+static void Game_Advance(u32 now)
+{
+    if (curr_level + 1u < level_count)
+    {
+        ++curr_level;
+        WriteLevelSetting(curr_level);
+        Game_Enter(GAME_SHOW_NUMBER, HAL_GetTick());
+    }
+    else
+        Game_Enter(GAME_COMPLETE, now);
+}
+
 static void Game_Update(u32 now)
 {
     u32 elapsed = now - state_started;
@@ -189,15 +210,23 @@ static void Game_Update(u32 now)
     case GAME_SHOW_NUMBER:
         if (elapsed >= NUMBER_MS)
         {
-            digit_divisor /= 10u;
-            if (digit_divisor == 0u)
+            if (digit_divisor == 1u)
                 Game_Enter(Game_IsTimedLevel() ? GAME_TIMED_INTRO : GAME_PLAY, now);
             else
             {
-                u16 digit = ((curr_level + 1u) / digit_divisor) % 10u;
-                disp_ptr = image_arr[IMAG_INDEX_0 + digit];
-                state_started = now;
+                digit_divisor /= 10u;
+                Game_Enter(GAME_NUMBER_GAP, now);
             }
+        }
+        break;
+    case GAME_NUMBER_GAP:
+        if (elapsed >= NUMBER_GAP_MS)
+        {
+            /* Resume digit display without resetting the number or result flags. */
+            disp_ptr = image_arr[IMAG_INDEX_0 +
+                                 ((curr_level + 1u) / digit_divisor) % 10u];
+            game_state = GAME_SHOW_NUMBER;
+            state_started = now;
         }
         break;
     case GAME_TIMED_INTRO:
@@ -218,9 +247,8 @@ static void Game_Update(u32 now)
         if (elapsed >= TIMED_LIMIT_MS)
         {
             timed_result = 1u;
-            timed_passed = 0u;
             result_image = IMAG_INDEX_E;
-            Game_Enter(GAME_RESULT, now);
+            Game_Enter(GAME_TIMED_EXPIRED, now);
         }
         else
         {
@@ -231,16 +259,23 @@ static void Game_Update(u32 now)
                 memcmp(pressed, level_arr[curr_level].data, sizeof(pressed)) == 0)
             {
                 timed_result = 1u;
-                timed_passed = 1u;
                 result_image = Game_Grade(elapsed);
                 Game_Enter(GAME_CELEBRATE, now);
                 Audio_Start();
             }
         }
         break;
+    case GAME_TIMED_EXPIRED:
+        if (Board_ReadPressed(pressed) &&
+            memcmp(pressed, level_arr[curr_level].data, sizeof(pressed)) == 0)
+        {
+            Game_Enter(GAME_CELEBRATE, now);
+            Audio_Start();
+        }
+        break;
     case GAME_RESULT:
         if (elapsed >= RESULT_MS)
-            Game_Enter(GAME_WAIT_CLEAR, now);
+            Game_Advance(now);
         break;
     case GAME_PLAY:
         if (Board_ReadPressed(pressed) &&
@@ -252,7 +287,7 @@ static void Game_Update(u32 now)
         break;
     case GAME_CELEBRATE:
         if (elapsed >= PASS_MS)
-            Game_Enter(timed_result ? GAME_RESULT : GAME_WAIT_CLEAR, now);
+            Game_Enter(GAME_WAIT_CLEAR, now);
         else
         {
             if (elapsed < PASS_BLINK_MS && (elapsed / BOARD_BLINK_MS) % 2u)
@@ -266,16 +301,10 @@ static void Game_Update(u32 now)
         if (Board_ReadPressed(pressed) &&
             memcmp(pressed, image_arr[IMAG_INDEX_DARK], sizeof(pressed)) == 0)
         {
-            if (timed_result && !timed_passed)
-                Game_Enter(GAME_SHOW_NUMBER, now);
-            else if (curr_level + 1u < level_count)
-            {
-                ++curr_level;
-                WriteLevelSetting(curr_level);
-                Game_Enter(GAME_SHOW_NUMBER, HAL_GetTick());
-            }
+            if (timed_result)
+                Game_Enter(GAME_RESULT, now);
             else
-                Game_Enter(GAME_COMPLETE, now);
+                Game_Advance(now);
         }
         break;
     case GAME_COMPLETE:
@@ -290,7 +319,6 @@ static void Game_HandleKey(KeyEvt_t ev, u32 now)
 
     /* Keep the automatic clear-and-advance flow intact during a celebration. */
     if (game_state == GAME_CELEBRATE || game_state == GAME_WAIT_CLEAR ||
-        game_state == GAME_TIMED_INTRO || game_state == GAME_TIMED_PLAY ||
         game_state == GAME_RESULT)
         return;
 
