@@ -52,8 +52,10 @@ typedef enum
 #define BOARD_BLINK_MS     180u
 #define COLOR_STEP_MS      150u
 
-/* Grade thresholds are elapsed milliseconds; timeout wins at exactly 60s. */
-#define TIMED_LIMIT_MS     60000u
+/* Grade thresholds are elapsed milliseconds. Timeout takes priority. */
+#define TIMED_LIMIT_MS     70000u
+#define COUNTDOWN_SECONDS     10u
+#define SECOND_MS           1000u
 #define GRADE_S_MS         12000u
 #define GRADE_A_MS         24000u
 #define GRADE_B_MS         36000u
@@ -62,6 +64,7 @@ typedef enum
 #define INTRO_BAR_BLINK_MS   400u
 
 static u8 timed_result;
+static u8 last_countdown_second;
 static u8 result_image;
 
 static u8 Game_IsTimedLevel(void)
@@ -134,6 +137,7 @@ static void Game_Enter(GameState state, u32 now)
     case GAME_SHOW_NUMBER:
     {
         u16 number = curr_level + 1u;
+        Audio_CancelCountdown();
         timed_result = 0u;
         progress_val = 0u;
         MLED1 = MLED2 = 0u;
@@ -144,8 +148,12 @@ static void Game_Enter(GameState state, u32 now)
         ledColor = level_arr[curr_level].color;
         break;
     }
-    case GAME_PLAY:
     case GAME_CELEBRATE:
+        disp_ptr = level_arr[curr_level].data;
+        ledColor = level_arr[curr_level].color;
+        Audio_PlayPass();
+        break;
+    case GAME_PLAY:
     case GAME_WAIT_CLEAR:
         disp_ptr = level_arr[curr_level].data;
         ledColor = level_arr[curr_level].color;
@@ -159,6 +167,7 @@ static void Game_Enter(GameState state, u32 now)
         ledColor = level_arr[curr_level].color;
         progress_val = 0u;
         MLED1 = MLED2 = 0u;
+        Audio_PlayTimeout();
         break;
     case GAME_TIMED_INTRO:
         disp_ptr = image_arr[IMAG_INDEX_LIGHT];
@@ -167,6 +176,7 @@ static void Game_Enter(GameState state, u32 now)
         MLED1 = MLED2 = 1u;
         break;
     case GAME_TIMED_PLAY:
+        last_countdown_second = 0u;
         disp_ptr = level_arr[curr_level].data;
         ledColor = level_arr[curr_level].color;
         progress_val = 100u;
@@ -177,6 +187,7 @@ static void Game_Enter(GameState state, u32 now)
         ledColor = level_arr[curr_level].color;
         progress_val = 0u;
         MLED1 = MLED2 = 0u;
+        Audio_PlayResult();
         break;
     case GAME_COMPLETE:
         disp_ptr = image_arr[IMAG_INDEX_DARK];
@@ -252,8 +263,11 @@ static void Game_Update(u32 now)
         }
         else
         {
+            u32 remaining = TIMED_LIMIT_MS - elapsed;
+            u32 seconds_left = (remaining + SECOND_MS - 1u) / SECOND_MS;
+
             /* Round up so a running timer never displays zero before expiry. */
-            progress_val = (u8)(((TIMED_LIMIT_MS - elapsed) * 100u +
+            progress_val = (u8)((remaining * 100u +
                                 TIMED_LIMIT_MS - 1u) / TIMED_LIMIT_MS);
             if (Board_ReadPressed(pressed) &&
                 memcmp(pressed, level_arr[curr_level].data, sizeof(pressed)) == 0)
@@ -261,7 +275,12 @@ static void Game_Update(u32 now)
                 timed_result = 1u;
                 result_image = Game_Grade(elapsed);
                 Game_Enter(GAME_CELEBRATE, now);
-                Audio_Start();
+            }
+            else if (seconds_left <= COUNTDOWN_SECONDS &&
+                     seconds_left != last_countdown_second)
+            {
+                last_countdown_second = (u8)seconds_left;
+                Audio_PlayCountdown();
             }
         }
         break;
@@ -270,7 +289,6 @@ static void Game_Update(u32 now)
             memcmp(pressed, level_arr[curr_level].data, sizeof(pressed)) == 0)
         {
             Game_Enter(GAME_CELEBRATE, now);
-            Audio_Start();
         }
         break;
     case GAME_RESULT:
@@ -282,7 +300,6 @@ static void Game_Update(u32 now)
             memcmp(pressed, level_arr[curr_level].data, sizeof(pressed)) == 0)
         {
             Game_Enter(GAME_CELEBRATE, now);
-            Audio_Start();
         }
         break;
     case GAME_CELEBRATE:

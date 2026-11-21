@@ -1218,13 +1218,16 @@ void display_matrix(const u8* matrix)
             col_data |= rgbVal;
     }
 
-    /* Five bar segments: >80, >60, >40, >20 and >0 percent. */
-    u8 percent = progress_val;
-    u8 segments = percent >= 100u ? 5u : (u8)((percent + 19u) / 20u);
-    if (segments != 0u && row >= 8u - segments)
+    /* Left to right: H8 through H5, MLED2 then MLED1 on each row. */
+    if (row >= 4u && row <= 7u)
     {
-        col_data |= (u16)MLED1 << 15;
-        col_data |= (u16)MLED2 << 14;
+        u8 percent = progress_val;
+        u8 lit = percent >= 100u ? 8u : (u8)((percent * 8u + 99u) / 100u);
+        u8 first = (u8)((7u - row) * 2u);
+        if (lit > first)
+            col_data |= (u16)MLED2 << 14;
+        if (lit > first + 1u)
+            col_data |= (u16)MLED1 << 15;
     }
 
     // 2. 串行发�?16 位数据给 SM16208（OUT0~OUT7 对应低字节）
@@ -1246,13 +1249,13 @@ void display_matrix(const u8* matrix)
         send_data <<= 1;
     }
 
+    /* Blank output before latching new columns and changing row. */
+    HAL_GPIO_WritePin(OE_GPIO, OE_PIN, GPIO_PIN_SET);
+
     // 3. 产生锁存信号，更新列驱动
     HAL_GPIO_WritePin(LE_GPIO, LE_PIN, GPIO_PIN_SET);
     asm("NOP");asm("NOP");asm("NOP");asm("NOP");asm("NOP");asm("NOP");
     HAL_GPIO_WritePin(LE_GPIO, LE_PIN, GPIO_PIN_RESET);
-
-    /* Blank output while changing row. */
-    HAL_GPIO_WritePin(OE_GPIO, OE_PIN, GPIO_PIN_SET);
 
     // 5. 切换行选：通过 3 根线控制 SM5166 选通当前行
     HAL_GPIO_WritePin(A2_GPIO, A2_PIN, (row & 0x04) ? GPIO_PIN_SET : GPIO_PIN_RESET);
