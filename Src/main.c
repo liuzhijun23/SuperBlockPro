@@ -376,11 +376,6 @@ int main(void)
 
     while (1)
     {
-        if (debugData1 == 4)
-        {
-            debugData1 = 0;
-            Rotate_Start(HAL_GetTick());
-        }
 
         if (rotate_active)
         {
@@ -406,6 +401,11 @@ int main(void)
         {
             debugData1 = 0;
             Game_Enter(GAME_SHOW_NUMBER, HAL_GetTick());
+        }
+        else if (debugData1 == 4)
+        {
+            debugData1 = 0;
+            Rotate_Start(HAL_GetTick());
         }
 
         powerKeyState = POWER_KEY_STATUS();

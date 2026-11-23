@@ -1213,9 +1213,17 @@ void display_matrix(const u8* matrix)
     
     if (yellowLed)
     {
-        rgbVal = (1 << 3) + (1 << 4);
         if (row > 4)
+        {
+            rgbVal = (1 << 3) + (1 << 4);
             col_data |= rgbVal;
+        }
+        else if(row == 4)
+        {
+            rgbVal = 1 + (1<<1);
+            col_data |= rgbVal;
+        }
+            
     }
 
     /* Left to right: H8 through H5, MLED2 then MLED1 on each row. */
