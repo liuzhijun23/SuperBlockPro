@@ -987,6 +987,14 @@ static void Audio_Stop(void)
     HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1);
 }
 
+void Audio_StopPlayback(void)
+{
+    uint32_t primask = __get_PRIMASK();
+    __disable_irq();
+    Audio_Stop();
+    __set_PRIMASK(primask);
+}
+
 static void Audio_StartClip(const uint8_t *data, uint16_t size)
 {
     uint32_t primask = __get_PRIMASK();

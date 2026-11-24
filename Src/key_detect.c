@@ -302,6 +302,16 @@ void Key_Detect_Init(void)
     m_q_rd          = 0;
 }
 
+/* Call with the scan timer stopped after the wake press is confirmed. */
+void Key_ConsumePowerPress(void)
+{
+    Key_t *power = &m_key[KIDX_POWER];
+    power->cand = 1u;
+    power->cnt = KEY_DEBOUNCE_TICKS;
+    power->pressed = 1u;
+    power->consumed = 1u;
+}
+
 /* 每 1ms 调用一次(如 TIM16 1ms 中断), 内部 10 分频 */
 void Key_Detect_Scan(void)
 {

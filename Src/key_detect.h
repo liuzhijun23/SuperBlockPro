@@ -24,6 +24,7 @@ typedef enum
 
 /* 初始化, main 里调用一次 */
 void     Key_Detect_Init(void);
+void     Key_ConsumePowerPress(void);
 
 /* 周期扫描: 每 1ms 调用一次(建议放在 TIM16 1ms 中断里), 内部按 10ms 节拍处理 */
 void     Key_Detect_Scan(void);

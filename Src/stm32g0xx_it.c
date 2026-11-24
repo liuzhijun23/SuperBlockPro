@@ -101,6 +101,11 @@ void SysTick_Handler(void)
   /* USER CODE END SysTick_IRQn 1 */
 }
 
+void EXTI4_15_IRQHandler(void)
+{
+    HAL_GPIO_EXTI_IRQHandler(POWER_KEY_PIN);
+}
+
 void TIM16_IRQHandler(void)
 {
     if (__HAL_TIM_GET_FLAG(&TIM16_Handler, TIM_FLAG_UPDATE) != RESET)

@@ -29,6 +29,7 @@
 #include <string.h>
 
 void SystemClock_Config(void);
+static void Power_WaitForOn(u8 wait_for_release);
 
 /* Game transitions run in the main loop; TIM16 only scans the board. */
 typedef enum
@@ -357,30 +358,34 @@ int main(void)
     SystemClock_Config();
     EnableAllGpio();
 
-    TIM16_Config();
     TIM17_Config();
-    delay_ms(100);
-
     SM16208_Init();
+    Display_ScanStop();
     SpeakerInit();
     KeyInit();
-    Key_Detect_Init();
-
-    disp_ptr = image_arr[IMAG_INDEX_DARK];
-    Boot_Animation();
 
     levelSaved = ReadLevelSetting();
     curr_level = (levelSaved < level_count) ? levelSaved : 0u;
-    Game_Enter(GAME_SHOW_NUMBER, HAL_GetTick());
-    Audio_Start();
+    Power_WaitForOn(0u);
 
     while (1)
     {
+        KeyEvt_t ev = Key_GetEvent();
+
+        if (ev == KEY_EVT_POWER_LONG)
+        {
+            debugData2 = (u32)ev;
+            Display_ScanStop();
+            Audio_StopPlayback();
+            HAL_TIM_Base_Stop_IT(&TIM16_Handler);
+            __HAL_TIM_CLEAR_FLAG(&TIM16_Handler, TIM_FLAG_UPDATE);
+            HAL_NVIC_ClearPendingIRQ(TIM16_IRQn);
+            Power_WaitForOn(1u);
+            continue;
+        }
 
         if (rotate_active)
         {
-            /* Discard key events during the overlay rather than replaying later. */
-            (void)Key_GetEvent();
             Rotate_Update(HAL_GetTick());
             continue;
         }
@@ -412,9 +417,82 @@ int main(void)
         leftKeyState = LEFT_KEY_STATUS();
         rightKeyState = RIGHT_KEY_STATUS();
 
-        Game_HandleKey(Key_GetEvent(), HAL_GetTick());
+        Game_HandleKey(ev, HAL_GetTick());
         Game_Update(HAL_GetTick());
     }
+}
+
+#define POWER_RELEASE_MS  30u
+#define POWER_ON_HOLD_MS 1000u
+
+static void Power_SleepWhileKey(GPIO_PinState level)
+{
+    HAL_SuspendTick();
+    __disable_irq();
+    SCB->ICSR = SCB_ICSR_PENDSTCLR_Msk;
+    __HAL_GPIO_EXTI_CLEAR_IT(POWER_KEY_PIN);
+    HAL_NVIC_ClearPendingIRQ(EXTI4_15_IRQn);
+
+    /* A later edge pends the IRQ and wakes WFI even while PRIMASK is set. */
+    if (POWER_KEY_STATUS() == level)
+    {
+        __DSB();
+        HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
+    }
+
+    __enable_irq();
+    HAL_ResumeTick();
+    if (__HAL_RCC_GET_SYSCLK_SOURCE() != RCC_SYSCLKSOURCE_STATUS_PLLCLK)
+        SystemClock_Config();
+}
+
+static void Power_WaitForStableKey(GPIO_PinState level, u32 hold_ms)
+{
+    GPIO_PinState idle = (level == GPIO_PIN_SET) ? GPIO_PIN_RESET : GPIO_PIN_SET;
+
+    for (;;)
+    {
+        u32 started;
+        while (POWER_KEY_STATUS() != level)
+            Power_SleepWhileKey(idle);
+
+        started = HAL_GetTick();
+        while (POWER_KEY_STATUS() == level)
+        {
+            if (HAL_GetTick() - started >= hold_ms)
+                return;
+            __WFI();
+        }
+    }
+}
+
+static void Power_WaitForOn(u8 wait_for_release)
+{
+    GPIO_InitTypeDef key = {0};
+    key.Pin = POWER_KEY_PIN;
+    key.Mode = GPIO_MODE_IT_RISING_FALLING;
+    key.Pull = GPIO_PULLDOWN;
+    HAL_GPIO_Init(POWER_KEY_GPIO, &key);
+    HAL_NVIC_EnableIRQ(EXTI4_15_IRQn);
+
+    if (wait_for_release)
+        Power_WaitForStableKey(GPIO_PIN_RESET, POWER_RELEASE_MS);
+    Power_WaitForStableKey(GPIO_PIN_SET, POWER_ON_HOLD_MS);
+
+    HAL_NVIC_DisableIRQ(EXTI4_15_IRQn);
+    CLEAR_BIT(EXTI->IMR1, POWER_KEY_PIN);
+    __HAL_GPIO_EXTI_CLEAR_IT(POWER_KEY_PIN);
+    HAL_NVIC_ClearPendingIRQ(EXTI4_15_IRQn);
+
+    Key_Detect_Init();
+    Key_ConsumePowerPress();
+    TIM16_Config();
+
+    rotate_active = 0u;
+    disp_ptr = image_arr[IMAG_INDEX_DARK];
+    Boot_Animation();
+    Game_Enter(GAME_SHOW_NUMBER, HAL_GetTick());
+    Audio_Start();
 }
 
 /**
