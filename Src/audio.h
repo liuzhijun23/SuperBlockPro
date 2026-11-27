@@ -3,6 +3,7 @@
 
 #define AUDIO_VOLUME_PERCENT 200
 
+void Audio_PlayShutdown(void);
 void Audio_Start(void);       /* Boot chime */
 void Audio_PlayPass(void);    /* Success chime */
 void Audio_PlayResult(void);  /* Timed grade chime */

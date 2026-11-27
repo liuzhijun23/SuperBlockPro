@@ -376,7 +376,7 @@ int main(void)
         {
             debugData2 = (u32)ev;
             Display_ScanStop();
-            Audio_StopPlayback();
+            Audio_PlayShutdown();
             HAL_TIM_Base_Stop_IT(&TIM16_Handler);
             __HAL_TIM_CLEAR_FLAG(&TIM16_Handler, TIM_FLAG_UPDATE);
             HAL_NVIC_ClearPendingIRQ(TIM16_IRQn);
@@ -490,9 +490,9 @@ static void Power_WaitForOn(u8 wait_for_release)
 
     rotate_active = 0u;
     disp_ptr = image_arr[IMAG_INDEX_DARK];
+    Audio_Start();
     Boot_Animation();
     Game_Enter(GAME_SHOW_NUMBER, HAL_GetTick());
-    Audio_Start();
 }
 
 /**
